@@ -1,0 +1,45 @@
+{
+  "title": "Feature Overview",
+  "categories": [
+    {
+      "name": "Core Features",
+      "features": [
+        {
+          "name": "Dashboard",
+          "description": "Comprehensive overview",
+          "available": true
+        },
+        {
+          "name": "Analytics",
+          "description": "Detailed insights",
+          "available": true
+        },
+        {
+          "name": "Reporting",
+          "description": "Custom reports",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "Advanced Features",
+      "features": [
+        {
+          "name": "API Access",
+          "description": "Full API access",
+          "available": true
+        },
+        {
+          "name": "Integrations",
+          "description": "Third-party integrations",
+          "available": true
+        },
+        {
+          "name": "Automation",
+          "description": "Workflow automation",
+          "available": true
+        }
+      ]
+    }
+  ]
+}

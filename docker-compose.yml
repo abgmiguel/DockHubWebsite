@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: mongodb-prod
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: prodpassword123
+      MONGO_INITDB_DATABASE: codersblog
+    volumes:
+      - /var/www/docker/mongodb-data:/data/db
+    networks:
+      - app-network
+    ports:
+      - "27017:27017"
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.unified-ssr
+    container_name: multi-tenant-app
+    restart: always
+    depends_on:
+      - mongodb
+    environment:
+      NODE_ENV: production
+      PORT: 4321
+      API_PORT: 3001
+      MONGODB_URI: mongodb://admin:prodpassword123@mongodb:27017/codersblog?authSource=admin
+      JWT_SECRET: prodsecret123
+      PUBLIC_API_URL: http://127.0.0.1:3001
+      HOST: 0.0.0.0
+    volumes:
+      - /var/www/docker/sites-config.json:/app/sites-config.json:ro
+      - /var/www/docker/uploads:/app/uploads
+      - /var/www/docker/public:/app/public
+      - /var/www/docker/logs:/app/logs
+      - /var/www/docker/dist:/app/dist
+      - /var/www/docker/sites:/app/src/sites
+      - /var/www/docker/server:/app/server
+    ports:
+      - "80:4321"    # Frontend SSR
+      - "3001:3001"  # Backend API
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

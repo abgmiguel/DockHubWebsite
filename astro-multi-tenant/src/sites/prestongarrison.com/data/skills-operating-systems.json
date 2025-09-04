@@ -1,0 +1,6 @@
+{
+  "title": "Operating Systems",
+  "color": "bg-green-500",
+  "description": "Throughout my career, I have worked extensively with a wide range of operating systems, including IBM Mainframe, VAX, Solaris, and Irix. Among these, Irix stood out as a particular favorite, inspiring the architecture of my web server, which was modeled after the Irix Application Server. <br><br> In the early stages, I primarily relied on FreeBSD as the server platform of choice due to its superior thread management and stability. This robust foundation enabled my initial project to serve 10 million unique clients and handle ten times that number in requests, all from a Pentium 3 1GHz processor. Over time, as Linux evolved to match FreeBSD's stability, I transitioned to using CentOS or Ubuntu, benefiting from their broader hardware and software support. <br><br> For desktop use, I prefer macOS for its stability and performance, though I also maintain regular use of Windows to ensure versatility across platforms.",
+  "items": []
+}

@@ -1,0 +1,65 @@
+---
+// Domain-specific page handler
+// This allows each domain to have completely custom pages
+
+import { getTenantFromHost, getTenantDirectory } from '../../lib/tenant';
+import fs from 'fs';
+import path from 'path';
+
+// Get tenant info
+const hostname = Astro.request.headers.get('host') || '127.0.0.1:4321';
+const tenant = getTenantFromHost(hostname);
+const tenantDir = getTenantDirectory(tenant);
+
+// Get the domain and path from params
+const { domain, path: pagePath } = Astro.params;
+
+// Check if this matches the current tenant
+if (domain !== tenantDir.replace('.com', '')) {
+  return Astro.redirect('/404');
+}
+
+// Try to load tenant-specific page component
+let PageComponent = null;
+const route = pagePath || 'index';
+
+// Check if tenant has a custom page for this route
+const customPagePath = path.join(
+  process.cwd(), 
+  'src', 
+  'content', 
+  tenantDir, 
+  'pages',
+  `${route}.mdx`
+);
+
+let content = null;
+let title = route.charAt(0).toUpperCase() + route.slice(1);
+
+if (fs.existsSync(customPagePath)) {
+  // Load custom page content
+  const CustomPage = await import(`../../content/${tenantDir}/pages/${route}.mdx`);
+  content = CustomPage;
+  title = CustomPage.frontmatter?.title || title;
+}
+
+// Load layout
+let Layout;
+const layoutPath = path.join(process.cwd(), 'src', 'layouts', tenantDir, 'Layout.astro');
+if (fs.existsSync(layoutPath)) {
+  Layout = (await import(`../../layouts/${tenantDir}/Layout.astro`)).default;
+} else {
+  Layout = (await import('../../layouts/default/Layout.astro')).default;
+}
+---
+
+<Layout title={title} tenant={tenant}>
+  {content ? (
+    <content.Content />
+  ) : (
+    <div class="container mx-auto px-4 py-8">
+      <h1 class="text-4xl font-bold mb-4">Page Not Found</h1>
+      <p>This page doesn't exist for {tenant.id}</p>
+    </div>
+  )}
+</Layout>

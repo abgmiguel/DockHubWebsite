@@ -1,0 +1,40 @@
+{
+  "logo": {
+    "src": "/darkflows-logo.svg",
+    "alt": "Darkflows Logo",
+    "href": "/",
+    "width": 180,
+    "height": 45
+  },
+  "tagline": "Have your CAKE and eat it too... DarkFlows RouterOS",
+  "social": [
+    {
+      "name": "Discord",
+      "href": "https://discord.gg/3QmjpqX2Y5",
+      "icon": "discord",
+      "color": "#5865F2"
+    },
+    {
+      "name": "Reddit",
+      "href": "https://www.reddit.com/r/DarkFlows/",
+      "icon": "reddit", 
+      "color": "#FF4500"
+    }
+  ],
+  "buttons": [
+    {
+      "text": "Support",
+      "href": "https://www.reddit.com/r/DarkFlows/",
+      "className": "hidden md:block px-4 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-md text-sm font-medium transition-colors"
+    },
+    {
+      "text": "Download",
+      "href": "/downloadpage",
+      "className": "px-4 py-1.5 bg-green-600 hover:bg-green-700 text-white rounded-md text-sm font-medium transition-colors"
+    }
+  ],
+  "blogHomeButton": {
+    "href": "/blog",
+    "text": "Blog Home"
+  }
+}

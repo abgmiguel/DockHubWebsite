@@ -1,0 +1,26 @@
+---
+export interface Props {
+  title: string;
+  tenant?: any;
+}
+
+const { title, tenant } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <nav>
+      <div class="container">
+        <a href="/">{tenant?.id || 'Home'}</a>
+        <a href="/blog">Blog</a>
+      </div>
+    </nav>
+    <slot />
+  </body>
+</html>

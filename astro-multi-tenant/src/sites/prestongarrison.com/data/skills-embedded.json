@@ -1,0 +1,6 @@
+{
+  "title": "Embedded Technology",
+  "color": "bg-blue-800",
+  "description": "Majority of my designs and software have been written to utilize the STM32 family of processors.  When internet integration is needed, we rely on the ESP32 platform.  Our drone software utilizes our own real time operating system that allows us to achieve unbelievable results on modest STM32 processors, like the STM32F4, STM32F7 and STM32H7.",
+  "items": []
+}

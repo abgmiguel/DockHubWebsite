@@ -1,0 +1,122 @@
+[
+  {
+    "id": "data-section-0a",
+    "title": "Why another router OS?",
+    "description": "I was frustrated with the ability to get true latency free gaming on my home network, and the ability to have a solution that took full advantage of my hardware and gave me the ability to use CAKE to fix these problems.  So, I decided to create my own solution.",
+    "features": [
+      {
+        "title": "Latency Free Gaming",
+        "subtitle": "CAKE plus full Linux Kernel support was the best solution"
+      },
+      {
+        "title": "Auto Configuration",
+        "subtitle": "Install and configure your router in minutes with our automated installer"
+      },
+      {
+        "title": "Full Control",
+        "subtitle": "Easily spot and solve problems on your network"
+      }
+    ],
+    "image": "/male_firefighter2.jpg"
+  },
+  {
+    "id": "data-section-1",
+    "title": "Fully Customizable Dashboard",
+    "description": "Easily hide and re-arrange the widgets to always have the perfect view of your network.",
+    "features": [
+      {
+        "title": "App Store",
+        "subtitle": "Install additional widgets from the App Store or with Docker"
+      },
+      {
+        "title": "Kiosk Mode",
+        "subtitle": "Use Kiosk mode to display a custom dashboard on your wall"
+      },
+      {
+        "title": "Network Monitoring",
+        "subtitle": "See at all time what is happening on your network"
+      }
+    ],
+    "image": "/custom.jpg"
+  },
+  {
+    "id": "data-section-2",
+    "title": "High Performance Traffic Shaping",
+    "description": "Thanks to CAKE and the Linux Kernel, you can shape your traffic with the highest possible performance",
+    "features": [
+      {
+        "title": "Linux Kernel",
+        "subtitle": "Higher Performance then BSD based solutions with more compatibility"
+      },
+      {
+        "title": "No more bufferbloat",
+        "subtitle": "CAKE is the only solution that can shape traffic with zero latency added under high load"
+      },
+      {
+        "title": "Gaming Performance",
+        "subtitle": "Stop jitter and lag during gaming sessions, CAKE is the only bullet proof solution"
+      }
+    ],
+    "image": "/cake.png"
+  },
+  {
+    "id": "data-section-0b",
+    "title": "Solutions",
+    "description": "Comes pre-configured with the bestsolutions that work together",
+    "features": [
+      {
+        "title": "NFTables",
+        "subtitle": "Modern firewall technology with better performance"
+      },
+      {
+        "title": "CAKE",
+        "subtitle": "Amazing packet based traffic shaping"
+      },
+      {
+        "title": "PiHole",
+        "subtitle": "Block ads and protect your network"
+      },
+      {
+        "title": "Docker",
+        "subtitle": "Easily install other applications"
+      },
+      {
+        "title": "Samba",
+        "subtitle": "Optimized for high speed NAS storage"
+      }
+    ],
+    "image": "/female_firefighter1.jpg"
+  },
+  {
+    "id": "data-section-3",
+    "title": "No more Ads",
+    "description": "Thanks to Pi-Hole we block all ads at the DNS level.  Easily manage your DNS from our dashboard.",
+    "features": [
+      {
+        "title": "Built in Management",
+        "subtitle": "Pi-Hole Admin is accessible however you don't even need to leave our dashboard"
+      },
+      {
+        "title": "Cooperative Naming",
+        "subtitle": "Using DNS and DHCP data we can name and trace clients on your network"
+      }
+    ],
+    "image": "/pihole.jpg"
+  },
+  {
+    "id": "data-section-4",
+    "title": "Easy NAS Storage",
+    "description": "Easily manage your NAS storage with our built in Samba server.  Share files between your devices and work together on the same documents.",
+    "features": [
+      {
+        "title": "Add additional storage",
+        "subtitle": "Leverage ZFS and RAID to add additional storage to your network"
+      },
+      {
+        "title": "Easy Management",
+        "subtitle": "Easily add shares, users, and groups to your Samba server"
+      }
+    ],
+    "image": "/samba_image.jpg"
+  }
+]

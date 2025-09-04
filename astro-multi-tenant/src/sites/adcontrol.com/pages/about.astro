@@ -1,0 +1,66 @@
+---
+import CallToAction from '../../../shared/components/CallToAction/CallToAction.tsx';
+import TechSection from '../../../shared/components/Tech/TechSection.tsx';
+
+const ctaData = {
+  title: "Let's Work Together",
+  description: "Have a project in mind? We'd love to hear from you.",
+  primaryButton: { text: "Get in Touch", href: "/contact" },
+  secondaryButton: { text: "View Portfolio", href: "/portfolio" }
+};
+---
+
+<main>
+    <!-- About Hero -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10 py-24 px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6">About adcontrol</h1>
+        <p class="text-xl md:text-2xl text-text-secondary">
+          Welcome to adcontrol
+        </p>
+      </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Our Mission</h2>
+        <p class="text-lg text-text-secondary mb-4">
+          We're dedicated to providing exceptional digital experiences that help businesses grow and thrive in the modern world.
+        </p>
+        <p class="text-lg text-text-secondary">
+          Our platform combines cutting-edge technology with user-friendly design to deliver solutions that work for everyone.
+        </p>
+      </div>
+    </section>
+
+    <!-- Values Grid -->
+    <section class="py-16 px-4 bg-surface">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-12">Our Values</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div class="text-4xl mb-4">🎯</div>
+            <h3 class="text-xl font-semibold mb-2">Focus</h3>
+            <p class="text-text-secondary">We stay focused on what matters most - delivering value to our users.</p>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl mb-4">💡</div>
+            <h3 class="text-xl font-semibold mb-2">Innovation</h3>
+            <p class="text-text-secondary">Constantly pushing boundaries to create better solutions.</p>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl mb-4">🤝</div>
+            <h3 class="text-xl font-semibold mb-2">Partnership</h3>
+            <p class="text-text-secondary">Building lasting relationships with our clients and community.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <TechSection client:visible />
+
+    <!-- CTA -->
+    <CallToAction {...ctaData} client:visible />
+</main>

@@ -1,0 +1,137 @@
+---
+// ONE layout to rule them all!
+import { getTenantFromHost } from '../shared/lib/tenant';
+import DevModeOverlay from '../shared/components/Dev/DevModeOverlay.tsx';
+import DevWrapper from '../shared/components/Dev/DevWrapper.astro';
+
+// Import all configs and styles using import.meta.glob
+const configs = import.meta.glob('../sites/*/config.json', { eager: true });
+const styles = import.meta.glob('../sites/*/styles/main.css', { eager: true, query: '?raw', import: 'default' });
+
+// Import site-specific header and footer components
+const headerComponents = import.meta.glob('../sites/*/components/Header.*');
+const footerComponents = import.meta.glob('../sites/*/components/Footer.*');
+
+// Get current tenant from hostname
+const hostname = Astro.request.headers.get('host') || '';
+const tenant = getTenantFromHost(hostname, Astro.url.searchParams);
+const tenantDir = tenant.directory || tenant.id;
+
+// Load tenant-specific config and styles
+const configPath = `../sites/${tenantDir}/config.json`;
+const stylePath = `../sites/${tenantDir}/styles/main.css`;
+
+const config = configs[configPath]?.default || {};
+const siteStyles = styles[stylePath] || '';
+
+// Load site-specific components if they exist
+let Header = null;
+let Footer = null;
+
+// Check for Header component (could be .astro, .tsx, .jsx)
+const headerPaths = [
+  `../sites/${tenantDir}/components/Header.astro`,
+  `../sites/${tenantDir}/components/Header.tsx`,
+  `../sites/${tenantDir}/components/Header.jsx`
+];
+
+for (const path of headerPaths) {
+  if (headerComponents[path]) {
+    Header = (await headerComponents[path]()).default;
+    break;
+  }
+}
+
+// Check for Footer component
+const footerPaths = [
+  `../sites/${tenantDir}/components/Footer.astro`,
+  `../sites/${tenantDir}/components/Footer.tsx`,
+  `../sites/${tenantDir}/components/Footer.jsx`
+];
+
+for (const path of footerPaths) {
+  if (footerComponents[path]) {
+    Footer = (await footerComponents[path]()).default;
+    break;
+  }
+}
+
+const { title = config.name || 'Site', showNav = true, showFooter = true } = Astro.props;
+const isDevelopment = import.meta.env.DEV;
+
+// Get fonts from config
+const googleFonts = config.fonts?.google || 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap';
+---
+
+<!DOCTYPE html>
+<html lang="en" data-tenant={tenantDir}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={config.description || ''} />
+    <title>{title}</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href={`/favicon-${tenantDir.replace('.com', '')}.svg`} />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href={googleFonts} rel="stylesheet" />
+    
+    <!-- Inject the tenant's generated Tailwind CSS -->
+    <style set:html={siteStyles}></style>
+  </head>
+  
+  <body class={`tenant-${tenantDir.replace('.', '-')} bg-background text-text-primary`}>
+    <!-- Header (if site has one) -->
+    {showNav && Header ? (
+      isDevelopment ? (
+        <DevWrapper componentName="Header" dataPath={`../data/header.json`}>
+          <Header />
+        </DevWrapper>
+      ) : (
+        <Header />
+      )
+    ) : null}
+    
+    <!-- Page content -->
+    <slot />
+    
+    <!-- Footer (if site has one) -->
+    {showFooter && Footer ? (
+      isDevelopment ? (
+        <DevWrapper componentName="Footer" dataPath={`../data/footer.json`}>
+          <Footer />
+        </DevWrapper>
+      ) : (
+        <Footer />
+      )
+    ) : null}
+    
+    <!-- Dev overlay in development -->
+    {isDevelopment && <DevModeOverlay client:load />}
+  </body>
+</html>
+
+<style>
+  /* Tenant-specific scoping - NO global styles! */
+  [data-tenant] {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Each tenant's styles are scoped to their class */
+  .tenant-prestongarrison-com {
+    /* Prestongarrison specific overrides if needed */
+  }
+  
+  .tenant-darkflows-com {
+    /* Darkflows specific overrides if needed */
+  }
+  
+  .tenant-default {
+    /* Default site specific overrides if needed */
+  }
+</style>

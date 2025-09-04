@@ -1,0 +1,74 @@
+---
+// Accept FAQ data as props
+const { data = {} } = Astro.props;
+const {
+  title = "Frequently Asked Questions",
+  subtitle = "Find answers to common questions",
+  items = []
+} = data;
+---
+
+<section id="faq" class="py-8 px-4 md:px-8 max-w-6xl mx-auto">
+  <div class="text-center mb-6">
+    <h2 class="text-3xl font-bold text-text-primary mb-2">{title}</h2>
+    <p class="text-text-muted">{subtitle}</p>
+  </div>
+  
+  <div class="space-y-2">
+    {items.map((item, index) => (
+      <div
+        class="faq-item border border-border rounded-lg overflow-hidden bg-surface/50 backdrop-blur-sm"
+        data-index={index}
+      >
+        <button
+          class="faq-button w-full px-4 py-3 text-left flex justify-between items-center text-text-primary hover:bg-surface/50 transition-colors"
+          data-faq-button={index}
+        >
+          <span class="text-lg">{item.question}</span>
+          <span class="faq-icon text-2xl transform transition-transform duration-200">
+            +
+          </span>
+        </button>
+        <div class="faq-content hidden px-4 py-3 text-text-muted border-t border-border">
+          {item.answer}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  let openIndex = null;
+
+  function toggleQuestion(index) {
+    const items = document.querySelectorAll('.faq-item');
+    const clickedItem = items[index];
+    const content = clickedItem.querySelector('.faq-content');
+    const icon = clickedItem.querySelector('.faq-icon');
+
+    // Close previously open item
+    if (openIndex !== null && openIndex !== index) {
+      const prevItem = items[openIndex];
+      const prevContent = prevItem.querySelector('.faq-content');
+      const prevIcon = prevItem.querySelector('.faq-icon');
+      prevContent.classList.add('hidden');
+      prevIcon.style.transform = 'rotate(0deg)';
+    }
+
+    // Toggle current item
+    if (openIndex === index) {
+      content.classList.add('hidden');
+      icon.style.transform = 'rotate(0deg)';
+      openIndex = null;
+    } else {
+      content.classList.remove('hidden');
+      icon.style.transform = 'rotate(45deg)';
+      openIndex = index;
+    }
+  }
+
+  // Add click handlers
+  document.querySelectorAll('[data-faq-button]').forEach((button, index) => {
+    button.addEventListener('click', () => toggleQuestion(index));
+  });
+</script>

@@ -1,0 +1,1 @@
+../../shared-scripts/dev-blog-generic.sh

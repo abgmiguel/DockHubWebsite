@@ -1,0 +1,9 @@
+---
+// This page handles all blog routes and delegates to the BlogApp component
+export const prerender = false;
+
+import BlogApp from '../../../../modules/blog/BlogApp.astro';
+import config from '../../config.json';
+---
+
+  <BlogApp config={config} />

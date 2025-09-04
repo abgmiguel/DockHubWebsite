@@ -1,0 +1,23 @@
+---
+import SmartLayout from '../../../layouts/SmartLayout.astro';
+---
+
+<SmartLayout title="Site Not Found" showNav={false} showFooter={false}>
+  <div class="min-h-screen flex items-center justify-center bg-gray-900">
+    <div class="text-center px-6 py-12 max-w-2xl">
+      <h1 class="text-8xl font-bold text-red-500 mb-4">404</h1>
+      <h2 class="text-3xl font-semibold text-white mb-6">Site Configuration Not Found</h2>
+      <p class="text-gray-400 text-lg mb-8">
+        The domain you're trying to access hasn't been configured in this multi-tenant platform.
+      </p>
+      <div class="bg-gray-800 rounded-lg p-6 text-left">
+        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Technical Details</h3>
+        <p class="text-gray-400 font-mono text-sm">
+          Requested Host: {Astro.request.headers.get('host') || 'unknown'}<br/>
+          Status: No matching site configuration<br/>
+          Action Required: Add domain to sites-config.json
+        </p>
+      </div>
+    </div>
+  </div>
+</SmartLayout>

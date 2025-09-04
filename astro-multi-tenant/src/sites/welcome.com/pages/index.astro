@@ -1,0 +1,89 @@
+---
+---
+
+  <main style="padding: 3rem 2rem; max-width: 1200px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 4rem;">
+      <h1 style="font-size: 4rem; margin-bottom: 1.5rem; font-weight: bold; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+        Multi-Tenant Component Platform
+      </h1>
+      <p style="font-size: 1.75rem; color: #666; margin-bottom: 2rem;">
+        Build faster by reusing components from any of our sites
+      </p>
+    </div>
+
+    <div style="background: white; border-radius: 1rem; padding: 2.5rem; box-shadow: 0 10px 40px rgba(0,0,0,0.08); margin-bottom: 2rem;">
+      <h2 style="font-size: 2.25rem; margin-bottom: 2rem; color: #333;">🚀 How to Use This Platform</h2>
+      
+      <div style="display: grid; gap: 2rem;">
+        <div style="display: flex; gap: 1.5rem; align-items: start;">
+          <span style="font-size: 2rem; color: #667eea;">1️⃣</span>
+          <div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #333;">Browse Sites</h3>
+            <p style="color: #666; line-height: 1.6;">Use the dropdown above to navigate between different sites in the platform. Each site showcases unique components and designs.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1.5rem; align-items: start;">
+          <span style="font-size: 2rem; color: #667eea;">2️⃣</span>
+          <div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #333;">Select Components</h3>
+            <p style="color: #666; line-height: 1.6;">When viewing sites in dashboard mode, click on any component to select it for reuse. Selected components appear in the top bar.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1.5rem; align-items: start;">
+          <span style="font-size: 2rem; color: #667eea;">3️⃣</span>
+          <div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #333;">Send to VSCode</h3>
+            <p style="color: #666; line-height: 1.6;">Click "Send to VSCode" to export your selected components directly to your development environment.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1.5rem; align-items: start;">
+          <span style="font-size: 2rem; color: #667eea;">4️⃣</span>
+          <div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #333;">Create Your Own Site</h3>
+            <p style="color: #666; line-height: 1.6;">Run <code style="background: #f5f5f5; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-family: monospace;">./scripts/add-site.sh yoursite.com</code> to create a new site with all shared components available.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+      <a href="/dashboard" style="text-decoration: none;">
+        <div style="background: white; border-radius: 0.75rem; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; border: 2px solid transparent; hover: border-color: #667eea;"
+             onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 30px rgba(0,0,0,0.12)'; this.style.borderColor='#667eea'"
+             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.06)'; this.style.borderColor='transparent'">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: #333;">Component Dashboard</h3>
+          <p style="color: #666; font-size: 0.95rem;">Full dashboard interface for browsing and selecting components</p>
+        </div>
+      </a>
+
+      <a href="/blog/editor" style="text-decoration: none;">
+        <div style="background: white; border-radius: 0.75rem; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; border: 2px solid transparent;"
+             onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 30px rgba(0,0,0,0.12)'; this.style.borderColor='#667eea'"
+             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.06)'; this.style.borderColor='transparent'">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">✍️</div>
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: #333;">Blog Editor</h3>
+          <p style="color: #666; font-size: 0.95rem;">Create and manage blog posts with our built-in editor</p>
+        </div>
+      </a>
+
+      <a href="https://github.com/CodersInFlow/AstroTemplate" target="_blank" style="text-decoration: none;">
+        <div style="background: white; border-radius: 0.75rem; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; border: 2px solid transparent;"
+             onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 30px rgba(0,0,0,0.12)'; this.style.borderColor='#667eea'"
+             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.06)'; this.style.borderColor='transparent'">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">📚</div>
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: #333;">Documentation</h3>
+          <p style="color: #666; font-size: 0.95rem;">Learn more about the platform on GitHub</p>
+        </div>
+      </a>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 0.75rem; padding: 1.5rem; text-align: center;">
+      <p style="font-size: 1.1rem;">
+        <strong>💡 Pro Tip:</strong> The dashboard shows all sites in an iframe. When browsing sites, look for the overlay controls to select components!
+      </p>
+    </div>
+  </main>

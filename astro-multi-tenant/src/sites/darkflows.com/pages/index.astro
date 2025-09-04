@@ -1,0 +1,29 @@
+---
+import SwirlingParticles from '../../../shared/components/Effects/SwirlingParticles.astro';
+import FeaturedPost from '../../../shared/components/Features/FeaturedPost.astro';
+import DataConnectSections from '../../../shared/components/sections/DataConnectSections.astro';
+import ScrollReveal from '../../../shared/components/Effects/ScrollReveal.astro';
+import FeatureCarousel from '../../../shared/components/Features/FeatureCarousel.astro';
+import FAQ from '../../../shared/components/FAQ/FAQ.astro';
+import Footer from '../../../shared/components/Footer/Footer.astro';
+import { API_URL } from '../../../shared/lib/api-config';
+
+// Import separate JSON files with "Data" suffix for auto-wrapper detection
+import heroData from '../data/hero.json';
+import dataConnectSectionsData from '../data/data-connect-sections.json';
+import carouselData from '../data/carousel.json';
+import faqData from '../data/faq.json';
+import footerData from '../data/footer.json';
+---
+
+  <main class="min-h-screen bg-background relative">
+    <SwirlingParticles />
+    <div class="relative z-20">
+      <FeaturedPost apiUrl={API_URL} />
+      <ScrollReveal data={heroData} />
+      <DataConnectSections data={dataConnectSectionsData} />
+      <FeatureCarousel data={carouselData} />
+      <FAQ data={faqData} />
+      <Footer data={footerData} />
+    </div>
+  </main>

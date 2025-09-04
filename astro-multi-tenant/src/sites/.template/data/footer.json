@@ -1,0 +1,19 @@
+{
+  "sisterProject": {
+    "title": "Sister Project",
+    "description": "Check out Ultimate Router OS - Enterprise-grade routing solutions based on Linux",
+    "linkText": "Visit darkflows.com",
+    "linkHref": "https://darkflows.com"
+  },
+  "copyright": "© 2025 Coders in Flow. All rights reserved.",
+  "links": [
+    {
+      "text": "Discord",
+      "href": "https://discord.com/invite/3QmjpqX2Y5"
+    },
+    {
+      "text": "Reddit",
+      "href": "https://www.reddit.com/r/codersinflow/"
+    }
+  ]
+}

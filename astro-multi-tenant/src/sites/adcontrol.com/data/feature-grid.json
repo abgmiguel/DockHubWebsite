@@ -1,0 +1,387 @@
+{
+  "features": [
+    {
+      "id": 1,
+      "title": "iPhone & Android App",
+      "items": [
+        "Continue working when you leave the house",
+        "Full control of AI, including Claude Code",
+        "Coming soon: full iPad app with editor"
+      ],
+      "icon": "Smartphone",
+      "gradient": "from-blue-600 to-purple-700",
+      "pattern": "circuit",
+      "className": "col-span-2 row-span-2",
+      "mobileClass": "col-span-1",
+      "hasImage": true,
+      "imageSrc": "/iphone-v2.jpg",
+      "learnMoreLink": "/features#mobile-apps"
+    },
+    {
+      "id": 2,
+      "title": "Powerful Codebase Search",
+      "items": [
+        "Most advanced codebase-aware search",
+        "Queries complete instantly",
+        "Works with Claude Code",
+        "Semantic Search with Vector DB"
+      ],
+      "icon": "Search",
+      "gradient": "from-emerald-600 to-teal-700",
+      "pattern": "grid",
+      "className": "col-span-1 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 3,
+      "title": "Context Editor",
+      "items": [
+        "Delete unneeded parts",
+        "Visualize usage at a glance",
+        "Save money"
+      ],
+      "icon": "Edit3",
+      "gradient": "from-pink-600 to-rose-700",
+      "pattern": "dots",
+      "className": "col-span-1 row-span-1",
+      "mobileClass": "col-span-1",
+      "learnMoreLink": "/features#context-control"
+    },
+    {
+      "id": 4,
+      "title": "Claude Code Integration",
+      "items": [
+        "Full Claude Code Integration",
+        "No longer relegated to command prompt",
+        "Git aware, tool aware",
+        "Attach files & images easily"
+      ],
+      "icon": "Code2",
+      "gradient": "from-indigo-600 to-purple-700",
+      "pattern": "waves",
+      "className": "col-span-2 row-span-1",
+      "mobileClass": "col-span-1",
+      "learnMoreLink": "/features#codebase-intelligence"
+    },
+    {
+      "id": 5,
+      "title": "MCP Marketplace",
+      "items": [
+        "Built-in MCP marketplace",
+        "Instantly find and install MCP Servers"
+      ],
+      "icon": "Store",
+      "gradient": "from-orange-600 to-red-600",
+      "pattern": "diagonal",
+      "className": "col-span-1 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 6,
+      "title": "Full Featured Git System",
+      "items": [
+        "Built-in shadow git system",
+        "Git integration with selective approval",
+        "Shadow git and normal git integration"
+      ],
+      "icon": "GitBranch",
+      "gradient": "from-slate-700 to-gray-900",
+      "pattern": "circuit",
+      "className": "col-span-1 row-span-1",
+      "mobileClass": "col-span-1",
+      "learnMoreLink": "/features#git-management"
+    },
+    {
+      "id": 7,
+      "title": "Real-Time Cost Visualization",
+      "items": [
+        "Claude Code statistics",
+        "Visualize your savings",
+        "Watch your cost live"
+      ],
+      "icon": "DollarSign",
+      "gradient": "from-green-600 to-emerald-700",
+      "pattern": "dots",
+      "className": "col-span-1 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 8,
+      "title": "Tool Correction",
+      "items": [
+        "No failed tool calls",
+        "Automatically correct errors",
+        "Prevent failures"
+      ],
+      "icon": "Wrench",
+      "gradient": "from-amber-600 to-yellow-600",
+      "pattern": "grid",
+      "className": "col-span-1 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 9,
+      "title": "Model Optimizations",
+      "items": [
+        "Prioritize lower cost models",
+        "Squeeze performance from all models",
+        "Great local model support"
+      ],
+      "icon": "Brain",
+      "gradient": "from-purple-600 to-pink-600",
+      "pattern": "diagonal",
+      "className": "col-span-1 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 10,
+      "title": "Todo List Generation",
+      "items": [
+        "Generate plans automatically",
+        "Claude Code and all AIs support",
+        "Same system across all models"
+      ],
+      "icon": "ListTodo",
+      "gradient": "from-cyan-600 to-blue-700",
+      "pattern": "dots",
+      "className": "col-span-1 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 11,
+      "title": "Project Detection",
+      "items": [
+        "Generate project summary with details",
+        "AI instantly knows your project",
+        "Auto adds project-specific rules"
+      ],
+      "icon": "Folder",
+      "gradient": "from-violet-600 to-indigo-700",
+      "pattern": "waves",
+      "className": "col-span-1 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 12,
+      "title": "Cheap Models Support",
+      "items": [
+        "Amazing support for low-cost models",
+        "Optimize code for low-cost models",
+        "Unlimited tool calls per query"
+      ],
+      "icon": "Coins",
+      "gradient": "from-teal-600 to-cyan-700",
+      "pattern": "circuit",
+      "className": "col-span-1 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 13,
+      "title": "Memory Bank",
+      "items": [
+        "Built-in memory bank",
+        "AI doesn't lose its memory"
+      ],
+      "icon": "Database",
+      "gradient": "from-red-600 to-pink-700",
+      "pattern": "dots",
+      "className": "col-span-1 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 14,
+      "title": "Intelligent Codebase",
+      "items": [
+        "Modular codebase, easy to analyze",
+        "Built from scratch, easy to add features",
+        "Smart usage of structure"
+      ],
+      "icon": "Cpu",
+      "gradient": "from-gray-700 to-slate-900",
+      "pattern": "grid",
+      "className": "col-span-2 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 15,
+      "title": "Mermaid Charts",
+      "items": [
+        "Instantly generate mermaid charts",
+        "Visualize your codebase"
+      ],
+      "icon": "ChartBar",
+      "gradient": "from-lime-600 to-green-700",
+      "pattern": "diagonal",
+      "className": "col-span-1 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 16,
+      "title": "Enterprise Dashboard",
+      "items": [
+        "Monitor entire dev team",
+        "Real-time productivity metrics",
+        "ROI tracking and reports"
+      ],
+      "icon": "Users",
+      "gradient": "from-blue-700 to-indigo-800",
+      "pattern": "grid",
+      "className": "col-span-2 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 17,
+      "title": "Subtask Parallelization",
+      "items": [
+        "20+ concurrent tasks",
+        "Automatic task decomposition",
+        "Lightning-fast development"
+      ],
+      "icon": "Zap",
+      "gradient": "from-yellow-600 to-orange-700",
+      "pattern": "circuit",
+      "className": "col-span-1 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 18,
+      "title": "Multi-Channel Logging",
+      "items": [
+        "ID-based filtering",
+        "Persistent file logs",
+        "SQLite analytics"
+      ],
+      "icon": "Layers",
+      "gradient": "from-teal-700 to-blue-800",
+      "pattern": "waves",
+      "className": "col-span-1 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 19,
+      "title": "Framework Detection",
+      "items": [
+        "Auto-detect tech stack",
+        "Custom search patterns",
+        "Smart documentation generation"
+      ],
+      "icon": "FileSearch",
+      "gradient": "from-purple-700 to-pink-700",
+      "pattern": "waves",
+      "className": "col-span-1 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 20,
+      "title": "Selective Staging",
+      "items": [
+        "Chunk-level change control",
+        "Perfect human-AI collaboration",
+        "Review changes individually"
+      ],
+      "icon": "GitMerge",
+      "gradient": "from-teal-700 to-cyan-800",
+      "pattern": "dots",
+      "className": "col-span-2 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 21,
+      "title": "Cloud Sync & Backup",
+      "items": [
+        "Automatic cloud backup",
+        "Cross-device continuity",
+        "Never lose your work"
+      ],
+      "icon": "Cloud",
+      "gradient": "from-sky-600 to-blue-700",
+      "pattern": "diagonal",
+      "className": "col-span-1 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 22,
+      "title": "Real-Time Analytics",
+      "items": [
+        "Live performance metrics",
+        "Usage statistics",
+        "Cost breakdowns by task"
+      ],
+      "icon": "Activity",
+      "gradient": "from-emerald-700 to-green-800",
+      "pattern": "grid",
+      "className": "col-span-2 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 23,
+      "title": "Provider Management",
+      "items": [
+        "Dynamic provider system",
+        "Add providers via JSON",
+        "No code changes needed"
+      ],
+      "icon": "BarChart3",
+      "gradient": "from-indigo-700 to-purple-800",
+      "pattern": "circuit",
+      "className": "col-span-1 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 24,
+      "title": "Connection Resilience",
+      "items": [
+        "Auto-reconnection",
+        "Provider failover",
+        "Offline mode support"
+      ],
+      "icon": "RefreshCw",
+      "gradient": "from-emerald-700 to-teal-800",
+      "pattern": "diagonal",
+      "className": "col-span-1 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 25,
+      "title": "Native Claude Code",
+      "items": [
+        "First-class integration",
+        "Official Anthropic CLI",
+        "Enhanced with visual UI"
+      ],
+      "icon": "Code2",
+      "gradient": "from-orange-700 to-red-800",
+      "pattern": "dots",
+      "className": "col-span-2 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 26,
+      "title": "Security & Compliance",
+      "items": [
+        "SOC2 compliant",
+        "GDPR ready",
+        "Enterprise SSO support"
+      ],
+      "icon": "Shield",
+      "gradient": "from-gray-700 to-slate-800",
+      "pattern": "grid",
+      "className": "col-span-1 row-span-1",
+      "mobileClass": "col-span-1"
+    },
+    {
+      "id": 27,
+      "title": "File Access Queue",
+      "items": [
+        "Prevent race conditions",
+        "Atomic operations",
+        "Transaction support"
+      ],
+      "icon": "Lock",
+      "gradient": "from-purple-700 to-indigo-800",
+      "pattern": "circuit",
+      "className": "col-span-1 row-span-1",
+      "mobileClass": "col-span-1"
+    }
+  ]
+}

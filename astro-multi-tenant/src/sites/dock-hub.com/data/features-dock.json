@@ -1,0 +1,36 @@
+{
+  "title": "Everything You Need in a Modern Lift Controller",
+  "subtitle": "Advanced technology that makes boating easier",
+  "features": [
+    {
+      "icon": "📱",
+      "title": "Start Before You Arrive",
+      "description": "Lower your lift while entering the channel. Pull right up when you arrive - no waiting."
+    },
+    {
+      "icon": "⚡",
+      "title": "Digital Timer System",
+      "description": "No mechanical stops to adjust. Press to set limits - the system remembers automatically."
+    },
+    {
+      "icon": "🔇",
+      "title": "Solid State Relays",
+      "description": "Quiet, reliable switching with no moving parts. Built to last in marine environments."
+    },
+    {
+      "icon": "🔌",
+      "title": "3-Wire Installation",
+      "description": "Everything runs through just 3 wires. Simpler than any other smart system."
+    },
+    {
+      "icon": "👥",
+      "title": "Share Access Easily",
+      "description": "Grant temporary access to family, friends, or service techs right from the app."
+    },
+    {
+      "icon": "🛡️",
+      "title": "Anti-Theft Alerts",
+      "description": "Get instant notifications if your lift moves unexpectedly. Know your boat is secure."
+    }
+  ]
+}

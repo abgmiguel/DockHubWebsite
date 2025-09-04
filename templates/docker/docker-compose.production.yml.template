@@ -1,0 +1,67 @@
+# Production Docker Compose Configuration
+# Generated from site.config.json via templates
+version: '3.8'
+
+services:
+  {{SITE_NAME}}:
+    container_name: {{SITE_NAME}}
+    image: ${DOCKER_USERNAME}/{{SITE_NAME}}:latest
+    ports:
+      - "127.0.0.1:{{BACKEND_PORT}}:{{BACKEND_PORT}}"  # Backend API port
+      - "127.0.0.1:{{FRONTEND_PORT}}:{{FRONTEND_PORT}}"  # Frontend port
+    env_file:
+      - .env.production
+    restart: unless-stopped
+    volumes:
+      # Persistent data
+      - {{SERVER_PATH}}/data/db:/data/db
+      - {{SERVER_PATH}}/uploads:/app/uploads
+      - {{SERVER_PATH}}/logs:/var/log/supervisor
+      
+      # SSL certificates
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      
+    environment:
+      - NODE_ENV=production
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+      - MONGODB_URI=mongodb://admin:${MONGO_PASSWORD}@127.0.0.1:27017/{{DB_NAME}}?authSource=admin
+      - JWT_SECRET=${JWT_SECRET}
+      - DOMAIN=${DOMAIN}
+      - PUBLIC_API_URL=https://${DOMAIN}
+      - PORT={{BACKEND_PORT}}
+      - FRONTEND_PORT={{FRONTEND_PORT}}
+      # Node.js memory and performance settings for production
+      - NODE_OPTIONS=--max-old-space-size=4096 --trace-warnings
+      - ASTRO_TELEMETRY_DISABLED=1
+      # Go performance settings
+      - GOMAXPROCS=4
+      - GOGC=100
+      
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:{{BACKEND_PORT}}/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
+      
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        
+    networks:
+      - web
+      
+    # Resource limits to prevent lockups
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+      nproc:
+        soft: 4096
+        hard: 4096
+
+networks:
+  web:
+    driver: bridge

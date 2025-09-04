@@ -1,0 +1,19 @@
+---
+// Simple blog route wrapper - wraps BlogApp with SmartLayout
+export const prerender = false;
+
+import SmartLayout from '../../layouts/SmartLayout.astro';
+import BlogApp from '../../modules/blog/BlogApp.astro';
+
+// Check if BlogApp needs to redirect (auth checks for editor routes)
+const blogAppModule = await import('../../modules/blog/BlogApp.astro');
+const redirectUrl = await blogAppModule.checkRedirect?.(Astro);
+
+if (redirectUrl) {
+  return Astro.redirect(redirectUrl);
+}
+---
+
+<SmartLayout title="Blog">
+  <BlogApp />
+</SmartLayout>

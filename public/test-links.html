@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Edit Links</title>
+    <style>
+        body { background: #111; color: #fff; padding: 20px; font-family: sans-serif; }
+        a { color: #60a5fa; text-decoration: none; padding: 10px; display: inline-block; margin: 10px; background: #1f2937; border-radius: 4px; }
+        a:hover { background: #374151; }
+    </style>
+</head>
+<body>
+    <h1>Test Links - These should all work:</h1>
+    
+    <h2>Profile Links:</h2>
+    <a href="/editor/profile">Edit My Profile (via /editor/profile)</a><br>
+    <a href="/editor/users/edit/1">Edit User ID 1 (direct)</a><br>
+    <a href="/editor/users/edit/2">Edit User ID 2 (direct)</a><br>
+    
+    <h2>User Management:</h2>
+    <a href="/editor/users">Users List</a><br>
+    <a href="/editor/users/new">Create New User</a><br>
+    
+    <h2>Test if JavaScript breaks links:</h2>
+    <a href="/editor/profile" onclick="alert('Click detected!'); return true;">Profile with onClick</a><br>
+    <a href="#" onclick="location.href='/editor/profile'; return false;">Profile via JS navigation</a><br>
+    
+    <p>If clicking these does nothing, check browser console for errors.</p>
+    <p>Current page: <span id="current"></span></p>
+    
+    <script>
+        document.getElementById('current').textContent = window.location.pathname;
+        
+        // Log all link clicks
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                console.log('Clicked:', e.target.href);
+            });
+        });
+    </script>
+</body>
+</html>

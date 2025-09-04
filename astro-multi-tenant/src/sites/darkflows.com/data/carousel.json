@@ -1,0 +1,52 @@
+[
+  {
+    "title": "DHCP Leases",
+    "description": "View and manage active DHCP leases on your network",
+    "imageSrc": "/active_dhcp_leases.jpg"
+  },
+  {
+    "title": "Bandwidth Statistics",
+    "description": "Monitor network bandwidth usage and trends",
+    "imageSrc": "/bandwidth_stats.jpg"
+  },
+  {
+    "title": "Bandwidth Usage",
+    "description": "Detailed bandwidth consumption analysis",
+    "imageSrc": "/bandwidth_usage.jpg"
+  },
+  {
+    "title": "Client Blocking",
+    "description": "Manage blocked clients and access control",
+    "imageSrc": "/block_clients.jpg"
+  },
+  {
+    "title": "DHCP Reservations",
+    "description": "Configure static IP assignments for devices",
+    "imageSrc": "/dhcp_reservations.jpg"
+  },
+  {
+    "title": "Network Ping Statistics",
+    "description": "Monitor network latency and connectivity",
+    "imageSrc": "/ping_stats.jpg"
+  },
+  {
+    "title": "Samba Configuration",
+    "description": "Manage file sharing settings and access",
+    "imageSrc": "/samba.jpg"
+  },
+  {
+    "title": "Network Services",
+    "description": "Control and monitor running network services",
+    "imageSrc": "/services.jpg"
+  },
+  {
+    "title": "System Monitor",
+    "description": "Track system performance and resources",
+    "imageSrc": "/system_monitor.jpg"
+  },
+  {
+    "title": "System Settings",
+    "description": "Configure core system parameters",
+    "imageSrc": "/system_settings.jpg"
+  }
+]

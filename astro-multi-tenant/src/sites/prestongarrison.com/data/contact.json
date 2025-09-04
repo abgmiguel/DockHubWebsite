@@ -1,0 +1,41 @@
+{
+  "header": {
+    "title": "Contact Me",
+    "description": "I look forward to any and all future projects. Let me help take your companies ideas to the next level.",
+    "image": "/images/envelope.jpg",
+    "imageDesc": "Envelope"
+  },
+  "info": {
+    "name": "Preston Garrison",
+    "email": "resume@prestongarrison.com",
+    "phone": "+1 (480) 388-7766",
+    "followTitle": "Follow Me",
+    "followDescription": "Connect with me on social media"
+  },
+  "social": [
+    {
+      "name": "Facebook",
+      "url": "https://www.facebook.com/proggod",
+      "icon": "https://cdn-icons-png.flaticon.com/512/733/733547.png",
+      "alt": "Facebook"
+    },
+    {
+      "name": "Twitter",
+      "url": "https://x.com/AskPreston",
+      "icon": "https://cdn-icons-png.flaticon.com/512/733/733579.png",
+      "alt": "Twitter"
+    },
+    {
+      "name": "Instagram",
+      "url": "https://www.instagram.com/prestonflightone/",
+      "icon": "https://cdn-icons-png.flaticon.com/512/733/733558.png",
+      "alt": "Instagram"
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/in/MrFlightOne",
+      "icon": "https://cdn-icons-png.flaticon.com/512/733/733561.png",
+      "alt": "LinkedIn"
+    }
+  ]
+}

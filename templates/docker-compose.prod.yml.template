@@ -1,0 +1,21 @@
+services:
+  # MongoDB for blog - this is the only service in Docker
+  blog-mongodb:
+    container_name: {{SITE_NAME}}-blog-mongodb
+    image: mongo:7.0
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:{{MONGODB_PORT}}:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_INITDB_DATABASE={{DB_NAME}}
+    volumes:
+      - ./runtime/mongodb:/data/db
+    networks:
+      - blog-network
+    command: mongod --bind_ip 0.0.0.0
+
+networks:
+  blog-network:
+    driver: bridge

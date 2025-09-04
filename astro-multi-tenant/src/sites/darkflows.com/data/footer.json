@@ -1,0 +1,13 @@
+{
+  "sisterProject": {
+    "title": "Sister Project",
+    "description": "Check out Coders in Flow - The AI-powered VSCode extension that revolutionizes coding",
+    "linkText": "Visit codersinflow.com",
+    "linkHref": "https://codersinflow.com"
+  },
+  "copyright": "© 2025 DarkFlows. All rights reserved.",
+  "links": [
+    { "href": "https://discord.com/invite/3QmjpqX2Y5", "text": "Discord" },
+    { "href": "https://www.reddit.com/r/DarkFlows/", "text": "Reddit" }
+  ]
+}

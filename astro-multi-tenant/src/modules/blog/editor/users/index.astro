@@ -1,0 +1,288 @@
+---
+export const prerender = false;
+
+import { API_URL } from '../../../../shared/lib/api-config';
+
+// Get database from props
+const { database, tenant } = Astro.props;
+
+// Check authentication
+const token = Astro.cookies.get('auth-token');
+if (!token) {
+  return Astro.redirect('/blog/editor/login');
+}
+
+// Check if user is admin
+const userResponse = await fetch(`${API_URL}/api/auth/me`, {
+  headers: {
+    'Cookie': `auth-token=${token.value}`,
+    'X-Site-Database': database
+  }
+});
+
+if (!userResponse.ok) {
+  return Astro.redirect('/blog/editor/login');
+}
+
+const currentUser = await userResponse.json();
+if (currentUser.role !== 'admin') {
+  return Astro.redirect('/blog/editor');
+}
+
+// Fetch all users
+const usersResponse = await fetch(`${API_URL}/api/admin/users`, {
+  headers: {
+    'Cookie': `auth-token=${token.value}`,
+    'X-Site-Database': database
+  }
+});
+const users = usersResponse.ok ? await usersResponse.json() : [];
+
+// Separate by status
+const approvedUsers = users.filter((u: any) => u.approved);
+const pendingUsers = users.filter((u: any) => !u.approved);
+---
+
+<div class="min-h-screen bg-background">
+    <!-- Editor Header -->
+    <header class="bg-surface border-b border-border">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <h1 class="text-xl font-bold text-text-primary">User Management</h1>
+          <div class="flex items-center gap-4">
+            <a href="/blog/editor/users/new" class="px-4 py-2 bg-primary hover:bg-primary/90 text-text-primary rounded transition">
+              Create User
+            </a>
+            <a href="/blog/editor" class="text-text-muted hover:text-text-primary">
+              ← Back to Dashboard
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Editor Navigation -->
+    <nav class="bg-surface border-b border-border">
+      <div class="container mx-auto px-4">
+        <div class="flex gap-6">
+          <a href="/blog/editor" class="py-3 border-b-2 border-transparent text-text-muted hover:text-text-secondary">Dashboard</a>
+          <a href="/blog/editor/posts" class="py-3 border-b-2 border-transparent text-text-muted hover:text-text-secondary">Posts</a>
+          <a href="/blog/editor/categories" class="py-3 border-b-2 border-transparent text-text-muted hover:text-text-secondary">Categories</a>
+          <a href="/blog/editor/users" class="py-3 border-b-2 border-blue-500 text-link">Users</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+      <!-- Pending Approvals -->
+      {pendingUsers.length > 0 && (
+        <section class="mb-8">
+          <h2 class="text-2xl font-bold mb-4 text-yellow-400">Pending Approvals ({pendingUsers.length})</h2>
+          <div class="bg-yellow-900/20 border border-yellow-700 rounded-lg overflow-hidden">
+            <table class="w-full">
+              <thead class="bg-yellow-900/30">
+                <tr>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Name</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Email</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Registered</th>
+                  <th class="px-6 py-3 text-right text-xs font-medium text-text-secondary uppercase tracking-wider">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-yellow-800">
+                {pendingUsers.map((user: any) => (
+                  <tr>
+                    <td class="px-6 py-4 text-text-primary">{user.name}</td>
+                    <td class="px-6 py-4 text-text-secondary">{user.email}</td>
+                    <td class="px-6 py-4 text-text-muted">
+                      {new Date(user.createdAt).toLocaleDateString()}
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                      <button
+                        data-user-id={user.id}
+                        data-user-name={user.name}
+                        class="approve-btn px-3 py-1 bg-green-600 hover:bg-green-700 rounded text-sm mr-2"
+                      >
+                        Approve
+                      </button>
+                      <button
+                        data-user-id={user.id}
+                        data-user-name={user.name}
+                        class="reject-btn px-3 py-1 bg-error hover:bg-error rounded text-sm"
+                      >
+                        Reject
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
+      <!-- Approved Users -->
+      <section>
+        <h2 class="text-2xl font-bold mb-4 text-text-primary">Active Users ({approvedUsers.length})</h2>
+        <div class="bg-surface rounded-lg overflow-hidden">
+          <table class="w-full">
+            <thead class="bg-surface-hover">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Name</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Email</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Role</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Registered</th>
+                <th class="px-6 py-3 text-right text-xs font-medium text-text-secondary uppercase tracking-wider">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-700">
+              {approvedUsers.map((user: any) => (
+                <tr>
+                  <td class="px-6 py-4">
+                    <a href={`/blog/editor/users/edit/${user.id}`} class="text-link hover:text-link-hover">
+                      {user.name}
+                    </a>
+                    {user.id === currentUser.id && (
+                      <span class="ml-2 text-xs text-text-muted">(You)</span>
+                    )}
+                  </td>
+                  <td class="px-6 py-4 text-text-secondary">{user.email}</td>
+                  <td class="px-6 py-4">
+                    <span class={`px-2 py-1 text-xs rounded-full ${
+                      user.role === 'admin' ? 'bg-purple-900 text-purple-300' : 'bg-surface-hover text-text-secondary'
+                    }`}>
+                      {user.role}
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 text-text-muted">
+                    {new Date(user.createdAt).toLocaleDateString()}
+                  </td>
+                  <td class="px-6 py-4 text-right">
+                    {user.id !== currentUser.id && (
+                      <select
+                        data-user-id={user.id}
+                        data-user-name={user.name}
+                        class="role-select px-3 py-1 bg-surface-hover rounded text-sm"
+                      >
+                        <option value="" disabled selected>Change role</option>
+                        <option value="admin" disabled={user.role === 'admin'}>Make Admin</option>
+                        <option value="user" disabled={user.role === 'user'}>Make User</option>
+                      </select>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {users.length === 0 && (
+        <div class="text-center py-12 text-text-muted">
+          <p>No users found.</p>
+        </div>
+      )}
+    </main>
+  </div>
+
+<script define:vars={{ API_URL, database }}>
+  // Handle approve buttons
+  document.querySelectorAll('.approve-btn').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      const button = e.currentTarget as HTMLElement;
+      const userId = button.dataset.userId;
+      const userName = button.dataset.userName;
+      
+      if (!userId) return;
+      
+      if (confirm(`Approve ${userName}?`)) {
+        try {
+          const response = await fetch(`${API_URL}/api/admin/users/${userId}/approve`, {
+            method: 'PUT',
+            headers: {
+              'X-Site-Database': database
+            },
+            credentials: 'include',
+          });
+          
+          if (response.ok) {
+            window.location.reload();
+          } else {
+            alert('Failed to approve user');
+          }
+        } catch (error) {
+          alert('Network error. Please try again.');
+        }
+      }
+    });
+  });
+
+  // Handle reject buttons (delete user)
+  document.querySelectorAll('.reject-btn').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      const button = e.currentTarget as HTMLElement;
+      const userId = button.dataset.userId;
+      const userName = button.dataset.userName;
+      
+      if (!userId) return;
+      
+      if (confirm(`Reject and delete ${userName}? This cannot be undone.`)) {
+        try {
+          const res = await fetch(`${API_URL}/api/admin/users/${userId}`, {
+            method: 'DELETE',
+            headers: {
+              'X-Site-Database': database
+            },
+            credentials: 'include'
+          });
+
+          if (res.ok) {
+            alert('User deleted successfully');
+            location.reload();
+          } else {
+            const error = await res.text();
+            alert(`Failed to delete user: ${error}`);
+          }
+        } catch (error) {
+          alert('Network error while deleting user');
+        }
+      }
+    });
+  });
+
+  // Handle role changes
+  document.querySelectorAll('.role-select').forEach(select => {
+    select.addEventListener('change', async (e) => {
+      const selectElement = e.currentTarget as HTMLSelectElement;
+      const userId = selectElement.dataset.userId;
+      const userName = selectElement.dataset.userName;
+      const newRole = selectElement.value;
+      
+      if (!userId || !newRole) return;
+      
+      if (confirm(`Change ${userName}'s role to ${newRole}?`)) {
+        try {
+          const response = await fetch(`${API_URL}/api/admin/users/${userId}/role`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Site-Database': database
+            },
+            credentials: 'include',
+            body: JSON.stringify({ role: newRole })
+          });
+          
+          if (response.ok) {
+            window.location.reload();
+          } else {
+            alert('Failed to update user role');
+          }
+        } catch (error) {
+          alert('Network error. Please try again.');
+        }
+      }
+      
+      // Reset select if cancelled
+      selectElement.value = '';
+    });
+  });
+</script>

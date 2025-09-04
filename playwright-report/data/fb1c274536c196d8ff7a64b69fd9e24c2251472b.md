@@ -1,0 +1,104 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e5]:
+        - heading "Edit Blog Post" [level=1] [ref=e6]
+        - link "← Back to Posts" [ref=e7] [cursor=pointer]:
+          - /url: /blog/editor/posts
+    - main [ref=e8]:
+      - generic [ref=e9]:
+        - generic [ref=e10]:
+          - generic [ref=e11]: Title
+          - textbox "Title" [ref=e12]: "Introducing CodersinFlow: The Ultimate AI-Powered Code Editor"
+        - generic [ref=e13]:
+          - generic [ref=e14]: Slug (URL)
+          - textbox "Slug (URL)" [ref=e15]: introducing-codersinflow-the-ultimate-aipowered-code-editor
+        - generic [ref=e16]:
+          - generic [ref=e17]: Description
+          - textbox "Description" [ref=e18]: Discover how CodersinFlow revolutionizes your coding workflow with AI assistance
+        - generic [ref=e19]:
+          - generic [ref=e20]: Category
+          - combobox "Category" [ref=e21]:
+            - option "Select a category"
+            - option "General" [selected]
+        - generic [ref=e22]:
+          - generic [ref=e23]:
+            - text: Cover Image
+            - generic [ref=e24]: Optional
+          - generic [ref=e25]:
+            - img [ref=e28]
+            - button "Upload Image" [ref=e31] [cursor=pointer]:
+              - img [ref=e32] [cursor=pointer]
+              - generic [ref=e34] [cursor=pointer]: Upload Image
+        - generic [ref=e35]:
+          - generic [ref=e36]: Content
+          - generic [ref=e39]:
+            - generic [ref=e41]:
+              - button "Bold" [ref=e42] [cursor=pointer]:
+                - img [ref=e43] [cursor=pointer]
+              - button "Italic" [ref=e45] [cursor=pointer]:
+                - img [ref=e46] [cursor=pointer]
+              - button "H1" [ref=e49] [cursor=pointer]
+              - button "H2" [ref=e50] [cursor=pointer]
+              - button "H3" [ref=e51] [cursor=pointer]
+              - button "Bullet List" [ref=e53] [cursor=pointer]:
+                - img [ref=e54] [cursor=pointer]
+              - button "Ordered List" [ref=e55] [cursor=pointer]:
+                - img [ref=e56] [cursor=pointer]
+              - button "Code Block" [ref=e60] [cursor=pointer]:
+                - img [ref=e61] [cursor=pointer]
+              - button "Quote" [ref=e64] [cursor=pointer]:
+                - img [ref=e65] [cursor=pointer]
+              - button "Select text to add link" [disabled] [ref=e69]:
+                - img [ref=e70]
+              - button "Add Image" [ref=e73] [cursor=pointer]:
+                - img [ref=e74] [cursor=pointer]
+            - paragraph [ref=e80]: CodersinFlow is a powerful AI-powered code editor that helps developers write better code faster. With features like intelligent code completion, automated testing, and real-time collaboration, it's the perfect tool for modern development teams.
+        - generic [ref=e82]:
+          - checkbox "Published" [checked] [ref=e83]
+          - generic [ref=e84]: Published
+        - generic [ref=e85]:
+          - button "Save Changes" [ref=e86] [cursor=pointer]
+          - button "Publish to Social Media" [ref=e87] [cursor=pointer]
+          - link "View Post" [ref=e88] [cursor=pointer]:
+            - /url: /blog/introducing-codersinflow-the-ultimate-aipowered-code-editor
+          - link "Cancel" [ref=e89] [cursor=pointer]:
+            - /url: /blog/editor/posts
+  - generic [ref=e92]:
+    - generic [ref=e93]:
+      - heading "Publish to Social Media" [level=2] [ref=e94]
+      - paragraph [ref=e95]: Share your post across multiple platforms
+    - generic [ref=e96]:
+      - generic [ref=e97]:
+        - button "Reddit" [ref=e98] [cursor=pointer]:
+          - img [ref=e100] [cursor=pointer]
+          - generic [ref=e102] [cursor=pointer]: Reddit
+        - button "Dev.to" [ref=e103] [cursor=pointer]:
+          - img [ref=e105] [cursor=pointer]
+          - generic [ref=e107] [cursor=pointer]: Dev.to
+        - button "LinkedIn Max 3000 chars" [ref=e108] [cursor=pointer]:
+          - img [ref=e110] [cursor=pointer]
+          - generic [ref=e112] [cursor=pointer]: LinkedIn
+          - generic [ref=e113] [cursor=pointer]: Max 3000 chars
+        - button "Facebook" [ref=e114] [cursor=pointer]:
+          - img [ref=e116] [cursor=pointer]
+          - generic [ref=e118] [cursor=pointer]: Facebook
+        - button "X (Twitter) Max 280 chars" [ref=e119] [cursor=pointer]:
+          - img [ref=e121] [cursor=pointer]
+          - generic [ref=e123] [cursor=pointer]: X (Twitter)
+          - generic [ref=e124] [cursor=pointer]: Max 280 chars
+      - generic [ref=e125]:
+        - heading "Customize Messages" [level=3] [ref=e126]
+        - generic [ref=e127]:
+          - generic [ref=e128]:
+            - img [ref=e130]
+            - text: Reddit
+            - textbox "Reddit" [ref=e132]: test
+          - textbox [ref=e133]: "Introducing CodersinFlow: The Ultimate AI-Powered Code Editor"
+    - generic [ref=e134]:
+      - button "Cancel" [ref=e135] [cursor=pointer]
+      - button "Publish to 1 Platform" [ref=e136] [cursor=pointer]
+```

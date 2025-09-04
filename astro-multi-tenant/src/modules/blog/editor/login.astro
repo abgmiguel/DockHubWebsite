@@ -1,0 +1,142 @@
+---
+export const prerender = false;
+
+import { API_URL } from '../../../shared/lib/api-config';
+
+// Get database from props
+const { database, tenant } = Astro.props;
+---
+
+<main class="min-h-screen flex items-center justify-center bg-background">
+    <div class="bg-surface p-8 rounded-lg shadow-xl w-full max-w-md border border-border">
+      <h1 class="text-2xl font-bold text-center mb-6 text-text-primary">Editor Login</h1>
+      
+      <form id="loginForm" class="space-y-4">
+        <div>
+          <label for="email" class="block text-sm font-medium mb-2 text-text-secondary">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="w-full px-3 py-2 bg-surface-hover border border-border rounded-md text-text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="admin@example.com"
+          />
+        </div>
+        
+        <div>
+          <label for="password" class="block text-sm font-medium mb-2 text-text-secondary">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            class="w-full px-3 py-2 bg-surface-hover border border-border rounded-md text-text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="••••••••"
+          />
+        </div>
+        
+        <div id="error" class="text-error text-sm hidden"></div>
+        
+        <button
+          type="submit"
+          class="w-full py-2 px-4 bg-primary hover:bg-primary/90 text-text-primary rounded-md font-medium transition-colors"
+        >
+          Login
+        </button>
+      </form>
+      
+      <p class="text-center mt-4 text-sm text-text-muted">
+        Don't have an account? 
+        <a href="/blog/editor/register" class="text-link hover:text-link-hover">Register</a>
+      </p>
+    </div>
+  </main>
+
+<script define:vars={{ database }}>
+  // Calculate API URL dynamically based on current domain
+  function getApiUrl() {
+    const hostname = window.location.hostname;
+    const protocol = window.location.protocol;
+    const currentPort = window.location.port;
+    
+    // Check if we're in development (port 4321)
+    if (currentPort === '4321') {
+      // Development: use same hostname but port 3001
+      return `${protocol}//${hostname}:3001`;
+    }
+    
+    // Production: use same origin (no port needed, nginx handles routing)
+    return window.location.origin;
+  }
+  
+  const API_URL = getApiUrl();
+  const form = document.getElementById('loginForm');
+  const errorDiv = document.getElementById('error');
+  
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(form);
+    const data = {
+      email: formData.get('email'),
+      password: formData.get('password')
+    };
+    
+    try {
+      const response = await fetch(`${API_URL}/api/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Site-Database': database
+        },
+        credentials: 'include',
+        body: JSON.stringify(data)
+      });
+      
+      if (response.ok) {
+        window.location.href = '/blog/editor';
+      } else {
+        let errorMessage = 'Login failed';
+        
+        // Handle different HTTP status codes
+        if (response.status === 401) {
+          errorMessage = 'Invalid email or password';
+        } else if (response.status === 404) {
+          errorMessage = 'User not found';
+        } else if (response.status === 500) {
+          errorMessage = 'Server error - please try again later';
+        } else if (response.status === 503) {
+          errorMessage = 'Database unavailable - please contact support';
+        }
+        
+        // Try to get more specific error from response body
+        try {
+          const text = await response.text();
+          if (text && text.length > 0 && text.length < 200) {
+            errorMessage = text;
+          }
+        } catch (e) {
+          // Use the status-based message if we can't parse the response
+        }
+        
+        errorDiv.textContent = errorMessage;
+        errorDiv.classList.remove('hidden');
+      }
+    } catch (error) {
+      // Provide more specific network error messages
+      let errorMessage = 'Connection failed';
+      
+      if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+        errorMessage = `Cannot connect to API server at ${API_URL}. Please ensure the backend is running.`;
+      } else if (error.name === 'NetworkError') {
+        errorMessage = 'Network error - please check your connection';
+      } else if (error.message) {
+        errorMessage = `Error: ${error.message}`;
+      }
+      
+      errorDiv.textContent = errorMessage;
+      errorDiv.classList.remove('hidden');
+    }
+  });
+</script>

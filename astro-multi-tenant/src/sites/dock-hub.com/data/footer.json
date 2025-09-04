@@ -1,0 +1,42 @@
+{
+  "logo": "⚓ DockHub",
+  "description": "Simplifying boat lifts everywhere",
+  "sections": [
+    {
+      "title": "Product",
+      "links": [
+        { "text": "Features", "href": "#features" },
+        { "text": "How It Works", "href": "#how-it-works" },
+        { "text": "Compatibility", "href": "#compatibility" }
+      ]
+    },
+    {
+      "title": "Support",
+      "links": [
+        { "text": "Installation Guides", "href": "/installation-guides" },
+        { "text": "Support", "href": "/support" },
+        { "text": "Contact", "href": "/contact" }
+      ]
+    },
+    {
+      "title": "Company",
+      "links": [
+        { "text": "About", "href": "/about" },
+        { "text": "Dealer Portal", "href": "/dealer-portal" },
+        { "text": "Privacy Policy", "href": "/privacy" },
+        { "text": "Terms of Service", "href": "/terms" }
+      ]
+    }
+  ],
+  "copyright": "© 2024 DockHub. Simplifying boat lifts everywhere.",
+  "links": [
+    {
+      "text": "Facebook",
+      "href": "https://facebook.com/dockhub"
+    },
+    {
+      "text": "Instagram", 
+      "href": "https://instagram.com/dockhub"
+    }
+  ]
+}

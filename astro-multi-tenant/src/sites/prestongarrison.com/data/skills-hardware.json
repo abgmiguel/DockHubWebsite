@@ -1,0 +1,6 @@
+{
+  "title": "Hardware Debugging & Development",
+  "color": "bg-green-400",
+  "description": "Over the years I have used a few different PCB Design software, but prefer KiCad over the majority of choices.  I have also found the Segger J-Link gives us the best results for hardware debugging, integrated with Visual Studio Code",
+  "items": []
+}

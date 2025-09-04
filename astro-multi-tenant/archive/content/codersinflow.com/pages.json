@@ -1,0 +1,49 @@
+{
+  "pages": [
+    {
+      "slug": "features",
+      "title": "Features",
+      "content": {
+        "hero": {
+          "title": "AI-Powered Pair Programming",
+          "subtitle": "Code faster with intelligent assistance"
+        },
+        "features": [
+          {
+            "title": "Smart Code Completion",
+            "description": "Context-aware suggestions as you type",
+            "icon": "✨"
+          },
+          {
+            "title": "Bug Detection",
+            "description": "Catch errors before you run",
+            "icon": "🐛"
+          },
+          {
+            "title": "Refactoring Help",
+            "description": "Improve code quality automatically",
+            "icon": "🔧"
+          }
+        ]
+      }
+    },
+    {
+      "slug": "pricing",
+      "title": "Pricing",
+      "content": {
+        "plans": [
+          {
+            "name": "Free",
+            "price": "$0",
+            "features": ["Basic completion", "5 projects"]
+          },
+          {
+            "name": "Pro",
+            "price": "$19/mo",
+            "features": ["Advanced AI", "Unlimited projects", "Priority support"]
+          }
+        ]
+      }
+    }
+  ]
+}

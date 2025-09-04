@@ -1,0 +1,21 @@
+{
+  "title": "How DockHub Uno Works",
+  "subtitle": "Three simple steps to modernize your boat lift",
+  "steps": [
+    {
+      "number": "1",
+      "title": "Quick Install",
+      "description": "Connect 3 wires to your existing lift motor. No tools needed for setup. Takes minutes, not hours."
+    },
+    {
+      "number": "2",
+      "title": "Download App",
+      "description": "Free app for iPhone and Android. Connect via Bluetooth in seconds. No complex pairing process."
+    },
+    {
+      "number": "3",
+      "title": "Take Control",
+      "description": "Operate from anywhere. Set digital limits with one button press. Share access instantly."
+    }
+  ]
+}

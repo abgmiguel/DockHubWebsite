@@ -1,0 +1,224 @@
+---
+export const prerender = false;
+
+import AstroRichTextEditor from './AstroRichTextEditor';
+import './editor-styles.css';
+import { API_URL } from '../../../../shared/lib/api-config';
+
+const { database, tenant, theme } = Astro.props;
+
+// Auth handled by middleware
+const token = Astro.cookies.get('auth-token');
+
+// Get post type from query params
+const postType = Astro.url.searchParams.get('type') || 'blog';
+
+// Fetch categories
+let categories = [];
+try {
+  const categoriesResponse = await fetch(`${API_URL}/api/categories?type=${postType}`, {
+    headers: {
+      'Cookie': `auth-token=${token.value}`,
+      'X-Site-Database': database
+    }
+  });
+  if (categoriesResponse.ok) {
+    categories = await categoriesResponse.json();
+  }
+} catch (error) {
+  console.error('Failed to fetch categories:', error);
+}
+---
+
+<div class="min-h-screen bg-background">
+  <!-- Editor Header -->
+  <header class="bg-surface border-b border-border">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex justify-between items-center">
+        <h1 class="text-xl font-bold text-text-primary">Create New {postType === 'blog' ? 'Blog Post' : 'Documentation'}</h1>
+        <a href="/blog/editor" class="text-text-secondary hover:text-text-primary transition-colors">
+          ← Back to Dashboard
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 py-8 max-w-4xl">
+    <form id="postForm" class="space-y-6">
+      <input type="hidden" name="type" value={postType} />
+      
+      <!-- Title -->
+      <div>
+        <label for="title" class="block text-sm font-medium mb-2 text-text-secondary">Title</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          required
+          class="w-full px-3 py-2 bg-background text-text-primary border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+          placeholder="Enter post title"
+        />
+      </div>
+
+      <!-- Slug -->
+      <div>
+        <label for="slug" class="block text-sm font-medium mb-2 text-text-secondary">
+          Slug (URL)
+          <span class="text-text-muted text-xs ml-2">Leave empty to auto-generate</span>
+        </label>
+        <input
+          type="text"
+          id="slug"
+          name="slug"
+          class="w-full px-3 py-2 bg-background text-text-primary border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+          placeholder="post-url-slug"
+        />
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label for="description" class="block text-sm font-medium mb-2 text-text-secondary">Description</label>
+        <textarea
+          id="description"
+          name="description"
+          required
+          rows="3"
+          class="w-full px-3 py-2 bg-background text-text-primary border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+          placeholder="Brief description for listing pages"
+        ></textarea>
+      </div>
+
+      <!-- Category -->
+      <div>
+        <label for="category" class="block text-sm font-medium mb-2 text-text-secondary">Category</label>
+        <select
+          id="category"
+          name="category"
+          class="w-full px-3 py-2 bg-background text-text-primary border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+        >
+          <option value="">Select a category (optional)</option>
+          {categories.map((cat: any) => (
+            <option value={cat._id || cat.id}>{cat.name}</option>
+          ))}
+        </select>
+      </div>
+
+      <!-- Content -->
+      <div>
+        <label class="block text-sm font-medium mb-2 text-text-secondary">Content</label>
+        <AstroRichTextEditor 
+          client:load
+          content=""
+          placeholder="Start writing your content..."
+          inputId="content"
+        />
+        <input type="hidden" id="content" name="content" />
+      </div>
+
+      <!-- Published Status -->
+      <div class="flex items-center gap-2">
+        <input
+          type="checkbox"
+          id="published"
+          name="published"
+          checked
+          class="rounded bg-surface border-border text-primary focus:ring-primary"
+        />
+        <label for="published" class="text-text-secondary">Publish immediately</label>
+      </div>
+
+      <!-- Messages -->
+      <div id="error" class="text-error hidden"></div>
+      <div id="success" class="text-success hidden"></div>
+
+      <!-- Buttons -->
+      <div class="flex gap-4">
+        <button type="submit" class="px-4 py-2 bg-primary hover:bg-primary/90 text-text-primary rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background">
+          Create Post
+        </button>
+        <a href="/blog/editor" class="px-4 py-2 bg-surface hover:bg-surface-hover text-text-primary rounded-md font-medium transition-colors inline-block">
+          Cancel
+        </a>
+      </div>
+    </form>
+  </main>
+</div>
+
+<script define:vars={{ API_URL, database }}>
+  const form = document.getElementById('postForm');
+  const errorDiv = document.getElementById('error');
+  const successDiv = document.getElementById('success');
+  
+  // Auto-generate slug from title
+  const titleInput = document.getElementById('title');
+  const slugInput = document.getElementById('slug');
+  
+  titleInput?.addEventListener('input', () => {
+    if (!slugInput.dataset.manual) {
+      const slug = titleInput.value
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]+/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-+|-+$/g, '');
+      slugInput.value = slug;
+    }
+  });
+  
+  slugInput?.addEventListener('input', () => {
+    slugInput.dataset.manual = 'true';
+  });
+  
+  // Form submission
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(form);
+    
+    // Get content from either the hidden input or window object (fallback)
+    const contentValue = formData.get('content') || window.__editorContent || '';
+    
+    const data = {
+      title: formData.get('title'),
+      slug: formData.get('slug') || undefined,
+      description: formData.get('description'),
+      content: contentValue,
+      type: formData.get('type'),
+      category: formData.get('category') || undefined,
+      published: formData.get('published') === 'on'
+    };
+    
+    try {
+      errorDiv.classList.add('hidden');
+      successDiv.textContent = 'Creating post...';
+      successDiv.classList.remove('hidden');
+      
+      const response = await fetch(`${API_URL}/api/posts`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Site-Database': database
+        },
+        credentials: 'include',
+        body: JSON.stringify(data)
+      });
+      
+      if (response.ok) {
+        const post = await response.json();
+        successDiv.textContent = 'Post created successfully! Redirecting...';
+        setTimeout(() => {
+          window.location.href = '/blog/editor';
+        }, 1000);
+      } else {
+        const text = await response.text();
+        errorDiv.textContent = text || 'Failed to create post';
+        errorDiv.classList.remove('hidden');
+        successDiv.classList.add('hidden');
+      }
+    } catch (error) {
+      errorDiv.textContent = 'Network error. Please try again.';
+      errorDiv.classList.remove('hidden');
+      successDiv.classList.add('hidden');
+    }
+  });
+</script>

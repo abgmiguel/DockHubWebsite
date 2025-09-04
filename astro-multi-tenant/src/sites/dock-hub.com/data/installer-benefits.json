@@ -1,0 +1,20 @@
+{
+  "title": "Built for Installers",
+  "subtitle": "Make your installations faster, cleaner, and more profitable",
+  "benefits": [
+    { "text": "No mechanical stops to align" },
+    { "text": "No limit switches to adjust" },
+    { "text": "Fewer service callbacks" },
+    { "text": "Cleaner installations" },
+    { "text": "Happy customers who refer others" },
+    { "text": "Dealer pricing available" }
+  ],
+  "cta": {
+    "text": "Become a Dealer",
+    "link": "/dealer-portal",
+    "secondary": {
+      "text": "View Installation Guide",
+      "link": "/installation-guides"
+    }
+  }
+}

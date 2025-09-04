@@ -1,0 +1,526 @@
+---
+export const prerender = false;
+
+import AstroRichTextEditor from '../../../components/editor/AstroRichTextEditor';
+import SocialPublishModal from '../../../components/editor/SocialPublishModal';
+import { API_URL } from '../../../../../shared/lib/api-config';
+
+// Get database from props
+const { database, tenant } = Astro.props;
+
+// Check authentication
+const token = Astro.cookies.get('auth-token');
+if (!token) {
+  return Astro.redirect('/blog/editor/login');
+}
+
+const { id } = Astro.params;
+
+// Debug logging
+console.log('Edit page - Post ID from URL:', id);
+
+// Fetch the post
+const fetchUrl = `${API_URL}/api/posts/id/${id}`;
+console.log('Edit page - Fetching URL:', fetchUrl);
+
+const postResponse = await fetch(fetchUrl, {
+  headers: {
+    'Cookie': `auth-token=${token.value}`,
+    'X-Site-Database': database
+  }
+});
+
+console.log('Edit page - Response status:', postResponse.status);
+console.log('Edit page - Response OK:', postResponse.ok);
+
+if (!postResponse.ok) {
+  const errorText = await postResponse.text();
+  console.error('Edit page - Error fetching post:', errorText);
+  return Astro.redirect('/blog/editor/posts');
+}
+
+const post = await postResponse.json();
+
+// Fetch categories
+const categoriesResponse = await fetch(`${API_URL}/api/categories?type=${post.type}`, {
+  headers: {
+    'Cookie': `auth-token=${token.value}`,
+    'X-Site-Database': database
+  }
+});
+const categories = categoriesResponse.ok ? await categoriesResponse.json() : [];
+
+// Check if saved
+const saved = Astro.url.searchParams.get('saved') === 'true';
+---
+
+<div class="min-h-screen bg-background">
+    <!-- Editor Header -->
+    <header class="bg-surface border-b border-border">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <h1 class="text-xl font-bold text-text-primary">Edit {post.type === 'blog' ? 'Blog Post' : 'Documentation'}</h1>
+          <a href="/blog/editor/posts" class="text-text-muted hover:text-text-primary">
+            ← Back to Posts
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 max-w-4xl">
+      {saved && (
+        <div class="mb-6 p-4 bg-green-900/20 border border-green-700 rounded-lg text-green-400">
+          ✓ Post saved successfully
+        </div>
+      )}
+
+      <form id="postForm" class="space-y-6">
+        <input type="hidden" name="id" value={post.id} />
+        <input type="hidden" name="type" value={post.type} />
+        
+        <!-- Title -->
+        <div>
+          <label for="title" class="block text-sm font-medium mb-2 text-text-secondary">Title</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            required
+            value={post.title}
+            class="w-full px-3 py-2 bg-surface text-text-primary rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="Enter post title"
+          />
+        </div>
+
+        <!-- Slug -->
+        <div>
+          <label for="slug" class="block text-sm font-medium mb-2 text-text-secondary">
+            Slug (URL)
+          </label>
+          <input
+            type="text"
+            id="slug"
+            name="slug"
+            value={post.slug}
+            class="w-full px-3 py-2 bg-surface text-text-primary rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="post-url-slug"
+          />
+        </div>
+
+        <!-- Description -->
+        <div>
+          <label for="description" class="block text-sm font-medium mb-2 text-text-secondary">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            required
+            rows="3"
+            class="w-full px-3 py-2 bg-surface text-text-primary rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="Brief description for listing pages"
+          >{post.description}</textarea>
+        </div>
+
+        <!-- Category -->
+        <div>
+          <label for="category" class="block text-sm font-medium mb-2 text-text-secondary">Category</label>
+          <select
+            id="category"
+            name="category"
+            required
+            class="w-full px-3 py-2 bg-surface text-text-primary rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+          >
+            <option value="">Select a category</option>
+            {categories.map((cat: any) => (
+              <option value={cat.id} selected={cat.id === post.category}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <!-- Cover Image -->
+        <div>
+          <label class="block text-sm font-medium mb-2 text-text-secondary">
+            Cover Image
+            <span class="text-text-muted text-xs ml-2">Optional</span>
+          </label>
+          <div class="flex items-center gap-4">
+            <!-- Hidden input to store the URL -->
+            <input
+              type="hidden"
+              id="coverImage"
+              name="coverImage"
+              value={post.coverImage || ''}
+            />
+            
+            <!-- Image preview or placeholder -->
+            <div id="coverPreviewContainer" class="relative">
+              <div id="coverPlaceholder" class={`w-32 h-32 bg-surface rounded-md border-2 border-dashed border-border flex items-center justify-center ${post.coverImage ? 'hidden' : ''}`}>
+                <svg class="w-8 h-8 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <img id="coverPreviewImg" src={post.coverImage || ''} class={`w-32 h-32 object-cover rounded-md border border-border ${post.coverImage ? '' : 'hidden'}`} />
+            </div>
+            
+            <!-- Upload/Change button -->
+            <div class="flex flex-col gap-2">
+              <button
+                type="button"
+                id="uploadCoverBtn"
+                class="px-4 py-2 bg-surface-hover hover:bg-surface-hover text-text-primary rounded-md transition-colors flex items-center gap-2"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                </svg>
+                <span id="uploadBtnText">{post.coverImage ? 'Change Image' : 'Upload Image'}</span>
+              </button>
+              <button
+                type="button"
+                id="removeCoverBtn"
+                class={`px-4 py-2 bg-error hover:bg-error text-text-primary rounded-md transition-colors ${post.coverImage ? '' : 'hidden'}`}
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div>
+          <label class="block text-sm font-medium mb-2 text-text-secondary">Content</label>
+          <AstroRichTextEditor 
+            client:load
+            content={post.content}
+            placeholder="Start writing your content..."
+            inputId="content"
+          />
+          <input type="hidden" id="content" name="content" value={post.content} />
+        </div>
+
+        <!-- Publish Options -->
+        <div class="flex items-center gap-4">
+          <label class="flex items-center gap-2">
+            <input
+              type="checkbox"
+              name="published"
+              id="published"
+              checked={post.published}
+              class="rounded bg-surface-hover border-border"
+            />
+            <span class="text-text-secondary">Published</span>
+          </label>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex gap-4">
+          <button
+            type="submit"
+            class="px-4 py-2 bg-primary hover:bg-primary/90 rounded-md font-medium text-text-primary transition-colors"
+          >
+            Save Changes
+          </button>
+          <button
+            type="button"
+            id="publishToSocialBtn"
+            class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-md font-medium text-text-primary transition-colors"
+          >
+            Publish to Social Media
+          </button>
+          <a
+            href={`/${post.type}/${post.slug}`}
+            target="_blank"
+            class="px-4 py-2 bg-surface-hover hover:bg-surface-hover rounded-md font-medium text-text-primary transition-colors"
+          >
+            View Post
+          </a>
+          <a
+            href="/blog/editor/posts"
+            class="px-4 py-2 bg-surface-hover hover:bg-surface-hover rounded-md font-medium text-text-primary transition-colors"
+          >
+            Cancel
+          </a>
+        </div>
+
+        <div id="error" class="text-error hidden"></div>
+      </form>
+    </main>
+  </div>
+
+  <!-- Social Publish Modal -->
+  <SocialPublishModal 
+    client:load
+    isOpen={false}
+    postId={post.id}
+    postTitle={post.title}
+    postDescription={post.description}
+    postSlug={post.slug}
+    coverImage={post.coverImage}
+  />
+
+<script define:vars={{ API_URL, post, database }}>
+  import '../../../components/editor/editor-styles.css';
+  const form = document.getElementById('postForm') as HTMLFormElement;
+  const errorDiv = document.getElementById('error') as HTMLDivElement;
+  
+  // Cover image upload
+  const uploadBtn = document.getElementById('uploadCoverBtn') as HTMLButtonElement;
+  const coverImageInput = document.getElementById('coverImage') as HTMLInputElement;
+  const coverPlaceholder = document.getElementById('coverPlaceholder') as HTMLDivElement;
+  const coverPreviewImg = document.getElementById('coverPreviewImg') as HTMLImageElement;
+  const uploadBtnText = document.getElementById('uploadBtnText') as HTMLSpanElement;
+  const removeCoverBtn = document.getElementById('removeCoverBtn') as HTMLButtonElement;
+  
+  // State for paste dialog
+  let showPasteDialog = false;
+  
+  // Function to upload image (used by both file picker and paste)
+  async function uploadImage(file: File | Blob) {
+    try {
+      // Update button to show uploading state
+      uploadBtn.disabled = true;
+      uploadBtnText.textContent = 'Uploading...';
+      
+      const formData = new FormData();
+      
+      // If it's a blob from paste, give it a proper filename
+      if (file instanceof Blob && !(file instanceof File)) {
+        const extension = file.type.split('/')[1] || 'png';
+        const filename = `pasted-image-${Date.now()}.${extension}`;
+        file = new File([file], filename, { type: file.type });
+      }
+      
+      formData.append('file', file);
+        
+        // Use full API URL in development, relative in production (nginx will proxy)
+        const uploadUrl = import.meta.env.PUBLIC_API_URL 
+          ? `${import.meta.env.PUBLIC_API_URL}/api/upload`
+          : '/api/upload';
+        const response = await fetch(uploadUrl, {
+          method: 'POST',
+          body: formData,
+          credentials: 'include',
+        });
+        
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('Upload failed:', response.status, errorText);
+          let errorMessage = 'Failed to upload image';
+          if (response.status === 401) {
+            errorMessage = 'Authentication required. Please log in again.';
+          } else if (response.status === 413) {
+            errorMessage = 'Image file is too large (max 25MB)';
+          }
+          errorDiv.textContent = errorMessage;
+          errorDiv.classList.remove('hidden');
+          return;
+        }
+        
+        const data = await response.json();
+        if (data.url) {
+          // In development, prepend the API URL to the uploads path
+          const imageUrl = import.meta.env.PUBLIC_API_URL && data.url.startsWith('/uploads/')
+            ? `${import.meta.env.PUBLIC_API_URL}${data.url}`
+            : data.url;
+          // Set the URL in the hidden input
+          coverImageInput.value = imageUrl;
+          
+          // Show preview and hide placeholder
+          coverPreviewImg.src = imageUrl;
+          coverPreviewImg.classList.remove('hidden');
+          coverPlaceholder.classList.add('hidden');
+          
+          // Update button text and show remove button
+          uploadBtnText.textContent = 'Change Image';
+          removeCoverBtn.classList.remove('hidden');
+          
+          // Clear any error
+          errorDiv.classList.add('hidden');
+        }
+      } catch (error) {
+        console.error('Upload error:', error);
+        errorDiv.textContent = 'Failed to upload image. Please try again.';
+        errorDiv.classList.remove('hidden');
+      } finally {
+        // Reset button state
+        uploadBtn.disabled = false;
+      }
+  }
+  
+  // Function to select file from disk
+  function selectFile() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    
+    input.onchange = async (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (!file) return;
+      closePasteDialog();
+      await uploadImage(file);
+    };
+    
+    input.click();
+  }
+  
+  // Create and show paste dialog
+  function showDialog() {
+    const dialog = document.createElement('div');
+    dialog.id = 'coverPasteDialog';
+    dialog.className = 'fixed inset-0 bg-black/50 z-50 flex items-center justify-center';
+    dialog.innerHTML = `
+      <div class="bg-surface rounded-lg p-6 max-w-md w-full mx-4 border border-border" onclick="event.stopPropagation()">
+        <h3 class="text-lg font-semibold text-text-primary mb-4">Add Cover Image</h3>
+        
+        <div class="space-y-4">
+          <!-- Paste option -->
+          <div class="border-2 border-dashed border-border rounded-lg p-6 text-center">
+            <div class="mb-2">
+              <svg class="w-8 h-8 mx-auto text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <p class="text-text-secondary mb-2">Paste an image from clipboard</p>
+            <p class="text-sm text-text-muted">Copy an image and press Ctrl+V / Cmd+V</p>
+          </div>
+          
+          <!-- Divider -->
+          <div class="flex items-center gap-4">
+            <div class="flex-1 h-px bg-surface-hover"></div>
+            <span class="text-text-muted text-sm">OR</span>
+            <div class="flex-1 h-px bg-surface-hover"></div>
+          </div>
+          
+          <!-- File upload option -->
+          <button
+            type="button"
+            id="selectFileBtn"
+            class="w-full px-4 py-3 bg-surface-hover hover:bg-surface-hover rounded-lg text-text-primary transition-colors"
+          >
+            Select File from Computer
+          </button>
+          
+          <!-- Cancel button -->
+          <button
+            type="button"
+            id="cancelDialogBtn"
+            class="w-full px-4 py-2 text-text-muted hover:text-text-primary transition-colors"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    `;
+    
+    document.body.appendChild(dialog);
+    showPasteDialog = true;
+    
+    // Handle dialog clicks
+    dialog.addEventListener('click', closePasteDialog);
+    document.getElementById('selectFileBtn')?.addEventListener('click', selectFile);
+    document.getElementById('cancelDialogBtn')?.addEventListener('click', closePasteDialog);
+  }
+  
+  function closePasteDialog() {
+    const dialog = document.getElementById('coverPasteDialog');
+    if (dialog) {
+      dialog.remove();
+      showPasteDialog = false;
+    }
+  }
+  
+  // Handle paste events when dialog is open
+  document.addEventListener('paste', async (e) => {
+    if (!showPasteDialog) return;
+    
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    
+    for (const item of Array.from(items)) {
+      if (item.type.startsWith('image/')) {
+        e.preventDefault();
+        
+        const blob = item.getAsFile();
+        if (!blob) continue;
+        
+        closePasteDialog();
+        await uploadImage(blob);
+        return;
+      }
+    }
+    
+    alert('No image found in clipboard. Try copying an image first.');
+  });
+  
+  uploadBtn.addEventListener('click', () => {
+    showDialog();
+  });
+  
+  // Remove cover image
+  removeCoverBtn.addEventListener('click', () => {
+    coverImageInput.value = '';
+    coverPreviewImg.src = '';
+    coverPreviewImg.classList.add('hidden');
+    coverPlaceholder.classList.remove('hidden');
+    uploadBtnText.textContent = 'Upload Image';
+    removeCoverBtn.classList.add('hidden');
+  });
+  
+  // Form submission
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(form);
+    const postId = formData.get('id');
+    
+    // Get content from window object or hidden input
+    let content = formData.get('content') || '';
+    if (!content && typeof window !== 'undefined' && (window as any).__editorContent) {
+      content = (window as any).__editorContent;
+    }
+    
+    const data = {
+      title: formData.get('title'),
+      slug: formData.get('slug'),
+      description: formData.get('description'),
+      content: content,
+      type: formData.get('type'),
+      category: formData.get('category'),
+      coverImage: formData.get('coverImage') || undefined,
+      published: formData.get('published') === 'on'
+    };
+    
+    try {
+      const response = await fetch(`${API_URL}/api/posts/${postId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Site-Database': database
+        },
+        credentials: 'include',
+        body: JSON.stringify(data)
+      });
+      
+      if (response.ok) {
+        // Reload the page with saved=true to show success message
+        window.location.href = `/blog/editor/posts/edit/${postId}?saved=true`;
+      } else {
+        const text = await response.text();
+        errorDiv.textContent = text || 'Failed to update post';
+        errorDiv.classList.remove('hidden');
+      }
+    } catch (error) {
+      errorDiv.textContent = 'Network error. Please try again.';
+      errorDiv.classList.remove('hidden');
+    }
+  });
+
+  // Handle Publish to Social Media button
+  const publishToSocialBtn = document.getElementById('publishToSocialBtn');
+  if (publishToSocialBtn) {
+    publishToSocialBtn.addEventListener('click', () => {
+      // Dispatch event to open the modal
+      window.dispatchEvent(new CustomEvent('openSocialPublishModal'));
+    });
+  }
+</script>

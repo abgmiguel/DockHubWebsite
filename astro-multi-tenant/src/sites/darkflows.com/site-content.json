@@ -1,0 +1,302 @@
+{
+  "hero": {
+    "title": "DarkFlows Router OS",
+    "subtitle": "High Performance Routing and Firewalling Reimagined",
+    "finalTitle": "Powerful and Easy to Use",
+    "finalSubtitle": "Latency free gaming, high performance traffic shaping, and easy to use dashboard",
+    "image": "/laptop.png"
+  },
+  "dataConnectSections": [
+    {
+      "id": "data-section-0a",
+      "title": "Why another router OS?",
+      "description": "I was frustrated with the ability to get true latency free gaming on my home network, and the ability to have a solution that took full advantage of my hardware and gave me the ability to use CAKE to fix these problems.  So, I decided to create my own solution.",
+      "features": [
+        {
+          "title": "Latency Free Gaming",
+          "subtitle": "CAKE plus full Linux Kernel support was the best solution"
+        },
+        {
+          "title": "Auto Configuration",
+          "subtitle": "Install and configure your router in minutes with our automated installer"
+        },
+        {
+          "title": "Full Control",
+          "subtitle": "Easily spot and solve problems on your network"
+        }
+      ],
+      "image": "/male_firefighter2.png"
+    },
+    {
+      "id": "data-section-1",
+      "title": "Fully Customizable Dashboard",
+      "description": "Easily hide and re-arrange the widgets to always have the perfect view of your network.",
+      "features": [
+        {
+          "title": "App Store",
+          "subtitle": "Install additional widgets from the App Store or with Docker"
+        },
+        {
+          "title": "Kiosk Mode",
+          "subtitle": "Use Kiosk mode to display a custom dashboard on your wall"
+        },
+        {
+          "title": "Network Monitoring",
+          "subtitle": "See at all time what is happening on your network"
+        }
+      ],
+      "image": "/custom.png"
+    },
+    {
+      "id": "data-section-2",
+      "title": "High Performance Traffic Shaping",
+      "description": "Thanks to CAKE and the Linux Kernel, you can shape your traffic with the highest possible performance",
+      "features": [
+        {
+          "title": "Linux Kernel",
+          "subtitle": "Higher Performance then BSD based solutions with more compatibility"
+        },
+        {
+          "title": "No more bufferbloat",
+          "subtitle": "CAKE is the only solution that can shape traffic with zero latency added under high load"
+        },
+        {
+          "title": "Gaming Performance",
+          "subtitle": "Stop jitter and lag during gaming sessions, CAKE is the only bullet proof solution"
+        }
+      ],
+      "image": "/cake.png"
+    },
+    {
+      "id": "data-section-0b",
+      "title": "Solutions",
+      "description": "Comes pre-configured with the bestsolutions that work together",
+      "features": [
+        {
+          "title": "NFTables",
+          "subtitle": "Modern firewall technology with better performance"
+        },
+        {
+          "title": "CAKE",
+          "subtitle": "Amazing packet based traffic shaping"
+        },
+        {
+          "title": "PiHole",
+          "subtitle": "Block ads and protect your network"
+        },
+        {
+          "title": "Docker",
+          "subtitle": "Easily install other applications"
+        },
+        {
+          "title": "Samba",
+          "subtitle": "Optimized for high speed NAS storage"
+        }
+
+      ],
+      "image": "/female_firefighter1.png"
+    },
+
+    {
+      "id": "data-section-3",
+      "title": "No more Ads",
+      "description": "Thanks to Pi-Hole we block all ads at the DNS level.  Easily manage your DNS from our dashboard.",
+      "features": [
+        {
+          "title": "Built in Management",
+          "subtitle": "Pi-Hole Admin is accessible however you don't even need to leave our dashboard"
+        },
+        {
+          "title": "Cooperative Naming",
+          "subtitle": "Using DNS and DHCP data we can name and trace clients on your network"
+        }
+      ],
+      "image": "/pihole.png"
+    },
+    {
+      "id": "data-section-4",
+      "title": "Easy NAS Storage",
+      "description": "Easily manage your NAS storage with our built in Samba server.  Share files between your devices and work together on the same documents.",
+      "features": [
+        {
+          "title": "Add additional storage",
+          "subtitle": "Leverage ZFS and RAID to add additional storage to your network"
+        },
+        {
+          "title": "Easy Management",
+          "subtitle": "Easily add shares, users, and groups to your Samba server"
+        }
+      ],
+      "image": "/samba_image.png"
+    }
+  ],
+  "dataConnect": {
+    "title": "Connect all of your precious data",
+    "description": "No more splitting data on Dropbox, Google Drive, or hard drives. Keep your data both updated and safe. Easily sync between devices and manage backups.",
+    "features": [
+      {
+        "title": "10X",
+        "subtitle": "Syncing speed"
+      },
+      {
+        "title": "ZERO",
+        "subtitle": "data traffic or subscription fee"
+      },
+      {
+        "title": "Multi-device",
+        "subtitle": "access via phone, TV or VR"
+      }
+    ],
+    "image": "/laptop.png"
+  },
+  "carousel": [
+    {
+      "title": "DHCP Leases",
+      "description": "View and manage active DHCP leases on your network",
+      "imageSrc": "/active_dhcp_leases.png"
+    },
+    {
+      "title": "Bandwidth Statistics",
+      "description": "Monitor network bandwidth usage and trends",
+      "imageSrc": "/bandwidth_stats.png"
+    }
+  ],
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Here are some frequently asked questions we have answered quickly for you.",
+    "items": [
+      {
+        "question": "What is DarkFlows?",
+        "answer": "On a Mission to make the best router OS for the home we decided to create the solution to solve our own problems.  We wanted to create a router OS that was easy to use, had all the features we needed, and ultimately solve all our traffic shaping needs."
+      },
+      {
+        "question": "Is DarkFlows free to use?",
+        "answer": "DarkFlows is free to use and our intent is to keep it that way."
+      },
+      {
+        "question": "Why is CAKE better then solutions on pfSense and OPNsense?",
+        "answer": "CAKE was made to fix all network bufferbloat issues that plague other solutions.  It is the only solution that can shape traffic with zero latency added under high load."
+      },
+      {
+        "question": "How can I install DarkFlows?",
+        "answer": "There are two ways to install DarkFlows.  You can use our pre-built ISO images or run our installer script on a Debian based system."
+      },
+      {
+        "question": "Why put applications and file sharing on the same system?",
+        "answer": "For most people having one system to rule them all is the best solution.  We have designed DarkFlows to be a very light weight OS that can run on a very inexpensive system and still provide all the features you need."
+      },
+      {
+        "question": "What do I do before installing DarkFlows?",
+        "answer": "Make sure you have your WAN and LAN ports set up before installing DarkFlows.  Our installer auto detects your network configuration and will configure your system accordingly."
+      },
+      {
+        "question": "How do I access the DarkFlows dashboard?",
+        "answer": "You can just visit the default IP address at http://192.168.58.1/ to access the dashboard.  It will then redirect you to port 4080."
+      },
+      {
+        "question": "What are the default passwords and usernames?",
+        "answer": "The default password for root and other things is 'darkflows'.  There is also a default user added called 'darkflows'."
+      }
+      ,
+      {
+        "question": "Can I access SSH?",
+        "answer": "SSH is enabled on port 12222 on both the WAN and LAN interfaces."
+      }
+      ,
+      {
+        "question": "Can I access the web interface from the internet?",
+        "answer": "By default the web interface is only accessible from the local network.  It is not recommended to expose the web interface to the internet at this time until we add additional security measures for user authentication."
+      }
+      ,
+      {
+        "question": "Isn't it dangerous to have NAS and other applications on my router?",
+        "answer": "In our opinions there is an elevated risk, however one that for the average user is minimal.  The entire router is firewalled from the internet, so the only attack vector is inside your network.  However what is great about our system is you get to choose rather you have other applications enabled our not.  We are just creating our ultimate solution, it is up to the user what they do with it."
+      }
+      ,
+      {
+        "question": "What are some good things to use to troubleshoot issues?",
+        "answer": "Use 'systemctl status kea-ctrl-agent.service' to see if DHCP is running. Use to 'cat /etc/darkflows/d_network.cfg' to see if at least two network interfaces are there. Use 'systemctl status nextjs' to see if webserver is running. Use 'ip addr show' to see what interfaces are setup. Use 'cat /etc/network/interfaces' to see what interfaces are configured."
+      }
+      ,
+      {
+        "question": "What debian ISO should I use to install DarkFlows?",
+        "answer": "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.9.0-amd64-netinst.iso"
+      }
+      ,
+      {
+        "question": "What is command to install DarkFlows?",
+        "answer": "su - root ; apt install curl ; curl -sSL https://darkflows.com/downloads/install.sh | bash"
+      }
+
+      
+
+    ]
+  },
+  "footer": {
+    "sections": [
+      {
+        "title": "Product",
+        "links": [
+          { "text": "Windsurf Editor", "href": "/windsurf-editor" },
+          { "text": "Supercomplete", "href": "/supercomplete" },
+          { "text": "Live", "href": "/live" },
+          { "text": "Forge", "href": "/forge" },
+          { "text": "Pricing", "href": "/pricing" },
+          { "text": "Enterprise", "href": "/enterprise" },
+          { "text": "Offers", "href": "/offers" }
+        ]
+      },
+      {
+        "title": "Extensions",
+        "links": [
+          { "text": "Visual Studio Code", "href": "/vscode" },
+          { "text": "JetBrains", "href": "/jetbrains" },
+          { "text": "Neovim / Vim", "href": "/vim" },
+          { "text": "Chrome", "href": "/chrome" },
+          { "text": "See All", "href": "/extensions" }
+        ]
+      },
+      {
+        "title": "Industry",
+        "links": [
+          { "text": "Tech Leaders 2024", "href": "/tech-leaders" }
+        ]
+      },
+      {
+        "title": "Company",
+        "links": [
+          { "text": "About Us", "href": "/about" },
+          { "text": "Blog", "href": "/blog" },
+          { "text": "Careers", "href": "/careers" },
+          { "text": "Compare", "href": "/compare" },
+          { "text": "Contact", "href": "/contact" },
+          { "text": "Community", "href": "/community" },
+          { "text": "Partnerships", "href": "/partnerships" }
+        ]
+      },
+      {
+        "title": "Resources",
+        "links": [
+          { "text": "Support", "href": "/support" },
+          { "text": "Docs", "href": "/docs" },
+          { "text": "Changelog", "href": "/changelog" },
+          { "text": "FAQ", "href": "/faq" },
+          { "text": "Feature Requests", "href": "/feature-requests" },
+          { "text": "Events", "href": "/events" },
+          { "text": "Media Kit", "href": "/media-kit" },
+          { "text": "University", "href": "/university" },
+          { "text": "Hackathons", "href": "/hackathons" }
+        ]
+      }
+    ],
+    "socials": [
+      { "platform": "email", "href": "#", "icon": "envelope" },
+      { "platform": "twitter", "href": "#", "icon": "twitter" },
+      { "platform": "discord", "href": "https://discord.gg/3QmjpqX2Y5", "icon": "discord" },
+      { "platform": "linkedin", "href": "#", "icon": "linkedin" },
+      { "platform": "reddit", "href": "https://www.reddit.com/r/DarkFlows/", "icon": "reddit" },
+      { "platform": "youtube", "href": "#", "icon": "youtube" }
+    ],
+    "tagline": "Your modern coding superpowers."
+  }
+} 

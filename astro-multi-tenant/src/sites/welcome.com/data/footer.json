@@ -1,0 +1,29 @@
+{
+  "copyright": "© 2024 SITE_NAME_PLACEHOLDER. All rights reserved.",
+  "links": [
+    {
+      "label": "Privacy Policy",
+      "href": "/privacy"
+    },
+    {
+      "label": "Terms of Service",
+      "href": "/terms"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact"
+    }
+  ],
+  "social": [
+    {
+      "platform": "Twitter",
+      "href": "#",
+      "icon": "twitter"
+    },
+    {
+      "platform": "GitHub",
+      "href": "#",
+      "icon": "github"
+    }
+  ]
+}

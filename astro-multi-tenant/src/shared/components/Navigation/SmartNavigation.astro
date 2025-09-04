@@ -1,0 +1,127 @@
+---
+// Smart navigation that handles different data structures
+const { data = {} } = Astro.props;
+
+// Detect which structure we have and normalize it
+let logo = null;
+let navigation = [];
+let tagline = null;
+let social = [];
+let cta = null;
+
+// Check for different data structures
+if (data.logo && data.navigation) {
+  // Standard header.json format (codersinflow, magicvideodownloader, etc)
+  logo = data.logo;
+  navigation = data.navigation;
+  social = data.social || [];
+  cta = data.cta || null;
+} else if (data.brandText && data.links) {
+  // PrestonGarrison navigation.json format
+  logo = { text: data.brandText, href: '/' };
+  navigation = data.links;
+} else if (data.logo && data.links) {
+  // DarkFlows navbar.json format
+  logo = data.logo;
+  tagline = data.tagline;
+  // DarkFlows links are social links, not navigation
+  social = data.links || [];
+  // Add some default navigation for DarkFlows
+  navigation = [
+    { href: '/', text: 'Home', label: 'Home' },
+    { href: '/#features', text: 'Features', label: 'Features' },
+    { href: '/#about', text: 'About', label: 'About' }
+  ];
+}
+
+// Normalize navigation items to have both text and label
+navigation = navigation.map(item => ({
+  href: item.href || '#',
+  text: item.text || item.label || 'Link',
+  label: item.label || item.text || 'Link'
+}));
+---
+
+<nav class="bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/60 border-b border-border">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo/Brand -->
+      <div class="flex items-center">
+        {logo && (
+          logo.src ? (
+            <a href="/" class="flex items-center">
+              <img 
+                src={logo.src}
+                alt={logo.alt || 'Logo'}
+                width={logo.width || 150}
+                height={logo.height || 40}
+                class="h-10"
+              />
+            </a>
+          ) : logo.text ? (
+            <a href={logo.href || '/'} class="text-xl font-bold text-text-primary hover:text-primary transition-colors">
+              {logo.text}
+            </a>
+          ) : null
+        )}
+        {tagline && (
+          <span class="ml-4 text-sm text-text-muted hidden lg:block">
+            {tagline}
+          </span>
+        )}
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="hidden md:flex items-center space-x-8">
+        {navigation.map((item) => (
+          <a 
+            href={item.href}
+            class="text-text-secondary hover:text-primary transition-colors font-medium"
+          >
+            {item.text}
+          </a>
+        ))}
+      </div>
+
+      <!-- Right side: Social/CTA -->
+      <div class="flex items-center space-x-4">
+        {social.length > 0 && (
+          <div class="flex items-center space-x-3">
+            {social.map((link) => (
+              <a 
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-text-secondary hover:text-primary transition-colors"
+                title={link.name || link.type}
+              >
+                {link.icon || link.type || link.name || '🔗'}
+              </a>
+            ))}
+          </div>
+        )}
+        {cta && (
+          <a 
+            href={cta.href}
+            class="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors font-medium"
+          >
+            {cta.text}
+          </a>
+        )}
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button 
+          type="button"
+          class="text-text-secondary hover:text-text-primary p-2"
+          aria-label="Open menu"
+        >
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

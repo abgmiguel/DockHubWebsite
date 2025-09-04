@@ -1,0 +1,26 @@
+---
+// This page is specifically for loading sites in the dashboard iframe
+// It uses the site parameter to override the host-based tenant detection
+import { getTenantFromHost } from '../shared/lib/tenant';
+
+// Get the site parameter
+const site = Astro.url.searchParams.get('site');
+if (!site) {
+  return new Response('Site parameter required', { status: 400 });
+}
+
+// Get tenant using the override
+const tenant = getTenantFromHost('', Astro.url.searchParams);
+const tenantDir = tenant.directory || tenant.id;
+
+// Import the site's page component
+const pages = import.meta.glob('../sites/*/pages/index.astro', { eager: true });
+const pagePath = `../sites/${tenantDir}/pages/index.astro`;
+const PageComponent = pages[pagePath]?.default;
+
+if (!PageComponent) {
+  return new Response(`Site not found: ${site}`, { status: 404 });
+}
+---
+
+<PageComponent />

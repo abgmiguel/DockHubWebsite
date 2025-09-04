@@ -1,0 +1,126 @@
+{
+  "hero": {
+    "title": "Powerful Features for Modern Development",
+    "description": "Discover why Coders In Flow is the most advanced AI coding assistant available. Every feature is designed to make you more productive."
+  },
+  "features": [
+    {
+      "id": "multitasking",
+      "title": "True Multi-Tasking Architecture",
+      "description": "Run 20+ AI tasks simultaneously without any interference. Each task maintains its own context, model selection, and permissions - true parallel processing for lightning-fast development.",
+      "features": [
+        "Run 20+ concurrent tasks without interference",
+        "Complete task isolation with zero shared state",
+        "Parent-child task relationships with result aggregation",
+        "Automatic load balancing across resources",
+        "Independent context windows per task"
+      ],
+      "gradient": "from-blue-900 to-indigo-900",
+      "videoSrc": "/videos/ClaudeCode KanBan.mp4",
+      "youtubeUrl": "https://www.youtube.com/watch?v=YOUR_VIDEO_ID_1",
+      "reverse": false
+    },
+    {
+      "id": "codebase-intelligence",
+      "title": "Intelligent Codebase Understanding",
+      "description": "AI analyzes and documents your entire codebase on startup, creating a deep understanding that dramatically reduces token usage and improves response accuracy.",
+      "features": [
+        "Automatic documentation generation on startup",
+        "Framework-specific intelligence and pattern detection",
+        "Project summary and architecture mapping",
+        "50%+ reduction in token usage",
+        "Smart dependency and relationship mapping"
+      ],
+      "gradient": "from-purple-900 to-pink-900",
+      "videoSrc": "/videos/Code Analysis.mov",
+      "youtubeUrl": "https://www.youtube.com/watch?v=YOUR_VIDEO_ID_2",
+      "reverse": true
+    },
+    {
+      "id": "git-management",
+      "title": "Shadow Git with Selective Staging",
+      "description": "Perfect human-AI collaboration with our shadow git system. Review and selectively apply AI changes at the chunk level for complete control over your codebase.",
+      "features": [
+        "Automatic git checkpoints after AI operations",
+        "Chunk-level change control and staging",
+        "Accept or refuse specific modifications",
+        "Task-scoped history linking",
+        "Instant rollback to any checkpoint"
+      ],
+      "gradient": "from-green-900 to-emerald-900",
+      "videoSrc": "/videos/ClaudeCode Modify.mp4",
+      "youtubeUrl": "https://www.youtube.com/watch?v=YOUR_VIDEO_ID_3",
+      "reverse": false
+    },
+    {
+      "id": "mobile-apps",
+      "title": "Native Mobile Development",
+      "description": "Continue coding on the go with our native iOS and Android apps. Full task management, real-time sync, and all the power of Coders In Flow in your pocket.",
+      "features": [
+        "Native iOS and Android applications",
+        "Real-time WebSocket synchronization",
+        "Seamless desktop-to-mobile continuity",
+        "Offline task queuing and sync",
+        "Push notifications for task completion"
+      ],
+      "gradient": "from-cyan-900 to-blue-900",
+      "videoSrc": "/videos/Claude Code.mov",
+      "youtubeUrl": "https://www.youtube.com/watch?v=YOUR_VIDEO_ID_4",
+      "reverse": true
+    },
+    {
+      "id": "context-control",
+      "title": "Advanced Context Management",
+      "description": "Revolutionary context management with AI self-editing capabilities. The AI intelligently prunes unnecessary information in real-time, dramatically reducing costs.",
+      "features": [
+        "AI-controlled context self-editing",
+        "Dynamic optimization during conversations",
+        "Multi-strategy truncation options",
+        "Token-perfect counting for every model",
+        "Visual context editor for manual control"
+      ],
+      "gradient": "from-orange-900 to-red-900",
+      "videoSrc": "/videos/ClaudeCode KanBan.mp4",
+      "youtubeUrl": "https://www.youtube.com/watch?v=YOUR_VIDEO_ID_5",
+      "reverse": false
+    },
+    {
+      "id": "enterprise-cloud",
+      "title": "Enterprise Cloud & Team Management",
+      "description": "Complete cloud synchronization with powerful team management capabilities. Monitor productivity, control access, and track ROI across your entire development team.",
+      "features": [
+        "Real-time developer productivity tracking",
+        "Centralized model access control",
+        "Comprehensive analytics dashboard",
+        "SOC2 compliant infrastructure",
+        "Automatic cloud backup and sync"
+      ],
+      "gradient": "from-indigo-900 to-purple-900",
+      "videoSrc": "/videos/ClaudeCode Modify.mp4",
+      "youtubeUrl": "https://www.youtube.com/watch?v=YOUR_VIDEO_ID_6",
+      "reverse": true
+    },
+    {
+      "id": "provider-system",
+      "title": "Dynamic Provider System",
+      "description": "Unlike competitors with hardcoded providers, our JSON-based system allows instant provider addition without code changes. Add any AI provider in minutes.",
+      "features": [
+        "20+ AI providers out of the box",
+        "Add new providers via JSON configuration",
+        "Automatic model discovery and updates",
+        "No recompilation needed for changes",
+        "Support for custom and local models"
+      ],
+      "gradient": "from-teal-900 to-cyan-900",
+      "videoSrc": "/videos/Code Analysis.mov",
+      "youtubeUrl": "https://www.youtube.com/watch?v=YOUR_VIDEO_ID_7",
+      "reverse": false
+    }
+  ],
+  "cta": {
+    "title": "Ready to Experience These Features?",
+    "description": "Join thousands of developers who are already coding faster with AI.",
+    "buttonText": "Install Now",
+    "buttonLink": "/download"
+  }
+}

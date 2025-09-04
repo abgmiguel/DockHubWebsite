@@ -1,0 +1,45 @@
+---
+export interface Props {
+  title: string;
+  tenant?: any;
+}
+
+const { title, tenant } = Astro.props;
+const siteName = tenant?.id || 'Multi-Tenant Site';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Multi-tenant blog platform" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} - {siteName}</title>
+    <style>
+      body {
+        background-color: #0f0f0f;
+        color: #ffffff;
+        margin: 0;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="bg-gray-900 border-b border-gray-800">
+      <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center gap-8">
+            <a href="/" class="text-xl font-bold">{siteName}</a>
+            <div class="flex gap-4">
+              <a href="/" class="hover:text-blue-400">Home</a>
+              <a href="/blog" class="hover:text-blue-400">Blog</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <slot />
+  </body>
+</html>

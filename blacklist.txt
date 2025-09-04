@@ -1,0 +1,8 @@
+# Sites to exclude from deployment
+# One site ID per line (without .com)
+
+codersinflow
+darkflows
+prestongarrison
+welcome
+

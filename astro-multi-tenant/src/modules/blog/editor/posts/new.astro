@@ -1,0 +1,647 @@
+---
+export const prerender = false;
+
+import AstroRichTextEditor from '../../components/editor/AstroRichTextEditor';
+import { API_URL } from '../../../../shared/lib/api-config';
+
+// Get database from props
+const { database, tenant } = Astro.props;
+
+// Get authentication token (already verified by BlogApp.astro)
+const token = Astro.cookies.get('auth-token');
+
+// Get post type from query params
+const postType = Astro.url.searchParams.get('type') || 'blog';
+
+// Handle form submission
+let submissionResult = {
+  success: false,
+  post: null,
+  errors: {},
+  generalError: null
+};
+
+if (Astro.request.method === 'POST') {
+  try {
+    const formData = await Astro.request.formData();
+    
+    // Validate required fields
+    const errors: Record<string, string> = {};
+    
+    if (!formData.get('title')) {
+      errors.title = 'Title is required';
+    }
+    
+    if (!formData.get('description')) {
+      errors.description = 'Description is required';
+    }
+    
+    if (!formData.get('category')) {
+      errors.category = 'Please select a category';
+    }
+    
+    const content = formData.get('content');
+    if (!content || content.toString().trim() === '') {
+      errors.content = 'Content is required';
+    }
+    
+    // If there are validation errors, set them and don't proceed
+    if (Object.keys(errors).length > 0) {
+      submissionResult.errors = errors;
+    } else {
+      // Build the post data
+      const postData = {
+        title: formData.get('title'),
+        slug: formData.get('slug') || undefined,
+        description: formData.get('description'),
+        content: formData.get('content'),
+        type: postType,
+        category: formData.get('category'),
+        coverImage: formData.get('coverImage') || undefined,
+        published: formData.get('published') === 'on'
+      };
+      
+      // Submit to API
+      const response = await fetch(`${API_URL}/api/posts`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Cookie': `auth-token=${token.value}`,
+          'X-Site-Database': database
+        },
+        body: JSON.stringify(postData)
+      });
+      
+      if (response.ok) {
+        const post = await response.json();
+        submissionResult.success = true;
+        submissionResult.post = post;
+      } else {
+        const errorText = await response.text();
+        submissionResult.generalError = errorText || 'Failed to create post';
+      }
+    }
+  } catch (error) {
+    submissionResult.generalError = 'An unexpected error occurred. Please try again.';
+    console.error('Form submission error:', error);
+  }
+}
+
+// Fetch categories (only if not showing success page)
+let categories = [];
+if (!submissionResult.success) {
+  const categoriesResponse = await fetch(`${API_URL}/api/categories?type=${postType}`, {
+    headers: {
+      'Cookie': `auth-token=${token.value}`,
+      'X-Site-Database': database
+    }
+  });
+  categories = categoriesResponse.ok ? await categoriesResponse.json() : [];
+}
+
+// Preserve form values on error (re-use the same formData from submission)
+let formValues: any = {};
+if (!submissionResult.success && Astro.request.method === 'POST') {
+  const formData = await Astro.request.formData();
+  formValues = {
+    title: formData.get('title') || '',
+    slug: formData.get('slug') || '',
+    description: formData.get('description') || '',
+    category: formData.get('category') || '',
+    coverImage: formData.get('coverImage') || '',
+    content: formData.get('content') || '',
+    published: formData.get('published') === 'on'
+  };
+}
+---
+
+<!-- No Layout wrapper needed, BlogApp handles the layout -->
+<div class="min-h-screen bg-background">
+  {submissionResult.success ? (
+    <!-- Success View -->
+    <div class="min-h-screen flex items-center justify-center p-4">
+      <div class="max-w-2xl w-full">
+        <div class="bg-surface rounded-lg p-8 text-center space-y-6 border border-border">
+          <!-- Success Icon -->
+          <div class="flex justify-center">
+            <div class="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center">
+              <svg class="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+          </div>
+          
+          <!-- Success Message -->
+          <div>
+            <h2 class="text-2xl font-bold text-text-primary mb-2">
+              {postType === 'blog' ? 'Blog Post' : 'Documentation'} Created Successfully!
+            </h2>
+            <p class="text-text-secondary">
+              Your {postType === 'blog' ? 'post' : 'documentation'} "{submissionResult.post.title}" has been created.
+            </p>
+          </div>
+          
+          <!-- Post URL -->
+          <div class="bg-surface-hover rounded-lg p-4">
+            <p class="text-sm text-text-muted mb-2">Your {postType === 'blog' ? 'post' : 'documentation'} is available at:</p>
+            <a 
+              href={`/${submissionResult.post.type}/${submissionResult.post.slug}`}
+              target="_blank"
+              class="text-link hover:text-link-hover break-all font-mono text-sm"
+            >
+              {new URL(`/${submissionResult.post.type}/${submissionResult.post.slug}`, Astro.url).href}
+            </a>
+          </div>
+          
+          <!-- Status Badge -->
+          <div>
+            {submissionResult.post.published ? (
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-green-500/20 text-green-400">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-10.293a1 1 0 00-1.414-1.414L9 9.586 7.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                Published
+              </span>
+            ) : (
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-yellow-500/20 text-yellow-400">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                </svg>
+                Draft
+              </span>
+            )}
+          </div>
+          
+          <!-- Action Buttons -->
+          <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href={`/${submissionResult.post.type}/${submissionResult.post.slug}`}
+              target="_blank"
+              class="px-6 py-2 bg-primary hover:bg-primary/90 rounded-md font-medium text-white transition-colors"
+            >
+              View {postType === 'blog' ? 'Post' : 'Documentation'}
+            </a>
+            <a
+              href={`/blog/editor/posts/edit/${submissionResult.post.id}`}
+              class="px-6 py-2 bg-surface-hover hover:bg-surface rounded-md font-medium text-text-primary transition-colors"
+            >
+              Edit {postType === 'blog' ? 'Post' : 'Documentation'}
+            </a>
+            <a
+              href={`/blog/editor/posts/new?type=${postType}`}
+              class="px-6 py-2 bg-surface-hover hover:bg-surface rounded-md font-medium text-text-primary transition-colors"
+            >
+              Create Another
+            </a>
+            <a
+              href="/blog/editor"
+              class="px-6 py-2 bg-surface-hover hover:bg-surface rounded-md font-medium text-text-primary transition-colors"
+            >
+              Back to Dashboard
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  ) : (
+    <!-- Editor Header -->
+    <header class="bg-surface border-b border-border">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <h1 class="text-xl font-bold text-text-primary">Create New {postType === 'blog' ? 'Blog Post' : 'Documentation'}</h1>
+          <a href="/blog/editor" class="text-text-muted hover:text-text-primary">
+            ← Back to Dashboard
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 max-w-4xl">
+      <!-- Show general error if exists -->
+      {submissionResult.generalError && (
+        <div class="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
+          <p class="text-red-400">{submissionResult.generalError}</p>
+        </div>
+      )}
+      
+      <form id="postForm" method="POST" class="space-y-6">
+        <input type="hidden" name="type" value={postType} />
+        
+        <!-- Title -->
+        <div>
+          <label for="title" class="block text-sm font-medium mb-2 text-text-secondary">Title</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            required
+            value={formValues.title || ''}
+            class={`w-full px-3 py-2 bg-surface text-text-primary rounded-md focus:outline-none focus:ring-2 focus:ring-primary ${
+              submissionResult.errors.title ? 'border-2 border-red-500' : ''
+            }`}
+            placeholder="Enter post title"
+          />
+          {submissionResult.errors.title && (
+            <p class="mt-1 text-sm text-red-400">{submissionResult.errors.title}</p>
+          )}
+        </div>
+
+        <!-- Slug -->
+        <div>
+          <label for="slug" class="block text-sm font-medium mb-2 text-text-secondary">
+            Slug (URL)
+            <span class="text-text-muted text-xs ml-2">Leave empty to auto-generate</span>
+          </label>
+          <input
+            type="text"
+            id="slug"
+            name="slug"
+            value={formValues.slug || ''}
+            class="w-full px-3 py-2 bg-surface text-text-primary rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="post-url-slug"
+          />
+        </div>
+
+        <!-- Description -->
+        <div>
+          <label for="description" class="block text-sm font-medium mb-2 text-text-secondary">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            required
+            rows="3"
+            class={`w-full px-3 py-2 bg-surface text-text-primary rounded-md focus:outline-none focus:ring-2 focus:ring-primary ${
+              submissionResult.errors.description ? 'border-2 border-red-500' : ''
+            }`}
+            placeholder="Brief description for listing pages"
+          >{formValues.description || ''}</textarea>
+          {submissionResult.errors.description && (
+            <p class="mt-1 text-sm text-red-400">{submissionResult.errors.description}</p>
+          )}
+        </div>
+
+        <!-- Category -->
+        <div>
+          <label for="category" class="block text-sm font-medium mb-2 text-text-secondary">Category</label>
+          <select
+            id="category"
+            name="category"
+            required
+            class={`w-full px-3 py-2 bg-surface text-text-primary rounded-md focus:outline-none focus:ring-2 focus:ring-primary ${
+              submissionResult.errors.category ? 'border-2 border-red-500' : ''
+            }`}
+          >
+            <option value="">Select a category</option>
+            {categories.map((cat: any) => (
+              <option value={cat.id} selected={formValues.category === cat.id}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
+          {submissionResult.errors.category && (
+            <p class="mt-1 text-sm text-red-400">{submissionResult.errors.category}</p>
+          )}
+        </div>
+
+        <!-- Cover Image -->
+        <div>
+          <label class="block text-sm font-medium mb-2 text-text-secondary">Cover Image</label>
+          <div class="relative">
+            <div id="coverPlaceholder" class="w-full h-48 bg-surface-hover rounded-lg flex items-center justify-center border-2 border-dashed border-border">
+              <div class="text-center">
+                <svg class="w-12 h-12 mx-auto text-text-muted mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                <p class="text-text-muted">No cover image</p>
+              </div>
+            </div>
+            <img id="coverPreviewImg" class="w-full h-48 object-cover rounded-lg hidden" alt="Cover preview" />
+            <button
+              type="button"
+              id="uploadCoverBtn"
+              class="mt-2 px-4 py-2 bg-surface-hover hover:bg-surface rounded-md text-sm text-text-primary transition-colors"
+            >
+              <span id="uploadBtnText">Upload Image</span>
+            </button>
+            <button
+              type="button"
+              id="removeCoverBtn"
+              class="mt-2 ml-2 px-4 py-2 bg-error/20 hover:bg-error/30 rounded-md text-sm text-error transition-colors hidden"
+            >
+              Remove
+            </button>
+            <input type="hidden" id="coverImage" name="coverImage" value={formValues.coverImage || ''} />
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div>
+          <label class="block text-sm font-medium mb-2 text-text-secondary">Content</label>
+          <AstroRichTextEditor 
+            client:load
+            content={formValues.content || ''}
+            placeholder="Start writing your content..."
+            inputId="content"
+          />
+          <input type="hidden" id="content" name="content" value={formValues.content || ''} />
+          {submissionResult.errors.content && (
+            <p class="mt-1 text-sm text-red-400">{submissionResult.errors.content}</p>
+          )}
+        </div>
+
+        <!-- Publish Options -->
+        <div class="flex items-center gap-4">
+          <label class="flex items-center gap-2">
+            <input
+              type="checkbox"
+              name="published"
+              id="published"
+              checked={formValues.published}
+              class="rounded bg-surface-hover border-border"
+            />
+            <span class="text-text-secondary">Publish immediately</span>
+          </label>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex gap-4">
+          <button
+            type="submit"
+            class="px-4 py-2 bg-primary hover:bg-primary/90 rounded-md font-medium text-text-primary transition-colors"
+          >
+            Create Post
+          </button>
+          <a
+            href="/blog/editor"
+            class="px-4 py-2 bg-surface-hover hover:bg-surface-hover rounded-md font-medium text-text-primary transition-colors"
+          >
+            Cancel
+          </a>
+        </div>
+
+      </form>
+    </main>
+  )}
+</div>
+
+<!-- End of component -->
+
+<style>
+  @import '../../components/editor/editor-styles.css';
+</style>
+
+<script define:vars={{ database }}>
+  // Calculate API URL dynamically based on current domain
+  function getApiUrl() {
+    const hostname = window.location.hostname;
+    const protocol = window.location.protocol;
+    const currentPort = window.location.port;
+    
+    // Check if we're in development (port 4321)
+    if (currentPort === '4321') {
+      // Development: use same hostname but port 3001
+      return `${protocol}//${hostname}:3001`;
+    }
+    
+    // Production: use same origin (no port needed, nginx handles routing)
+    return window.location.origin;
+  }
+  
+  const API_URL = getApiUrl();
+  const form = document.getElementById('postForm');
+  const errorDiv = document.getElementById('error');
+  
+  // Auto-generate slug from title
+  const titleInput = document.getElementById('title');
+  const slugInput = document.getElementById('slug');
+  
+  titleInput.addEventListener('input', () => {
+    // Only auto-generate if user hasn't manually edited the slug
+    if (!slugInput.dataset.manual) {
+      const slug = titleInput.value
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]+/g, '') // Remove special chars but keep spaces
+        .replace(/\s+/g, '-')          // Replace spaces with hyphens
+        .replace(/-+/g, '-')           // Replace multiple hyphens with single
+        .replace(/^-+|-+$/g, '');      // Remove leading/trailing hyphens
+      slugInput.value = slug;
+    }
+  });
+  
+  slugInput.addEventListener('input', () => {
+    slugInput.dataset.manual = 'true';
+  });
+  
+  // Cover image upload
+  const uploadBtn = document.getElementById('uploadCoverBtn');
+  const coverImageInput = document.getElementById('coverImage');
+  const coverPlaceholder = document.getElementById('coverPlaceholder');
+  const coverPreviewImg = document.getElementById('coverPreviewImg');
+  const uploadBtnText = document.getElementById('uploadBtnText');
+  const removeCoverBtn = document.getElementById('removeCoverBtn');
+  
+  // State for paste dialog
+  let showPasteDialog = false;
+  
+  // Function to upload image (used by both file picker and paste)
+  async function uploadImage(file) {
+    try {
+      // Update button to show uploading state
+      uploadBtn.disabled = true;
+      uploadBtnText.textContent = 'Uploading...';
+      
+      const formData = new FormData();
+      
+      // If it's a blob from paste, give it a proper filename
+      if (file && file.constructor && file.constructor.name === 'Blob' && file.constructor.name !== 'File') {
+        const extension = file.type.split('/')[1] || 'png';
+        const filename = `pasted-image-${Date.now()}.${extension}`;
+        file = new File([file], filename, { type: file.type });
+      }
+      
+      formData.append('file', file);
+        
+        // Use centralized API URL
+        const response = await fetch(`${API_URL}/api/upload`, {
+          method: 'POST',
+          body: formData,
+          credentials: 'include',
+          headers: {
+            'X-Site-Database': database
+          }
+        });
+        
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('Upload failed:', response.status, errorText);
+          let errorMessage = 'Failed to upload image';
+          if (response.status === 401) {
+            errorMessage = 'Authentication required. Please log in again.';
+          } else if (response.status === 413) {
+            errorMessage = 'Image file is too large (max 25MB)';
+          }
+          errorDiv.textContent = errorMessage;
+          errorDiv.classList.remove('hidden');
+          return;
+        }
+        
+        const data = await response.json();
+        if (data.url) {
+          // Prepend API URL to relative upload paths
+          const imageUrl = data.url.startsWith('/uploads/')
+            ? `${API_URL}${data.url}`
+            : data.url;
+          // Set the URL in the hidden input
+          coverImageInput.value = imageUrl;
+          
+          // Show preview and hide placeholder
+          coverPreviewImg.src = imageUrl;
+          coverPreviewImg.classList.remove('hidden');
+          coverPlaceholder.classList.add('hidden');
+          
+          // Update button text and show remove button
+          uploadBtnText.textContent = 'Change Image';
+          removeCoverBtn.classList.remove('hidden');
+          
+          // Clear any error
+          errorDiv.classList.add('hidden');
+        }
+      } catch (error) {
+        console.error('Upload error:', error);
+        errorDiv.textContent = 'Failed to upload image. Please try again.';
+        errorDiv.classList.remove('hidden');
+      } finally {
+        // Reset button state
+        uploadBtn.disabled = false;
+      }
+  }
+  
+  // Function to select file from disk
+  function selectFile() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    
+    input.onchange = async (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      closePasteDialog();
+      await uploadImage(file);
+    };
+    
+    input.click();
+  }
+  
+  // Create and show paste dialog
+  function showDialog() {
+    const dialog = document.createElement('div');
+    dialog.id = 'coverPasteDialog';
+    dialog.className = 'fixed inset-0 bg-black/50 z-50 flex items-center justify-center';
+    dialog.innerHTML = `
+      <div class="bg-surface rounded-lg p-6 max-w-md w-full mx-4 border border-border" onclick="event.stopPropagation()">
+        <h3 class="text-lg font-semibold text-text-primary mb-4">Add Cover Image</h3>
+        
+        <div class="space-y-4">
+          <!-- Paste option -->
+          <div class="border-2 border-dashed border-border rounded-lg p-6 text-center">
+            <div class="mb-2">
+              <svg class="w-8 h-8 mx-auto text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <p class="text-text-secondary mb-2">Paste an image from clipboard</p>
+            <p class="text-sm text-text-muted">Copy an image and press Ctrl+V / Cmd+V</p>
+          </div>
+          
+          <!-- Divider -->
+          <div class="flex items-center gap-4">
+            <div class="flex-1 h-px bg-surface-hover"></div>
+            <span class="text-text-muted text-sm">OR</span>
+            <div class="flex-1 h-px bg-surface-hover"></div>
+          </div>
+          
+          <!-- File upload option -->
+          <button
+            type="button"
+            id="selectFileBtn"
+            class="w-full px-4 py-3 bg-surface-hover hover:bg-surface-hover rounded-lg text-text-primary transition-colors"
+          >
+            Select File from Computer
+          </button>
+          
+          <!-- Cancel button -->
+          <button
+            type="button"
+            id="cancelDialogBtn"
+            class="w-full px-4 py-2 text-text-muted hover:text-text-primary transition-colors"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    `;
+    
+    document.body.appendChild(dialog);
+    showPasteDialog = true;
+    
+    // Handle dialog clicks
+    dialog.addEventListener('click', closePasteDialog);
+    document.getElementById('selectFileBtn')?.addEventListener('click', selectFile);
+    document.getElementById('cancelDialogBtn')?.addEventListener('click', closePasteDialog);
+  }
+  
+  function closePasteDialog() {
+    const dialog = document.getElementById('coverPasteDialog');
+    if (dialog) {
+      dialog.remove();
+      showPasteDialog = false;
+    }
+  }
+  
+  // Handle paste events when dialog is open
+  document.addEventListener('paste', async (e) => {
+    if (!showPasteDialog) return;
+    
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    
+    for (const item of Array.from(items)) {
+      if (item.type.startsWith('image/')) {
+        e.preventDefault();
+        
+        const blob = item.getAsFile();
+        if (!blob) continue;
+        
+        closePasteDialog();
+        await uploadImage(blob);
+        return;
+      }
+    }
+    
+    alert('No image found in clipboard. Try copying an image first.');
+  });
+  
+  uploadBtn.addEventListener('click', () => {
+    showDialog();
+  });
+  
+  // Remove cover image
+  removeCoverBtn.addEventListener('click', () => {
+    coverImageInput.value = '';
+    coverPreviewImg.src = '';
+    coverPreviewImg.classList.add('hidden');
+    coverPlaceholder.classList.remove('hidden');
+    uploadBtnText.textContent = 'Upload Image';
+    removeCoverBtn.classList.add('hidden');
+  });
+  
+  // Client-side form enhancement (optional - form works without JS)
+  form?.addEventListener('submit', async (e) => {
+    // Get content from editor if available
+    const contentInput = document.getElementById('content');
+    if (contentInput && typeof window !== 'undefined' && window.__editorContent) {
+      contentInput.value = window.__editorContent;
+    }
+    // Let the form submit normally for server-side processing
+  });
+</script>

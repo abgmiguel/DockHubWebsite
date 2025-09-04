@@ -1,0 +1,60 @@
+---
+import { API_URL } from '../../../shared/lib/api-config';
+import BlogPostViewer from './BlogPostViewer';
+
+const { database, tenant, slug, type = 'blog' } = Astro.props;
+
+// Fetch post from backend API
+let post = null;
+let error = null;
+
+try {
+  const response = await fetch(`${API_URL}/api/posts/${slug}`, {
+    headers: {
+      'X-Site-Database': database
+    }
+  });
+  
+  if (response.ok) {
+    post = await response.json();
+  } else if (response.status === 404) {
+    error = 'Post not found';
+  } else {
+    error = 'Failed to load post';
+  }
+} catch (err) {
+  console.error('Failed to fetch post:', err);
+  error = 'Failed to load post';
+}
+
+// Transform the post data to match what BlogPostViewer expects
+let formattedPost = null;
+if (post) {
+  formattedPost = {
+    id: post._id || post.id,
+    title: post.title,
+    content: post.content,
+    category_data: post.categoryData || post.category_data,
+    coverImage: post.coverImage,
+    author_data: post.authorData || post.author_data || { name: 'Admin', email: 'admin@codersinflow.com' },
+    readingTime: post.readingTime || 5,
+    createdAt: post.createdAt || post.created_at || new Date().toISOString()
+  };
+}
+---
+
+<div class="container mx-auto px-4 py-8 max-w-4xl">
+  {error ? (
+    <div class="blog-alert blog-alert-error">
+      <p>{error}</p>
+      <a href="/blog" class="blog-link mt-4 inline-block">← Back to blog</a>
+    </div>
+  ) : formattedPost ? (
+    <BlogPostViewer client:load post={formattedPost} />
+  ) : (
+    <div class="blog-loading h-96 flex items-center justify-center">
+      <div class="blog-text-muted">Loading...</div>
+    </div>
+  )}
+</div>
+

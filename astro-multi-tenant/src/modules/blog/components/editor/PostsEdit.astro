@@ -1,0 +1,192 @@
+---
+export const prerender = false;
+import { API_URL } from '../../../../shared/lib/api-config';
+
+const { database, tenant, id } = Astro.props;
+const token = Astro.cookies.get('auth-token');
+
+// Fetch post
+let post = null;
+let categories = [];
+
+try {
+  const postResponse = await fetch(`${API_URL}/api/posts/${id}`, {
+    headers: {
+      'Cookie': `auth-token=${token.value}`,
+      'X-Site-Database': database
+    }
+  });
+  if (postResponse.ok) {
+    post = await postResponse.json();
+  }
+
+  // Fetch categories
+  const categoriesResponse = await fetch(`${API_URL}/api/categories?type=${post?.type || 'blog'}`, {
+    headers: {
+      'Cookie': `auth-token=${token.value}`,
+      'X-Site-Database': database
+    }
+  });
+  if (categoriesResponse.ok) {
+    categories = await categoriesResponse.json();
+  }
+} catch (error) {
+  console.error('Failed to fetch data:', error);
+}
+
+if (!post) {
+  return Astro.redirect('/blog/editor/posts');
+}
+---
+
+<div class="blog-page">
+  <header class="blog-header">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex justify-between items-center">
+        <h1 class="text-xl font-bold blog-title">Edit Post</h1>
+        <a href="/blog/editor/posts" class="blog-link">
+          ← Back to Posts
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 py-8 max-w-4xl">
+    <form id="postForm" class="blog-card p-6 space-y-6">
+      <input type="hidden" name="type" value={post.type} />
+      
+      <div>
+        <label for="title" class="blog-label">Title</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          required
+          value={post.title}
+          class="blog-input"
+        />
+      </div>
+
+      <div>
+        <label for="slug" class="blog-label">Slug (URL)</label>
+        <input
+          type="text"
+          id="slug"
+          name="slug"
+          value={post.slug}
+          class="blog-input"
+        />
+      </div>
+
+      <div>
+        <label for="description" class="blog-label">Description</label>
+        <textarea
+          id="description"
+          name="description"
+          required
+          rows="3"
+          class="blog-textarea"
+        >{post.description}</textarea>
+      </div>
+
+      <div>
+        <label for="category" class="blog-label">Category</label>
+        <select id="category" name="category" class="blog-select">
+          <option value="">No category</option>
+          {categories.map((cat: any) => (
+            <option value={cat._id || cat.id} selected={post.category === (cat._id || cat.id)}>
+              {cat.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label for="content" class="blog-label">Content</label>
+        <textarea
+          id="content"
+          name="content"
+          required
+          rows="15"
+          class="blog-textarea font-mono"
+        >{post.content}</textarea>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <input
+          type="checkbox"
+          id="published"
+          name="published"
+          checked={post.published}
+          class="blog-checkbox"
+        />
+        <label for="published" class="blog-label mb-0">Published</label>
+      </div>
+
+      <div id="error" class="blog-alert-error hidden"></div>
+      <div id="success" class="blog-alert-success hidden"></div>
+
+      <div class="flex gap-4">
+        <button type="submit" class="blog-btn-primary">
+          Update Post
+        </button>
+        <a href="/blog/editor/posts" class="blog-btn-secondary">
+          Cancel
+        </a>
+      </div>
+    </form>
+  </main>
+</div>
+
+<script define:vars={{ API_URL, database, id }}>
+  const form = document.getElementById('postForm');
+  const errorDiv = document.getElementById('error');
+  const successDiv = document.getElementById('success');
+  
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(form);
+    const data = {
+      title: formData.get('title'),
+      slug: formData.get('slug'),
+      description: formData.get('description'),
+      content: formData.get('content'),
+      type: formData.get('type'),
+      category: formData.get('category') || undefined,
+      published: formData.get('published') === 'on'
+    };
+    
+    try {
+      errorDiv.classList.add('hidden');
+      successDiv.textContent = 'Updating post...';
+      successDiv.classList.remove('hidden');
+      
+      const response = await fetch(`${API_URL}/api/posts/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Site-Database': database
+        },
+        credentials: 'include',
+        body: JSON.stringify(data)
+      });
+      
+      if (response.ok) {
+        successDiv.textContent = 'Post updated successfully!';
+        setTimeout(() => {
+          window.location.href = '/blog/editor/posts';
+        }, 1000);
+      } else {
+        const text = await response.text();
+        errorDiv.textContent = text || 'Failed to update post';
+        errorDiv.classList.remove('hidden');
+        successDiv.classList.add('hidden');
+      }
+    } catch (error) {
+      errorDiv.textContent = 'Network error. Please try again.';
+      errorDiv.classList.remove('hidden');
+      successDiv.classList.add('hidden');
+    }
+  });
+</script>

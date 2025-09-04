@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Preston Garrison favicon - stylized 'PG' monogram -->
+  <defs>
+    <linearGradient id="pgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6366f1;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="128" height="128" rx="24" fill="url(#pgGradient)"/>
+  
+  <!-- Letter P -->
+  <path d="M 30 90 L 30 38 L 50 38 Q 60 38, 60 48 Q 60 58, 50 58 L 30 58" 
+        stroke="white" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Letter G -->
+  <path d="M 88 48 Q 78 38, 68 48 Q 68 58, 68 68 Q 68 78, 78 78 Q 88 78, 88 68 L 88 63 L 78 63" 
+        stroke="white" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

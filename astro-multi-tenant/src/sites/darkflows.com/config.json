@@ -1,0 +1,14 @@
+{
+  "name": "DarkFlows Router OS",
+  "domain": "darkflows.com",
+  "database": "darkflows",
+  "theme": {
+    "primaryColor": "#ff7b72",
+    "backgroundColor": "#0a0a0a",
+    "foregroundColor": "#ededed"
+  },
+  "features": {
+    "blog": true,
+    "auth": true
+  }
+}

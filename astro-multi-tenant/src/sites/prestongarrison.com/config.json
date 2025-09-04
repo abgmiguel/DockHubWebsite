@@ -1,0 +1,15 @@
+{
+  "name": "Preston Garrison",
+  "domain": "prestongarrison.com",
+  "description": "Preston Garrison - Full Stack Developer, Hardware Designer, Technology Leader",
+  "theme": {
+    "type": "light",
+    "primaryColor": "#000000",
+    "accentColor": "#4b5563"
+  },
+  "features": ["blog", "docs"],
+  "social": {
+    "github": "https://github.com/prestongarrison",
+    "linkedin": "https://www.linkedin.com/in/prestongarrison"
+  }
+}

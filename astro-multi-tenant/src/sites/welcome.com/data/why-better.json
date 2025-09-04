@@ -1,0 +1,32 @@
+{
+  "title": "Why We're Better",
+  "sections": [
+    {
+      "title": "Superior Technology",
+      "description": "Built with the latest technologies for optimal performance",
+      "points": [
+        "Lightning fast load times",
+        "Modern architecture",
+        "Scalable infrastructure"
+      ]
+    },
+    {
+      "title": "Better Support",
+      "description": "We're here when you need us",
+      "points": [
+        "24/7 customer support",
+        "Dedicated account managers",
+        "Comprehensive documentation"
+      ]
+    },
+    {
+      "title": "Fair Pricing",
+      "description": "Transparent pricing with no hidden fees",
+      "points": [
+        "No setup fees",
+        "Cancel anytime",
+        "Volume discounts available"
+      ]
+    }
+  ]
+}

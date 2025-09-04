@@ -1,0 +1,187 @@
+---
+import DraggableCustomizableCard from './DraggableCustomizableCard';
+---
+
+<div class="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-b from-gray-900 to-gray-800 text-white pt-12 md:pt-16 pb-16 px-4 md:px-6 relative">
+  <div class="text-center w-full px-4">
+    <h1 class="text-6xl md:text-8xl font-bold mb-2">
+      Coders in <span class="text-indigo-400">Flow</span>
+    </h1>
+    <h2 class="text-3xl md:text-4xl font-medium mb-6 text-gray-300">agentic pair programming, re-imagined</h2>
+    <p class="text-xl md:text-2xl mb-4 text-gray-300">
+      AI-Powered Code Assistance: Efficient, Affordable, Effective
+    </p>
+    <p class="text-md md:text-lg mb-12 text-gray-400 max-w-3xl mx-auto">
+      iPhone App. Android App. Claude Code. Open Router. DeepSeek. Anthropic. OpenAI. LM Studio. Ollama. Context Editing. Context Visualation. Cost Analysis. VS Code. CoPilot. Automatic Memory. Rule Detection. Language Detection. GitLab. GitHub. Automatic Snapshots. Commit Staging.
+    </p>
+    
+    <!-- Three Cards Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 w-full max-w-screen-xl mx-auto mt-12">
+      <!-- Card 1 -->
+      <div class="flex justify-center">
+        <DraggableCustomizableCard 
+          width={400} 
+          height={560}
+          title="Advanced Code Understanding"
+          client:load
+        >
+          <div class="h-full flex flex-col p-2">
+            <div class="mb-6">
+              <div class="h-1 w-16 bg-gradient-to-r from-indigo-500 to-purple-500 mb-4 transition-all duration-500 hover:w-24"></div>
+              <h4 class="text-2xl font-bold text-gray-100 mb-3">Semantic Search Engine</h4>
+              <p class="text-sm text-gray-400 leading-relaxed">Thanks to our sematic search engine we know everything about your codebase.</p>
+            </div>
+            <div class="space-y-5 text-left flex-1">
+              <div class="group">
+                <div class="flex items-start">
+                  <div class="w-1 h-12 bg-gradient-to-b from-indigo-500 to-transparent mr-4 transition-all duration-300 group-hover:h-14"></div>
+                  <div>
+                    <h5 class="text-sm font-semibold text-gray-200 mb-1">Semantic Analysis Engine</h5>
+                    <p class="text-xs text-gray-400 leading-relaxed">Understands code meaning beyond syntax, recognizing patterns, idioms, and architectural decisions throughout your project.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="group">
+                <div class="flex items-start">
+                  <div class="w-1 h-12 bg-gradient-to-b from-purple-500 to-transparent mr-4 transition-all duration-300 group-hover:h-14"></div>
+                  <div>
+                    <h5 class="text-sm font-semibold text-gray-200 mb-1">Pinpoint Search Accuracy</h5>
+                    <p class="text-xs text-gray-400 leading-relaxed">Easily find code without complex searching.  AI Can instantly find anything it needs, saving your money.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="group">
+                <div class="flex items-start">
+                  <div class="w-1 h-12 bg-gradient-to-b from-indigo-500 to-transparent mr-4 transition-all duration-300 group-hover:h-14"></div>
+                  <div>
+                    <h5 class="text-sm font-semibold text-gray-200 mb-1">Real-time Updates</h5>
+                    <p class="text-xs text-gray-400 leading-relaxed">Automatically monitors your code base updating our semantic search database live.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-gray-700">
+              <div class="flex justify-between text-xs text-gray-500">
+                <span>Context Window: 200K tokens</span>
+                <span>Accuracy: 99.2%</span>
+              </div>
+            </div>
+          </div>
+        </DraggableCustomizableCard>
+      </div>
+      
+      <!-- Card 2 -->
+      <div class="flex justify-center" style="margin-top: -35px;">
+        <DraggableCustomizableCard 
+          width={400} 
+          height={560}
+          title="Optimized Cost Structure"
+          client:load
+        >
+          <div class="h-full flex flex-col p-2">
+            <div class="mb-6">
+              <div class="h-1 w-16 bg-gradient-to-r from-green-500 to-emerald-500 mb-4 transition-all duration-500 hover:w-24"></div>
+              <h4 class="text-2xl font-bold text-gray-100 mb-3">Saves You Money</h4>
+              <p class="text-sm text-gray-400 leading-relaxed">From implementing the best providers, to optimization token utilization, our goal is the best understanding with the lowest costs.</p>
+            </div>
+            <div class="space-y-5 text-left flex-1">
+              <div class="group">
+                <div class="flex items-start">
+                  <div class="w-1 h-12 bg-gradient-to-b from-green-500 to-transparent mr-4 transition-all duration-300 group-hover:h-14"></div>
+                  <div>
+                    <h5 class="text-sm font-semibold text-gray-200 mb-1">Smart Token Management</h5>
+                    <p class="text-xs text-gray-400 leading-relaxed">Visualize and edit your context, or let our built in AI do it for you, to minimize your token cost.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="group">
+                <div class="flex items-start">
+                  <div class="w-1 h-12 bg-gradient-to-b from-emerald-500 to-transparent mr-4 transition-all duration-300 group-hover:h-14"></div>
+                  <div>
+                    <h5 class="text-sm font-semibold text-gray-200 mb-1">Claude Code and Other Integrations</h5>
+                    <p class="text-xs text-gray-400 leading-relaxed">We integrate and optimize for the best solutions and providers.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="group">
+                <div class="flex items-start">
+                  <div class="w-1 h-12 bg-gradient-to-b from-green-500 to-transparent mr-4 transition-all duration-300 group-hover:h-14"></div>
+                  <div>
+                    <h5 class="text-sm font-semibold text-gray-200 mb-1">Optimize Tool Calls</h5>
+                    <p class="text-xs text-gray-400 leading-relaxed">Unlimited tool calls per request, allowing the AI to maximize its token utilizations.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-gray-700">
+              <div class="flex justify-between text-xs text-gray-500">
+                <span>Avg. savings: $2,400/month</span>
+                <span>ROI: 320%</span>
+              </div>
+            </div>
+          </div>
+        </DraggableCustomizableCard>
+      </div>
+      
+      <!-- Card 3 -->
+      <div class="flex justify-center">
+        <DraggableCustomizableCard 
+          width={400} 
+          height={560}
+          title="Rapid Development"
+          client:load
+        >
+          <div class="h-full flex flex-col p-2">
+            <div class="mb-6">
+              <div class="h-1 w-16 bg-gradient-to-r from-orange-500 to-red-500 mb-4 transition-all duration-500 hover:w-24"></div>
+              <h4 class="text-2xl font-bold text-gray-100 mb-3">Latest Features and AI</h4>
+              <p class="text-sm text-gray-400 leading-relaxed">Our system is truely dynamic so we always get the latest Models the second they are available.</p>
+            </div>
+            <div class="space-y-5 text-left flex-1">
+              <div class="group">
+                <div class="flex items-start">
+                  <div class="w-1 h-12 bg-gradient-to-b from-orange-500 to-transparent mr-4 transition-all duration-300 group-hover:h-14"></div>
+                  <div>
+                    <h5 class="text-sm font-semibold text-gray-200 mb-1">Modular Design</h5>
+                    <p class="text-xs text-gray-400 leading-relaxed">Our system is build from a modular design so implementing new features is often done with in minutes.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="group">
+                <div class="flex items-start">
+                  <div class="w-1 h-12 bg-gradient-to-b from-red-500 to-transparent mr-4 transition-all duration-300 group-hover:h-14"></div>
+                  <div>
+                    <h5 class="text-sm font-semibold text-gray-200 mb-1">Cutting Edge Development</h5>
+                    <p class="text-xs text-gray-400 leading-relaxed">We were the first to implement features in our tool, and still have many features not available in the competition.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="group">
+                <div class="flex items-start">
+                  <div class="w-1 h-12 bg-gradient-to-b from-orange-500 to-transparent mr-4 transition-all duration-300 group-hover:h-14"></div>
+                  <div>
+                    <h5 class="text-sm font-semibold text-gray-200 mb-1">Rapid Development Cycle</h5>
+                    <p class="text-xs text-gray-400 leading-relaxed">As fast as we cane think of new ideas, or users provider suggestions we will implement them in our tool.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-gray-700">
+              <div class="flex justify-between text-xs text-gray-500">
+                <span>Code quality score: 98.7/100</span>
+                <span>Bug rate: -94%</span>
+              </div>
+            </div>
+          </div>
+        </DraggableCustomizableCard>
+      </div>
+    </div>
+    
+    <!-- Arrow animation -->
+    <div class="animate-bounce mt-12">
+      <svg class="w-8 h-8 mx-auto text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </div>
+</div>

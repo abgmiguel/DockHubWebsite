@@ -1,0 +1,24 @@
+{
+  "logo": {
+    "text": "SITE_NAME_PLACEHOLDER",
+    "href": "/"
+  },
+  "navigation": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "Features",
+      "href": "#features"
+    },
+    {
+      "label": "About",
+      "href": "#about"
+    },
+    {
+      "label": "Contact",
+      "href": "#contact"
+    }
+  ]
+}

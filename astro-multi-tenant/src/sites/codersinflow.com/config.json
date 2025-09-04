@@ -1,0 +1,17 @@
+{
+  "id": "codersinflow",
+  "name": "CodersInFlow",
+  "database": "codersinflow_db",
+  "theme": {
+    "primaryColor": "#3B82F6",
+    "secondaryColor": "#8B5CF6"
+  },
+  "features": ["blog", "docs", "api"],
+  "navigation": [
+    { "label": "Home", "href": "/" },
+    { "label": "Features", "href": "/features" },
+    { "label": "Enterprise", "href": "/enterprise" },
+    { "label": "Blog", "href": "/blog" },
+    { "label": "Docs", "href": "/docs" }
+  ]
+}

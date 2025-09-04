@@ -1,0 +1,6 @@
+{
+  "title": "Programming Languages",
+  "color": "bg-blue-600",
+  "description": "My preferred programming languages are C and C++ due to the control and power they offer over project development. I value the ability to manage projects with precision, which is why I have developed and used many of my own libraries over the years, avoiding the challenges that can arise when relying on third-party code. For cross-platform software development, I favor JavaScript, while Python is my go-to language for Unix-based programs and automation tasks. When reverse engineering or working on smaller functions for embedded platforms, I utilize assembly languages. Additionally, I have experience using C# for developing Windows applications.",
+  "items": []
+}

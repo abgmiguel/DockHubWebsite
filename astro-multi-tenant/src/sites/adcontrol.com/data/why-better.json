@@ -1,0 +1,101 @@
+{
+  "cards": [
+    {
+      "id": 1,
+      "title": "Advanced Code Understanding",
+      "width": 400,
+      "height": 560,
+      "gradient": "from-indigo-500 to-purple-500",
+      "header": {
+        "title": "Code Understanding",
+        "description": ""
+      },
+      "features": [
+        {
+          "title": "Automatic Codebase Documentation",
+          "description": "AI analyzes and documents your entire codebase. 50%+ reduction in token usage through deep understanding. Framework-specific intelligence (React vs Django vs Rails).",
+          "gradient": "from-indigo-500"
+        },
+        {
+          "title": "Intelligent Project Awareness",
+          "description": "Generates executive summaries of your architecture. Maps all component relationships automatically. Understands your specific design patterns.",
+          "gradient": "from-purple-500"
+        },
+        {
+          "title": "Context-Aware Search",
+          "description": "Customizes queries for YOUR tech stack. AST-aware code chunking for precision. Real-time index updates as you code.",
+          "gradient": "from-indigo-500"
+        }
+      ],
+      "footer": {
+        "label": "Automatic Context Compression",
+        "value": "Savings: 50%"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Optimized Cost Structure",
+      "width": 400,
+      "height": 560,
+      "gradient": "from-green-500 to-emerald-500",
+      "marginTop": "-35px",
+      "header": {
+        "title": "Optimized Cost Structure",
+        "description": "AI chooses the cheapest capable model for each task. Simple tasks → cheap models, Complex tasks → advanced models. Average 60% cost reduction."
+      },
+      "features": [
+        {
+          "title": "Automatic Model Selection",
+          "description": "AI chooses the cheapest capable model for each task.",
+          "gradient": "from-green-500"
+        },
+        {
+          "title": "Multi-Task Efficiency",
+          "description": "20+ concurrent tasks with focused contexts. Each subtask uses minimal tokens. Main context stays small = massive savings.",
+          "gradient": "from-emerald-500"
+        },
+        {
+          "title": "Smart Context Management",
+          "description": "Automatic conversation condensing. Token-perfect counting for every model. Budget enforcement per task or globally.",
+          "gradient": "from-green-500"
+        }
+      ],
+      "footer": {
+        "label": "Huge Savings",
+        "value": "Estimated: 50-75%"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Rapid Development",
+      "width": 400,
+      "height": 560,
+      "gradient": "from-orange-500 to-red-500",
+      "header": {
+        "title": "Next Generation Features",
+        "description": "True multi-tasking capabilities."
+      },
+      "features": [
+        {
+          "title": "Massive Parallelization",
+          "description": "Run 20+ AI tasks simultaneously. Complete hours of work in minutes. Automatic task decomposition and routing.",
+          "gradient": "from-orange-500"
+        },
+        {
+          "title": "Enterprise Cloud & Team Management",
+          "description": "Complete cloud backup of all conversations. Monitor your entire dev team's AI usage. Synchronize modes across your organization. View comprehensive reports for management.",
+          "gradient": "from-red-500"
+        },
+        {
+          "title": "Mobile Continuity",
+          "description": "Native iOS app with real-time sync. Start on desktop, continue on iPhone. Zero context switches.",
+          "gradient": "from-orange-500"
+        }
+      ],
+      "footer": {
+        "label": "Full Cloud Enterprise Solution",
+        "value": "More Savings"
+      }
+    }
+  ]
+}

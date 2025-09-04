@@ -1,0 +1,27 @@
+{
+  "title": "What Boat Owners Are Saying",
+  "subtitle": "Join hundreds of satisfied DockHub users",
+  "testimonials": [
+    {
+      "name": "Mike S.",
+      "location": "Florida Keys",
+      "rating": 5,
+      "content": "No more searching for remotes or waiting at the dock. I start lowering my lift as I enter the channel. Game changer!",
+      "image": "/testimonials/mike.jpg"
+    },
+    {
+      "name": "Sarah L.",
+      "location": "Lake Michigan",
+      "rating": 5,
+      "content": "Installed it myself in 15 minutes. The digital limit setting is brilliant - just press a button and it remembers.",
+      "image": "/testimonials/sarah.jpg"
+    },
+    {
+      "name": "Tom R.",
+      "location": "Marine Installer",
+      "rating": 5,
+      "content": "As an installer, this saves me so much time. No more callbacks for limit adjustments. My customers love it.",
+      "image": "/testimonials/tom.jpg"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+---
+import DevWrapper from '../../../shared/components/Dev/DevWrapper.astro';
+
+// Import data
+import featuresHeroData from '../data/features-hero.json';
+import featuresItemsData from '../data/features-items.json';
+import comparisonData from '../data/comparison.json';
+import videosData from '../data/videos.json';
+import heroComparisonData from '../data/hero-comparison.json';
+import whyBetterData from '../data/why-better.json';
+import featureGridData from '../data/feature-grid.json';
+
+// Hero and Feature Showcase components
+import HeroComparison from '../../../shared/components/Hero/HeroComparison';
+import FeaturesHero from '../../../shared/components/Features/FeaturesHero';
+import FeaturesItems from '../../../shared/components/Features/FeaturesItems';
+import ComparisonTable from '../../../shared/components/Comparison/ComparisonTable';
+
+// Section components
+import WhyBetterSection from '../../../shared/components/sections/WhyBetterSection';
+import VideoSection from '../../../shared/components/sections/VideoSection';
+import KeyFeaturesSection from '../../../shared/components/sections/KeyFeaturesSection.astro';
+
+// Interactive sections
+import TechStackSection from '../../../shared/components/sections/TechStackSection';
+import TestimonialsWrapper from '../../../shared/components/sections/TestimonialsWrapper';
+import CallToAction from '../../../shared/components/sections/CallToAction';
+---
+
+  
+  <!-- Hero Comparison Card -->
+  <DevWrapper componentName="HeroComparison" dataPath="../data/hero-comparison.json" data={heroComparisonData}>
+    <HeroComparison client:load data={heroComparisonData} />
+  </DevWrapper>
+  
+  <!-- Features Hero Section -->
+  <DevWrapper componentName="FeaturesHero" dataPath="../data/features-hero.json" data={featuresHeroData}>
+    <FeaturesHero client:load data={featuresHeroData} />
+  </DevWrapper>
+  
+  <!-- Features Items Section -->
+  <DevWrapper componentName="FeaturesItems" dataPath="../data/features-items.json" data={featuresItemsData}>
+    <FeaturesItems client:load data={featuresItemsData} />
+  </DevWrapper>
+  
+  <!-- Comparison Table -->
+  <DevWrapper componentName="ComparisonTable" dataPath="../data/comparison.json" data={comparisonData}>
+    <ComparisonTable client:load data={comparisonData} />
+  </DevWrapper>
+  
+  <!-- Why We're Better Section -->
+  <DevWrapper componentName="WhyBetterSection" dataPath="../data/why-better.json" data={whyBetterData}>
+    <WhyBetterSection client:load data={whyBetterData} />
+  </DevWrapper>
+  
+  <!-- Video Section -->
+  <DevWrapper componentName="VideoSection" dataPath="../data/videos.json" data={videosData}>
+    <VideoSection client:only="react" data={videosData} />
+  </DevWrapper>
+  
+  <!-- Tech Stack Section -->
+  <!-- TechStackSection client:visible -->
+  
+  <!-- Key Features Section with FeatureGrid -->
+  <DevWrapper componentName="KeyFeaturesSection" dataPath="../data/feature-grid.json" data={featureGridData}>
+    <KeyFeaturesSection featureGridData={featureGridData} />
+  </DevWrapper>
+  
+  <!-- Testimonials Section -->
+  <!-- <TestimonialsWrapper client:visible /> -->
+  
+  <!-- Call to Action -->
+  <!-- <CallToAction client:visible /> -->

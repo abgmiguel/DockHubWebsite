@@ -1,0 +1,6 @@
+{
+  "title": "Web Frameworks",
+  "color": "bg-purple-600",
+  "description": "For web development my preferred combination is HTML, TailwindCSS with Javascript.  For the backend I have utilized PHP, and python via DJango and Flask, as well as C using my own web server, that allows protected modules to run directly inside developed purely in C.  I also developed my own server side HTML that includes a language that many of my projects have used.  This allows my websites to integrate smoothly with the C modules in my own web server. <br><br> Our drone configuration client uses Javascript, React and Electron to create a stand alone configurator available on Windows, MacOS and Linux.  The original version was written using Angular, but I have found React to be better suited.",
+  "items": []
+}

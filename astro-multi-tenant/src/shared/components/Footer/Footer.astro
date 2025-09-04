@@ -1,0 +1,46 @@
+---
+// Footer component - accepts data prop
+const { data = {} } = Astro.props;
+const {
+  sisterProject = {
+    title: "Sister Project",
+    description: "Check out Ultimate Router OS - Enterprise-grade routing solutions based on Linux",
+    linkText: "Visit darkflows.com",
+    linkHref: "https://darkflows.com"
+  },
+  copyright = "© 2025 Coders in Flow. All rights reserved.",
+  links = [
+    { href: "https://discord.com/invite/3QmjpqX2Y5", text: "Discord" },
+    { href: "https://www.reddit.com/r/codersinflow/", text: "Reddit" }
+  ]
+} = data;
+---
+
+<footer class="bg-gradient-to-r from-indigo-900 to-blue-800 text-white py-8">
+  <div class="max-w-6xl mx-auto px-4">
+    <!-- Sister Project Section -->
+    <div class="border-b border-indigo-700 pb-8 mb-8">
+      <div class="text-center">
+        <h3 class="text-xl font-semibold mb-2">{sisterProject.title}</h3>
+        <p class="text-indigo-200 mb-4">{sisterProject.description}</p>
+        <a href={sisterProject.linkHref} target="_blank" class="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg font-semibold transition-colors">
+          {sisterProject.linkText}
+          <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <p class="text-indigo-200 mb-4 md:mb-0">{copyright}</p>
+      <div class="flex space-x-6">
+        {links.map((link, index) => (
+          <a key={index} href={link.href} target="_blank" class="text-indigo-200 hover:text-white transition-colors">
+            {link.text}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</footer>

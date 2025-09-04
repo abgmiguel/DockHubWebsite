@@ -1,0 +1,10 @@
+{
+  "brandText": "www.prestongarrison.com",
+  "links": [
+    { "href": "/", "text": "Home" },
+    { "href": "/blog", "text": "Blog" },
+    { "href": "/#qualifications", "text": "Qualifications" },
+    { "href": "/#experiences", "text": "Experiences" },
+    { "href": "/#contact", "text": "Contact" }
+  ]
+}

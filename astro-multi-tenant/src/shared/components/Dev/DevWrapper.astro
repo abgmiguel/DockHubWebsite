@@ -1,0 +1,36 @@
+---
+// DevWrapper.astro - Wraps components with dev mode tracking attributes
+export interface Props {
+  componentName: string;
+  dataPath?: string;
+  data?: any;
+  class?: string;
+  style?: string | object;
+  order?: number;
+}
+
+const { componentName, dataPath, data, class: className, style, order } = Astro.props;
+
+// Only add dev attributes in development mode
+const isDev = import.meta.env.DEV;
+const componentId = isDev ? `${componentName}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}` : undefined;
+---
+
+{isDev ? (
+  <div
+    data-component-id={componentId}
+    data-component-name={componentName}
+    data-component-path={dataPath}
+    data-component-props={data ? JSON.stringify(data) : undefined}
+    data-component-order={order !== undefined ? order.toString() : undefined}
+    class={className}
+    style:list={[
+      typeof style === 'object' ? style : {},
+      typeof style === 'string' ? style : ''
+    ]}
+  >
+    <slot />
+  </div>
+) : (
+  <slot />
+)}

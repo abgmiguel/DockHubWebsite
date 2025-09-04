@@ -1,0 +1,155 @@
+/* TipTap Editor Styles */
+.ProseMirror {
+  @apply text-text-secondary;
+}
+
+.ProseMirror p {
+  @apply mb-4;
+}
+
+.ProseMirror h1 {
+  @apply text-3xl font-bold mb-4 text-text-primary;
+}
+
+.ProseMirror h2 {
+  @apply text-2xl font-bold mb-3 text-text-primary;
+}
+
+.ProseMirror h3 {
+  @apply text-xl font-bold mb-2 text-text-primary;
+}
+
+.ProseMirror ul {
+  @apply list-disc list-inside mb-4 ml-4;
+}
+
+.ProseMirror ol {
+  @apply list-decimal list-inside mb-4 ml-4;
+}
+
+.ProseMirror blockquote {
+  @apply border-l-4 border-border pl-4 my-4 italic text-text-muted;
+}
+
+.ProseMirror pre {
+  @apply bg-[#0d1117] rounded-lg p-4 overflow-x-auto mb-4;
+}
+
+.ProseMirror pre code {
+  @apply bg-transparent p-0 rounded-none text-sm;
+}
+
+.ProseMirror code {
+  @apply bg-surface px-1 py-0.5 rounded text-sm;
+}
+
+.ProseMirror img {
+  @apply max-w-full rounded-lg my-4;
+}
+
+.ProseMirror a {
+  @apply text-link hover:text-link-hover underline;
+}
+
+/* Code block specific styles */
+.ProseMirror pre code.hljs {
+  @apply bg-transparent;
+  color: #e1e4e8;
+}
+
+/* GitHub Dark theme colors for syntax highlighting */
+.hljs-comment,
+.hljs-quote {
+  color: #8b949e;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-selector-tag {
+  color: #ff7b72;
+}
+
+.hljs-literal,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-attribute,
+.hljs-addition,
+.hljs-variable,
+.hljs-template-tag,
+.hljs-template-variable {
+  color: #7ee787;
+}
+
+.hljs-string,
+.hljs-regexp {
+  color: #a5d6ff;
+}
+
+.hljs-deletion,
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-link {
+  color: #79c0ff;
+}
+
+.hljs-meta,
+.hljs-type,
+.hljs-params,
+.hljs-title {
+  color: #d2a8ff;
+}
+
+.hljs-section,
+.hljs-title.function_,
+.hljs-function .hljs-title,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+  color: #d2a8ff;
+}
+
+.hljs-operator,
+.hljs-punctuation {
+  color: #e1e4e8;
+}
+
+.hljs-tag {
+  color: #7ee787;
+}
+
+.hljs-name,
+.hljs-attr {
+  color: #79c0ff;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+/* Fix for code block overflow */
+.ProseMirror pre {
+  white-space: pre;
+  word-wrap: normal;
+  overflow-x: auto;
+}
+
+.ProseMirror pre code {
+  display: block;
+  white-space: pre;
+  overflow-x: visible;
+}
+
+/* Ensure proper spacing */
+.ProseMirror > *:first-child {
+  margin-top: 0;
+}
+
+.ProseMirror > *:last-child {
+  margin-bottom: 0;
+}

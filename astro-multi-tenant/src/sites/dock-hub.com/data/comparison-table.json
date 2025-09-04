@@ -1,0 +1,139 @@
+{
+  "header": {
+    "title": "See How DockHub Uno Compares",
+    "subtitle": "The clear choice for modern boat lift control",
+    "badge": "RECOMMENDED"
+  },
+  "competitors": [
+    {
+      "name": "Traditional Remotes",
+      "key": "traditional"
+    },
+    {
+      "name": "Other Smart Controllers",
+      "key": "other"
+    },
+    {
+      "name": "DockHub Uno",
+      "key": "dockhub",
+      "highlight": true,
+      "icon": "⚓"
+    }
+  ],
+  "features": [
+    {
+      "name": "Phone Control",
+      "values": {
+        "traditional": { "status": false, "value": "No" },
+        "other": { "status": true, "value": "Yes" },
+        "dockhub": { "status": true, "value": "Yes" }
+      }
+    },
+    {
+      "name": "Start Before Arrival",
+      "values": {
+        "traditional": { "status": false, "value": "No" },
+        "other": { "status": true, "value": "Yes" },
+        "dockhub": { "status": true, "value": "Yes" }
+      }
+    },
+    {
+      "name": "Installation Time",
+      "values": {
+        "traditional": { "status": false, "value": "45+ min" },
+        "other": { "status": false, "value": "30-60 min" },
+        "dockhub": { "status": true, "value": "10 min" }
+      }
+    },
+    {
+      "name": "Digital Auto-Stop",
+      "values": {
+        "traditional": { "status": false, "value": "No" },
+        "other": { "status": false, "value": "Partial" },
+        "dockhub": { "status": true, "value": "Yes" }
+      }
+    },
+    {
+      "name": "No Mechanical Stops",
+      "values": {
+        "traditional": { "status": false, "value": "No" },
+        "other": { "status": false, "value": "No" },
+        "dockhub": { "status": true, "value": "Yes" }
+      }
+    },
+    {
+      "name": "3-Wire Setup",
+      "values": {
+        "traditional": { "status": false, "value": "No" },
+        "other": { "status": false, "value": "No" },
+        "dockhub": { "status": true, "value": "Yes" }
+      }
+    },
+    {
+      "name": "Solid State Relays",
+      "values": {
+        "traditional": { "status": false, "value": "No" },
+        "other": { "status": false, "value": "No" },
+        "dockhub": { "status": true, "value": "Yes" }
+      }
+    },
+    {
+      "name": "Price Range",
+      "values": {
+        "traditional": { "status": false, "value": "$200-400" },
+        "other": { "status": false, "value": "$500-800" },
+        "dockhub": { "status": true, "value": "$499" }
+      }
+    },
+    {
+      "name": "Monthly Fees",
+      "values": {
+        "traditional": { "status": true, "value": "None" },
+        "other": { "status": false, "value": "Some" },
+        "dockhub": { "status": true, "value": "None" }
+      }
+    },
+    {
+      "name": "Lost Remote Cost",
+      "values": {
+        "traditional": { "status": false, "value": "$200+ each" },
+        "other": { "status": false, "value": "$50-100" },
+        "dockhub": { "status": true, "value": "$0" }
+      }
+    },
+    {
+      "name": "Service Calls",
+      "values": {
+        "traditional": { "status": false, "value": "Frequent" },
+        "other": { "status": false, "value": "Occasional" },
+        "dockhub": { "status": true, "value": "Rare" }
+      }
+    },
+    {
+      "name": "Guest Access",
+      "values": {
+        "traditional": { "status": false, "value": "No" },
+        "other": { "status": true, "value": "Yes" },
+        "dockhub": { "status": true, "value": "Yes" }
+      }
+    }
+  ],
+  "stats": [
+    {
+      "value": "10 min",
+      "label": "Installation Time"
+    },
+    {
+      "value": "$0",
+      "label": "Lost Remote Cost"
+    },
+    {
+      "value": "3-Wire",
+      "label": "Simple Setup"
+    },
+    {
+      "value": "No Fees",
+      "label": "Monthly Cost"
+    }
+  ]
+}

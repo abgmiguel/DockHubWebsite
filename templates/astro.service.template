@@ -1,0 +1,19 @@
+[Unit]
+Description={{DISPLAY_NAME}} Astro Frontend
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory={{SERVER_PATH}}
+Environment="NODE_ENV=production"
+Environment="PORT={{FRONTEND_PORT}}"
+Environment="HOST=0.0.0.0"
+Environment="PUBLIC_API_URL={{FRONTEND_URL}}"
+Environment="BACKEND_PORT={{BACKEND_PORT}}"
+ExecStart=/usr/bin/node {{SERVER_PATH}}/dist/server/entry.mjs
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

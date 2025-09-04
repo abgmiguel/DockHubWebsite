@@ -1,0 +1,27 @@
+{
+  "title": "Say Goodbye to Boat Lift Frustrations",
+  "subtitle": "Traditional remotes create problems. DockHub Uno solves them.",
+  "problems": [
+    {
+      "emoji": "🔍",
+      "title": "Lost Remotes",
+      "description": "Why spend $100+ on a new remote when there is always a phone in your pocket",
+      "highlightText": "$100+ on a new remote"
+    },
+    {
+      "emoji": "⏰",
+      "title": "Waiting at the Dock",
+      "description": "No circling in the channel while your lift slowly comes down"
+    },
+    {
+      "emoji": "🔧",
+      "title": "Service Calls",
+      "description": "No expensive technician visits for limit switch adjustments"
+    },
+    {
+      "emoji": "📦",
+      "title": "Modular Equipment",
+      "description": "Pay for what you need, save on what you don't"
+    }
+  ]
+}

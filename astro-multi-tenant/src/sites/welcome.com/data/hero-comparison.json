@@ -1,0 +1,22 @@
+{
+  "title": "The Better Choice",
+  "subtitle": "See why we're different",
+  "mainFeature": {
+    "title": "All-in-One Solution",
+    "description": "Everything you need in one place"
+  },
+  "comparisons": [
+    {
+      "us": "Complete solution",
+      "them": "Partial features"
+    },
+    {
+      "us": "24/7 Support",
+      "them": "Limited hours"
+    },
+    {
+      "us": "Free updates",
+      "them": "Paid upgrades"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "header": {
+    "title": "Experiences",
+    "description": "My professional journey spans hardware design, software development, and business leadership.",
+    "image": "/images/h7group_trans.jpg",
+    "imageDesc": "Professional Experience"
+  },
+  "items": [
+    {
+      "id": 1,
+      "company": "FlightOne",
+      "position": "Co-Founder & CTO",
+      "period": "2016 - Present",
+      "description": "Led technical development of flight controller hardware and software, managing a team of engineers."
+    },
+    {
+      "id": 2,
+      "company": "FalcoX",
+      "position": "Lead Developer",
+      "period": "2018 - Present",
+      "description": "Developed industry-leading flight controller firmware used by thousands of pilots worldwide."
+    },
+    {
+      "id": 3,
+      "company": "Hardware Consulting",
+      "position": "Consultant",
+      "period": "2014 - 2016",
+      "description": "Provided PCB design and embedded systems consulting for various startups and enterprises."
+    }
+  ]
+}

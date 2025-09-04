@@ -1,0 +1,151 @@
+---
+export const prerender = false;
+
+const { database, tenant, theme } = Astro.props;
+const databaseName = database || 'codersinflow';
+
+// Use semantic color classes
+const pageBg = 'bg-background';
+const btnPrimary = 'bg-primary hover:bg-primary/90 text-text-primary';
+const linkClass = 'text-link hover:text-link-hover';
+const cardClass = 'bg-surface border-border';
+const textPrimary = 'text-text-primary';
+const textSecondary = 'text-text-secondary';
+const inputClass = 'border-border focus:ring-primary focus:border-primary';
+
+// Get tenant name with fallback
+const tenantName = tenant?.name || 'Blog';
+---
+
+<div class={`min-h-screen flex items-center justify-center ${pageBg}`}>
+  <div class={`p-8 w-full max-w-md rounded-lg shadow-sm ${cardClass}`}>
+    <h1 class={`text-2xl font-bold mb-6 text-center ${textPrimary}`}>
+      Login to {tenantName} Editor
+    </h1>
+    
+    <form id="loginForm">
+      <div class="mb-4">
+        <label for="email" class={`block text-sm font-medium mb-1 ${textPrimary}`}>Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          class={`w-full px-3 py-2 bg-background text-text-primary border rounded-md focus:outline-none focus:ring-2 focus:border-transparent ${inputClass}`}
+          placeholder="admin@codersinflow.com"
+        />
+      </div>
+      
+      <div class="mb-6">
+        <label for="password" class={`block text-sm font-medium mb-1 ${textPrimary}`}>Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+          class={`w-full px-3 py-2 bg-background text-text-primary border rounded-md focus:outline-none focus:ring-2 focus:border-transparent ${inputClass}`}
+          placeholder="c0dersinflow"
+        />
+      </div>
+      
+      <div id="error" class="bg-error/10 text-error border border-error/20 p-4 rounded-md mb-4 hidden"></div>
+      
+      <button type="submit" class={`w-full px-4 py-2 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${btnPrimary}`}>
+        Login
+      </button>
+    </form>
+    
+    <div class="mt-4 text-center">
+      <a href="/blog/editor/register" class={`text-sm transition-colors ${linkClass}`}>
+        Don't have an account? Register
+      </a>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ databaseName }}>
+  window.addEventListener('load', () => {
+    const form = document.getElementById('loginForm');
+    const errorDiv = document.getElementById('error');
+    const database = databaseName;
+    
+    // Auto-create admin user if needed
+    async function ensureAdminExists() {
+      try {
+        // Check if admin exists
+        const checkResponse = await fetch('/api/auth/check-admin', {
+          method: 'GET',
+          headers: {
+            'X-Site-Database': database
+          }
+        });
+        
+        if (checkResponse.status === 404) {
+          // Create admin user
+          const createResponse = await fetch('/api/auth/create-admin', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Site-Database': database
+            },
+            body: JSON.stringify({
+              email: 'admin@codersinflow.com',
+              password: 'c0dersinflow',
+              name: 'Admin'
+            })
+          });
+          
+          if (createResponse.ok) {
+            console.log('Admin user created successfully');
+          }
+        }
+      } catch (error) {
+        console.error('Error checking/creating admin:', error);
+      }
+    }
+    
+    // Check for admin on page load
+    ensureAdminExists();
+    
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        const data = {
+          email: formData.get('email'),
+          password: formData.get('password')
+        };
+        
+        try {
+          if (errorDiv) errorDiv.classList.add('hidden');
+          
+          const response = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Site-Database': database
+            },
+            credentials: 'include',
+            body: JSON.stringify(data)
+          });
+          
+          if (response.ok) {
+            window.location.href = '/blog/editor';
+          } else {
+            const text = await response.text();
+            if (errorDiv) {
+              errorDiv.textContent = text || 'Login failed';
+              errorDiv.classList.remove('hidden');
+            }
+          }
+        } catch (error) {
+          if (errorDiv) {
+            errorDiv.textContent = 'Network error. Please try again.';
+            errorDiv.classList.remove('hidden');
+          }
+        }
+      });
+    }
+  });
+</script>

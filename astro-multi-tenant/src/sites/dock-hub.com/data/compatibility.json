@@ -1,0 +1,19 @@
+{
+  "title": "Works With Your Boat Lift",
+  "subtitle": "Compatible with 90% of boat lift brands",
+  "percentage": "90%",
+  "brands": [
+    { "name": "GEM", "compatible": true },
+    { "name": "TEC", "compatible": true },
+    { "name": "Hi-Tide", "compatible": true },
+    { "name": "Elite", "compatible": true },
+    { "name": "Tiger Shark", "compatible": true },
+    { "name": "ShoreStation", "compatible": true },
+    { "name": "Hewitt", "compatible": true },
+    { "name": "Pier Pleasure", "compatible": true },
+    { "name": "Neptune", "compatible": true },
+    { "name": "ShoreMaster", "compatible": true }
+  ],
+  "inputPlaceholder": "Enter your lift brand and model...",
+  "checkButtonText": "Check Compatibility"
+}

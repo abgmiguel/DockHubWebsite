@@ -1,0 +1,117 @@
+{
+  "hero": {
+    "title": "Our competition can't compare",
+    "subtitle": "We knew we could do better, and we proved it",
+    "quote": {
+      "text": "Our competitors thought my ideas were unobtainable, so i decided to prove otherwise, building a solution from the ground up",
+      "authorName": "Preston Garrison",
+      "authorTitle": "Creator"
+    }
+  },
+  "features": [
+    {
+      "id": "ai-providers",
+      "title": "Support for all AI Providers and Models",
+      "heading": "You don't have to wait for a software update to support that new provider or model!",
+      "learnMoreLink": "/features#provider-system",
+      "paragraphs": [
+        "We automatically query the providers for the latest models, and automatically support all of them.  Other extensions need the code updated just to support the new models, we load everything dynamically",
+        "**All our data is stored in JSON, so can easily be modified on the fly**",
+        "The other extensions all load most of their data from code, we have a universal standard system that lets you easily add and support your own providers.  Adding new providers takes very little work",
+        "**Mutiple accounts from the same providers are also easily added, you can even add mutiple accounts under the same mode so you can automatically rotate keys.**"
+
+        
+      ]
+    },
+    {
+      "id": "code-analysis",
+      "title": "Real-time code analysis",
+      "heading": "Automatically find and fix errors without using AI",
+      "learnMoreLink": "/features#codebase-intelligence",
+      "paragraphs": [
+        "**AI often makes mistakes and is constantly creating lint errors and other issues that take time and credit to fix**",
+        "We fully analyze your code base and find all issues, and allow you to automatically fix the majority of them without relying on expensive AI providers.",
+        "**Errors are found and fixed like magic**"
+      ]
+    },
+    {
+      "id": "codebase-knowledge",
+      "title": "Code base knowledge",
+      "heading": "We know everything about your code",
+      "learnMoreLink": "/features#codebase-intelligence",
+      "paragraphs": [
+        "We fully analyze and give AI providers access to a query system to find every detail about your code base.",
+        "Instead of needing to do extensive searches to find that perfect spot, or to do things properly we provide the AI with the tools to find the answer immediately.",
+        "**AI Follows YOUR standards and knows how YOU want your code to be written**"
+      ]
+    },
+    {
+      "id": "multitasking",
+      "title": "True Realtime Multitasking",
+      "heading": "AI not limited to one process at a time",
+      "learnMoreLink": "/features#multitasking",
+      "paragraphs": [
+        "We allow the AI to automatically create tasks that all run simeltaneously and realtime to find the perfect solution, or create the ultimate solution.",
+        "AI will automatically choose the perfect model, which builds custom instructions to run the query in the background while its processing other queries.",
+        "This allows the AI to work more economically, faster, and analyze results as they are fed back realtime into the main process",
+        "**No other extension has such power**"
+      ]
+    },
+    {
+      "id": "context-control",
+      "title": "Full context control",
+      "heading": "Save huge money by allowing you or the AI to manage context",
+      "learnMoreLink": "/features#context-control",
+      "paragraphs": [
+        "Full context editor, you can easily delete items from context, and visualize it in a full context viewer.",
+        "AI has commands at its disposable where it can automatically delete elements i no longer needs.",
+        "Full mult-tasking subtasks allow the AI to keep elements seperate, saving money on your main context.",
+        "**Smart context management saves YOU ALOT OF MONEY!**"
+      ]
+    },
+    {
+      "id": "mobile-apps",
+      "title": "iPhone, Android and iPad Apps",
+      "heading": "Jump in the pool and keep your project moving",
+      "learnMoreLink": "/features#mobile-apps",
+      "paragraphs": [
+        "No longer stay tethered to your desk, our apps allow you to completely control the AI and your project from anywhere.",
+        "Our applications allow you to completely respond and view the entire AI process, change tasks, models, etc all from the comfort of your couch.",
+        "**Everything full synchronized anywhere, anytime**"
+      ]
+    },
+    {
+      "id": "git-management",
+      "title": "Expansive GIT Management",
+      "heading": "Control every detail of AI with your GIT",
+      "learnMoreLink": "/features#git-management",
+      "paragraphs": [
+        "Most of the extensions don't have individual chunking, selectively approve or deny individual chunks of code, so you can easily monitor what the AI is doing to your code base.",
+        "Full automatic shadow git, everytime a file is modified it can be automatically commited to a shadow git, so you never need to worry about losing any code.",
+        "**Two git systems, for the utimate control**"
+      ]
+    },
+    {
+      "id": "web-management",
+      "title": "Web-based Management",
+      "heading": "All chat and statistics synchronized to the web",
+      "learnMoreLink": "/features#enterprise-cloud",
+      "paragraphs": [
+        "Monitor your team or even your own sessions on the web in realtime, easily see your costs, what is being worked on, even your entire chat history.",
+        "Keep track of your costs, see where to target your efficiency, even monitor if your employees are hard at work.",
+        "*All details are tracked in realtime**"
+      ]
+    },
+    {
+      "id": "claude-codex",
+      "title": "Claude Code and Codex Support",
+      "heading": "No longer relegated to commandline",
+      "learnMoreLink": "/features#codebase-intelligence",
+      "paragraphs": [
+        "We keep the best parts of claude code and codex but integrate them directly into our extension.",
+        "Other extensions try and shoe horn using claude code and codex into their system, not taking advantageo of what they do best.  We allow them to work properly, and keep you up to date with all their tool calls, and all the information the output.  This keeps them working the absolute best, and keeps your credit usage low.",
+        "*Really make Claude Code and Codex shine**"
+      ]
+    }
+  ]
+}

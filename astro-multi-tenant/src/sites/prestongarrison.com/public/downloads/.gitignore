@@ -1,0 +1,5 @@
+# Ignore VSIX files (they should be uploaded to server directly)
+*.vsix
+
+# But track the README
+!README.md

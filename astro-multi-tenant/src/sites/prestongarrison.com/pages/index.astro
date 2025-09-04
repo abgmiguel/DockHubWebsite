@@ -1,0 +1,43 @@
+---
+import MainTitleHeader from '../../../shared/components/Headers/MainTitleHeader.jsx';
+import Hero from '../../../shared/components/Hero/Hero.jsx';
+import ProjectsHeader from '../../../shared/components/sections/ProjectsHeader.jsx';
+import ProjectsItems from '../../../shared/components/sections/ProjectsItems.jsx';
+import ExperiencesHeader from '../../../shared/components/sections/ExperiencesHeader.jsx';
+import ExperiencesVideos from '../../../shared/components/sections/ExperiencesVideos.jsx';
+import QualificationsHeader from '../../../shared/components/sections/QualificationsHeader.jsx';
+import QualificationsSkills from '../../../shared/components/sections/QualificationsSkills.jsx';
+import ContactHeader from '../../../shared/components/Contact/ContactHeader.jsx';
+import ContactInfo from '../../../shared/components/Contact/ContactInfo.jsx';
+
+// Import data
+import mainTitleData from '../data/main-title.json';
+import heroData from '../data/hero.json';
+import projectsHeaderData from '../data/projects-header.json';
+import projectsItemsData from '../data/projects-items.json';
+import experiencesData from '../data/experiences.json';
+import videosData from '../data/videos.json';
+import qualificationsHeaderData from '../data/qualifications-header.json';
+import skillsData from '../data/skills.json';
+import contactHeaderData from '../data/contact-header.json';
+import contactInfoData from '../data/contact-info.json';
+---
+
+  <main>
+    <MainTitleHeader data={mainTitleData} />
+    <Hero client:visible data={heroData} />
+    <ProjectsHeader data={projectsHeaderData} />
+    <ProjectsItems client:visible data={projectsItemsData} />
+    <div id="qualifications">
+      <QualificationsHeader data={qualificationsHeaderData} />
+      <QualificationsSkills client:visible data={skillsData} />
+    </div>
+    <div id="experiences">
+      <ExperiencesHeader data={experiencesData.header} />
+      <ExperiencesVideos client:visible data={videosData} />
+    </div>
+    <div id="contact">
+      <ContactHeader data={contactHeaderData} />
+      <ContactInfo data={contactInfoData} />
+    </div>
+  </main>

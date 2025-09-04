@@ -1,0 +1,32 @@
+[
+  {
+    "id": "feature-1",
+    "title": "Lightning Fast",
+    "heading": "Optimized Performance",
+    "paragraphs": [
+      "Built with performance in mind from the ground up.",
+      "Experience instant load times and smooth interactions."
+    ],
+    "learnMoreLink": "#"
+  },
+  {
+    "id": "feature-2",
+    "title": "Modern Design",
+    "heading": "Beautiful & Responsive",
+    "paragraphs": [
+      "Stunning visuals that adapt to any screen size.",
+      "Clean, intuitive interfaces that users love."
+    ],
+    "learnMoreLink": "#"
+  },
+  {
+    "id": "feature-3",
+    "title": "Easy Integration",
+    "heading": "Plug & Play",
+    "paragraphs": [
+      "Get started in minutes with our simple setup.",
+      "Seamlessly integrates with your existing tools."
+    ],
+    "learnMoreLink": "#"
+  }
+]

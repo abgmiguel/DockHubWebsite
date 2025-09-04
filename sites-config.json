@@ -1,0 +1,343 @@
+{
+  "welcome.com": {
+    "id": "welcome",
+    "name": "Platform Overview",
+    "description": "Multi-Tenant Component Platform",
+    "directory": "welcome.com",
+    "database": "welcome_db",
+    "theme": "light",
+    "features": []
+  },
+  "www.welcome.com": {
+    "id": "welcome",
+    "name": "Platform Overview",
+    "description": "Multi-Tenant Component Platform",
+    "directory": "welcome.com",
+    "database": "welcome_db",
+    "theme": "light",
+    "features": []
+  },
+  "codersinflow.com": {
+    "id": "codersinflow",
+    "name": "CodersInFlow",
+    "description": "AI-Powered Pair Programming Platform",
+    "directory": "codersinflow.com",
+    "database": "codersinflow_db",
+    "theme": "dark-blue",
+    "features": [
+      "blog",
+      "auth",
+      "payments"
+    ]
+  },
+  "www.codersinflow.com": {
+    "id": "codersinflow",
+    "name": "CodersInFlow",
+    "description": "AI-Powered Pair Programming Platform",
+    "directory": "codersinflow.com",
+    "database": "codersinflow_db",
+    "theme": "dark-blue",
+    "features": [
+      "blog",
+      "auth",
+      "payments"
+    ]
+  },
+  "darkflows.com": {
+    "id": "darkflows",
+    "name": "DarkFlows",
+    "description": "Advanced Router OS & Network Solutions",
+    "directory": "darkflows.com",
+    "database": "darkflows_db",
+    "theme": "dark-red",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  },
+  "www.darkflows.com": {
+    "id": "darkflows",
+    "name": "DarkFlows",
+    "description": "Advanced Router OS & Network Solutions",
+    "directory": "darkflows.com",
+    "database": "darkflows_db",
+    "theme": "dark-red",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  },
+  "prestongarrison.com": {
+    "id": "prestongarrison",
+    "name": "Preston Garrison",
+    "description": "Full Stack Developer Portfolio",
+    "directory": "prestongarrison.com",
+    "database": "prestongarrison_db",
+    "theme": "light",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  },
+  "www.prestongarrison.com": {
+    "id": "prestongarrison",
+    "name": "Preston Garrison",
+    "description": "Full Stack Developer Portfolio",
+    "directory": "prestongarrison.com",
+    "database": "prestongarrison_db",
+    "theme": "light",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  },
+  "localhost": {
+    "id": "default",
+    "directory": "default",
+    "database": "default_db",
+    "theme": "dark",
+    "features": []
+  },
+  "127.0.0.1": {
+    "id": "default",
+    "directory": "default",
+    "database": "default_db",
+    "theme": "dark",
+    "features": []
+  },
+  "default": {
+    "id": "default",
+    "directory": "default",
+    "database": "default_db",
+    "theme": "light",
+    "features": [
+      "blog"
+    ]
+  },
+  "magicvideodownloader.com": {
+    "id": "magicvideodownloader",
+    "name": "Magic Video Downloader",
+    "description": "Download videos from any website with ease",
+    "directory": "magicvideodownloader.com",
+    "database": "magicvideodownloader_db",
+    "theme": "dark",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  },
+  "www.magicvideodownloader.com": {
+    "id": "magicvideodownloader",
+    "name": "Magic Video Downloader",
+    "description": "Download videos from any website with ease",
+    "directory": "magicvideodownloader.com",
+    "database": "magicvideodownloader_db",
+    "theme": "dark",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  },
+  "magicvideodownloader.localhost": {
+    "id": "magicvideodownloader",
+    "name": "Magic Video Downloader",
+    "description": "Download videos from any website with ease",
+    "directory": "magicvideodownloader.com",
+    "database": "magicvideodownloader_db",
+    "theme": "dark",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  },
+  "codersinflow.localhost": {
+    "id": "codersinflow",
+    "name": "CodersInFlow",
+    "description": "AI-Powered Pair Programming Platform",
+    "directory": "codersinflow.com",
+    "database": "codersinflow_db",
+    "theme": "dark-blue",
+    "features": [
+      "blog",
+      "auth",
+      "payments"
+    ]
+  },
+  "darkflows.localhost": {
+    "id": "darkflows",
+    "name": "DarkFlows",
+    "description": "Advanced Router OS & Network Solutions",
+    "directory": "darkflows.com",
+    "database": "darkflows_db",
+    "theme": "dark-red",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  },
+  "prestongarrison.localhost": {
+    "id": "prestongarrison",
+    "name": "Preston Garrison",
+    "description": "Full Stack Developer Portfolio",
+    "directory": "prestongarrison.com",
+    "database": "prestongarrison_db",
+    "theme": "light",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  },
+  "welcome.localhost": {
+    "id": "welcome",
+    "name": "Platform Overview",
+    "description": "Multi-Tenant Component Platform",
+    "directory": "welcome.com",
+    "database": "welcome_db",
+    "theme": "light",
+    "features": []
+  },
+  "alexgarrison.org": {
+    "id": "alexgarrison",
+    "name": "alexgarrison",
+    "description": "Welcome to alexgarrison",
+    "directory": "alexgarrison.org",
+    "database": "alexgarrison_db",
+    "theme": "light",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  },
+  "www.alexgarrison.org": {
+    "id": "alexgarrison",
+    "name": "alexgarrison",
+    "description": "Welcome to alexgarrison",
+    "directory": "alexgarrison.org",
+    "database": "alexgarrison_db",
+    "theme": "light",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  },
+  "alexgarrison.localhost": {
+    "id": "alexgarrison",
+    "name": "alexgarrison",
+    "description": "Welcome to alexgarrison",
+    "directory": "alexgarrison.org",
+    "database": "alexgarrison_db",
+    "theme": "light",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  },
+  "adcontrol.com": {
+    "id": "adcontrol",
+    "name": "adcontrol",
+    "description": "Welcome to adcontrol",
+    "directory": "adcontrol.com",
+    "database": "adcontrol_db",
+    "theme": "light",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  },
+  "www.adcontrol.com": {
+    "id": "adcontrol",
+    "name": "adcontrol",
+    "description": "Welcome to adcontrol",
+    "directory": "adcontrol.com",
+    "database": "adcontrol_db",
+    "theme": "light",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  },
+  "adcontrol.localhost": {
+    "id": "adcontrol",
+    "name": "adcontrol",
+    "description": "Welcome to adcontrol",
+    "directory": "adcontrol.com",
+    "database": "adcontrol_db",
+    "theme": "light",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  },
+  "andreaimagines.com": {
+    "id": "andreaimagines",
+    "name": "andreaimagines",
+    "description": "Welcome to andreaimagines",
+    "directory": "andreaimagines.com",
+    "database": "andreaimagines_db",
+    "theme": "light",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  },
+  "www.andreaimagines.com": {
+    "id": "andreaimagines",
+    "name": "andreaimagines",
+    "description": "Welcome to andreaimagines",
+    "directory": "andreaimagines.com",
+    "database": "andreaimagines_db",
+    "theme": "light",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  },
+  "andreaimagines.localhost": {
+    "id": "andreaimagines",
+    "name": "andreaimagines",
+    "description": "Welcome to andreaimagines",
+    "directory": "andreaimagines.com",
+    "database": "andreaimagines_db",
+    "theme": "light",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  },
+  "dock-hub.com": {
+    "id": "dock-hub",
+    "name": "DockHub",
+    "description": "Smart Boat Lift Controller - Control From Your Phone",
+    "directory": "dock-hub.com",
+    "database": "dock-hub_db",
+    "theme": "dark",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  },
+  "www.dock-hub.com": {
+    "id": "dock-hub",
+    "name": "DockHub",
+    "description": "Smart Boat Lift Controller - Control From Your Phone",
+    "directory": "dock-hub.com",
+    "database": "dock-hub_db",
+    "theme": "dark",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  },
+  "dock-hub.localhost": {
+    "id": "dock-hub",
+    "name": "DockHub",
+    "description": "Smart Boat Lift Controller - Control From Your Phone",
+    "directory": "dock-hub.com",
+    "database": "dock-hub_db",
+    "theme": "dark",
+    "features": [
+      "blog",
+      "docs"
+    ]
+  }
+}

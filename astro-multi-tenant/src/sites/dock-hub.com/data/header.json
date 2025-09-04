@@ -1,0 +1,33 @@
+{
+  "cta": {
+    "href": "https://shopify.com",
+    "text": "Buy Now"
+  },
+  "logo": {
+    "href": "/",
+    "text": "DockHub"
+  },
+  "navigation": [
+    {
+      "href": "/",
+      "text": "Home"
+    },
+    {
+      "href": "#features",
+      "text": "Features"
+    },
+    {
+      "href": "#how-it-works",
+      "text": "How It Works"
+    },
+    {
+      "href": "#compatibility",
+      "text": "Compatibility"
+    },
+    {
+      "href": "#testimonials",
+      "text": "Reviews"
+    }
+  ],
+  "social": []
+}

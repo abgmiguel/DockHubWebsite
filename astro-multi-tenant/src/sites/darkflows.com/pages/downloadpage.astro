@@ -1,0 +1,239 @@
+---
+import TopNavBar from '../../../shared/components/Navigation/TopNavBar.astro';
+---
+
+  <main class="min-h-screen bg-background">
+    <TopNavBar />
+    
+    <div class="pt-24 pb-12 px-4 max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 text-text-primary">
+          DarkFlows{' '}
+          <span class="text-[#7fb69b]">installation</span>
+        </h1>
+      </div>
+
+      <!-- Installation Prerequisites -->
+      <div class="max-w-2xl mx-auto mb-12 text-text-secondary">
+        <p class="mb-4 italic text-center" id="description">
+          Use this ISO to install directly onto the machine or virtual machine. Let it run and do the full install, after it boots you need to let it finish the install which can take 15 minutes or more, once it is done it will show the message where you can log into the webserver. If you have any issues installing you can use the script in <span class="text-[#7fb69b]">/usr/local/darkflows/installer/verify_installation.sh</span> to see what is missing and have it attempt to fix it.
+        </p>
+        <div id="iso-link-container" class="hidden bg-surface p-4 rounded-lg flex items-center justify-between group">
+          <code class="text-text-secondary break-all" id="iso-link">https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.9.0-amd64-netinst.iso</code>
+          <button
+            id="copy-iso-link"
+            class="ml-4 p-2 text-text-muted hover:text-text-primary transition-colors"
+            title="Copy ISO link"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Option Buttons -->
+      <div class="flex flex-col sm:flex-row justify-center gap-4 items-center mb-8">
+        <button
+          data-type="iso"
+          class="option-btn flex items-center gap-2 px-6 py-3 rounded-md transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg bg-[#7fb69b] text-white"
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="16" 
+            height="16" 
+            fill="currentColor" 
+            viewBox="0 0 16 16"
+          >
+            <path d="M8 0a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 12.293V.5A.5.5 0 0 1 8 0z"/>
+          </svg>
+          ISO Install
+        </button>
+
+        <button
+          data-type="install"
+          class="option-btn flex items-center gap-2 px-6 py-3 rounded-md transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg bg-surface text-text-secondary hover:bg-surface/80"
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="16" 
+            height="16" 
+            fill="currentColor" 
+            viewBox="0 0 16 16"
+          >
+            <path d="M8 0a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 12.293V.5A.5.5 0 0 1 8 0z"/>
+          </svg>
+          Script Install
+        </button>
+
+        <button
+          data-type="update"
+          class="option-btn flex items-center gap-2 px-6 py-3 rounded-md transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg bg-surface text-text-secondary hover:bg-surface/80"
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="16" 
+            height="16" 
+            fill="currentColor" 
+            viewBox="0 0 16 16"
+          >
+            <path d="M8 3a5 5 0 0 0-5 5v.5a.5.5 0 0 1-1 0V8a6 6 0 1 1 12 0v.5a.5.5 0 0 1-1 0V8a5 5 0 0 0-5-5z"/>
+            <path d="M8 4.5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5z"/>
+          </svg>
+          Upgrade
+        </button>
+      </div>
+
+      <!-- Download ISO Button -->
+      <div id="iso-download" class="flex justify-center mt-8">
+        <a 
+          href="/downloads/darkflows.iso"
+          download
+          class="inline-block px-6 py-3 bg-[#7fb69b] text-white rounded-md hover:bg-[#6fa58b] transition-colors"
+        >
+          Download DarkFlows ISO
+        </a>
+      </div>
+
+      <!-- Instructions Section -->
+      <div class="mt-16">
+        <div class="max-w-2xl mx-auto">
+          <div id="instructions-container" class="hidden">
+            <h2 class="text-2xl font-bold text-text-primary mb-4" id="instructions-title">
+              Install Instructions
+            </h2>
+            <div class="bg-surface p-4 rounded-lg flex items-center justify-between group">
+              <code class="text-text-secondary" id="instructions-code">su - root -c "apt install -y curl && curl -sSL https://darkflows.com/downloads/install.sh | bash"</code>
+              <button
+                id="copy-instructions"
+                class="ml-4 p-2 text-text-muted hover:text-text-primary transition-colors"
+                title="Copy command"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                </svg>
+              </button>
+            </div>
+            <p id="copy-success" class="text-green-500 text-sm mt-2 text-center hidden">
+              Copied!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+<script>
+  let activeType = 'iso';
+  
+  const descriptions = {
+    iso: `Use this ISO to install directly onto the machine or virtual machine. Let it run and do the full install, after it boots you need to let it finish the install which can take 15 minutes or more, once it is done it will show the message where you can log into the webserver. If you have any issues installing you can use the script in <span class="text-[#7fb69b]">/usr/local/darkflows/installer/verify_installation.sh</span> to see what is missing and have it attempt to fix it.`,
+    install: "We recommend you installing the following ISO as the base for your install. Also make sure you have both your WAN and LAN ethernet plugged in before you run the install. The installer will automatically detect and configure the networking. If you have a secondary WAN plug that in as well.",
+    update: "We recommend you installing the following ISO as the base for your install. Also make sure you have both your WAN and LAN ethernet plugged in before you run the install. The installer will automatically detect and configure the networking. If you have a secondary WAN plug that in as well."
+  };
+  
+  const instructions = {
+    install: 'su - root -c "apt install -y curl && curl -sSL https://darkflows.com/downloads/install.sh | bash"',
+    update: 'su - root -c "apt install -y curl && curl -sSL https://darkflows.com/downloads/update.sh | bash"'
+  };
+  
+  const isoLink = 'https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.9.0-amd64-netinst.iso';
+  
+  function updateDisplay(type) {
+    activeType = type;
+    
+    // Update description
+    const descriptionEl = document.getElementById('description');
+    if (descriptionEl) {
+      descriptionEl.innerHTML = descriptions[type];
+    }
+    
+    // Update ISO link visibility
+    const isoLinkContainer = document.getElementById('iso-link-container');
+    if (isoLinkContainer) {
+      if (type !== 'iso') {
+        isoLinkContainer.classList.remove('hidden');
+      } else {
+        isoLinkContainer.classList.add('hidden');
+      }
+    }
+    
+    // Update button states
+    document.querySelectorAll('.option-btn').forEach(btn => {
+      const btnType = btn.getAttribute('data-type');
+      if (btnType === type) {
+        btn.classList.remove('bg-surface', 'text-text-secondary', 'hover:bg-surface/80');
+        btn.classList.add('bg-[#7fb69b]', 'text-white');
+      } else {
+        btn.classList.remove('bg-[#7fb69b]', 'text-white');
+        btn.classList.add('bg-surface', 'text-text-secondary', 'hover:bg-surface/80');
+      }
+    });
+    
+    // Update ISO download visibility
+    const isoDownload = document.getElementById('iso-download');
+    if (isoDownload) {
+      if (type === 'iso') {
+        isoDownload.classList.remove('hidden');
+      } else {
+        isoDownload.classList.add('hidden');
+      }
+    }
+    
+    // Update instructions visibility
+    const instructionsContainer = document.getElementById('instructions-container');
+    if (instructionsContainer) {
+      if (type !== 'iso') {
+        instructionsContainer.classList.remove('hidden');
+        const titleEl = document.getElementById('instructions-title');
+        const codeEl = document.getElementById('instructions-code');
+        if (titleEl) {
+          titleEl.textContent = type === 'install' ? 'Install Instructions' : 'Update Instructions';
+        }
+        if (codeEl) {
+          codeEl.textContent = instructions[type];
+        }
+      } else {
+        instructionsContainer.classList.add('hidden');
+      }
+    }
+  }
+  
+  // Handle button clicks
+  document.querySelectorAll('.option-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const type = btn.getAttribute('data-type');
+      if (type) {
+        updateDisplay(type);
+      }
+    });
+  });
+  
+  // Handle copy buttons
+  async function handleCopy(text, successMessage) {
+    try {
+      await navigator.clipboard.writeText(text);
+      const successEl = document.getElementById('copy-success');
+      if (successEl) {
+        successEl.textContent = successMessage;
+        successEl.classList.remove('hidden');
+        setTimeout(() => {
+          successEl.classList.add('hidden');
+        }, 2000);
+      }
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+  }
+  
+  document.getElementById('copy-iso-link')?.addEventListener('click', () => {
+    handleCopy(isoLink, 'ISO link copied!');
+  });
+  
+  document.getElementById('copy-instructions')?.addEventListener('click', () => {
+    const codeEl = document.getElementById('instructions-code');
+    if (codeEl) {
+      handleCopy(codeEl.textContent, 'Command copied!');
+    }
+  });
+</script>

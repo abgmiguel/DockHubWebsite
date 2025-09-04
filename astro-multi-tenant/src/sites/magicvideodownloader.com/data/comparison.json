@@ -1,0 +1,227 @@
+{
+  "header": {
+    "title": "How We Compare",
+    "subtitle": "True multitasking, powerful, token optimized, intuitive - fundamentally changing how software is built",
+    "badge": "✨ 17-0 Feature Advantage"
+  },
+  "competitors": [
+    {
+      "name": "Cline",
+      "key": "cline"
+    },
+    {
+      "name": "Continue",
+      "key": "continue"
+    },
+    {
+      "name": "Cursor",
+      "key": "cursor"
+    },
+    {
+      "name": "Roo",
+      "key": "roo"
+    },
+    {
+      "name": "Coders in Flow",
+      "key": "codersinflow",
+      "highlight": true,
+      "icon": "⚡"
+    }
+  ],
+  "features": [
+    {
+      "name": "Concurrent Tasks",
+      "link": "/features#multitasking",
+      "values": {
+        "cline": { "status": false, "value": "1" },
+        "continue": { "status": false, "value": "1" },
+        "cursor": { "status": false, "value": "1" },
+        "roo": { "status": false, "value": "1" },
+        "codersinflow": { "status": true, "value": "20+" }
+      }
+    },
+    {
+      "name": "Automatic Subtasks",
+      "link": "/features#multitasking",
+      "values": {
+        "cline": { "status": false, "value": "No" },
+        "continue": { "status": false, "value": "No" },
+        "cursor": { "status": false, "value": "No" },
+        "roo": { "status": false, "value": "No" },
+        "codersinflow": { "status": true, "value": "Yes" }
+      }
+    },
+    {
+      "name": "Dynamic Providers",
+      "link": "/features#provider-system",
+      "values": {
+        "cline": { "status": false, "value": "Hardcoded" },
+        "continue": { "status": false, "value": "Hardcoded" },
+        "cursor": { "status": false, "value": "Hardcoded" },
+        "roo": { "status": false, "value": "Hardcoded" },
+        "codersinflow": { "status": true, "value": "JSON-based" }
+      }
+    },
+    {
+      "name": "Model Discovery",
+      "link": "/features#provider-system",
+      "values": {
+        "cline": { "status": false, "value": "Manual" },
+        "continue": { "status": false, "value": "Manual" },
+        "cursor": { "status": false, "value": "Manual" },
+        "roo": { "status": false, "value": "Manual" },
+        "codersinflow": { "status": true, "value": "Automatic" }
+      }
+    },
+    {
+      "name": "Mobile App",
+      "link": "/features#mobile-apps",
+      "values": {
+        "cline": { "status": false, "value": "No" },
+        "continue": { "status": false, "value": "No" },
+        "cursor": { "status": false, "value": "No" },
+        "roo": { "status": false, "value": "No" },
+        "codersinflow": { "status": true, "value": "Native iOS" }
+      }
+    },
+    {
+      "name": "Selective Staging",
+      "link": "/features#git-management",
+      "values": {
+        "cline": { "status": false, "value": "No" },
+        "continue": { "status": false, "value": "No" },
+        "cursor": { "status": true, "value": "Yes" },
+        "roo": { "status": false, "value": "No" },
+        "codersinflow": { "status": true, "value": "Chunk-level" }
+      }
+    },
+    {
+      "name": "Cloud Backup",
+      "link": "/features#enterprise-cloud",
+      "values": {
+        "cline": { "status": false, "value": "No" },
+        "continue": { "status": false, "value": "No" },
+        "cursor": { "status": false, "value": "Limited" },
+        "roo": { "status": false, "value": "No" },
+        "codersinflow": { "status": true, "value": "Complete" }
+      }
+    },
+    {
+      "name": "Team Management",
+      "link": "/features#enterprise-cloud",
+      "values": {
+        "cline": { "status": false, "value": "No" },
+        "continue": { "status": false, "value": "No" },
+        "cursor": { "status": false, "value": "No" },
+        "roo": { "status": false, "value": "No" },
+        "codersinflow": { "status": true, "value": "Enterprise" }
+      }
+    },
+    {
+      "name": "AI Context Editing",
+      "link": "/features#context-control",
+      "values": {
+        "cline": { "status": false, "value": "No" },
+        "continue": { "status": false, "value": "No" },
+        "cursor": { "status": false, "value": "No" },
+        "roo": { "status": false, "value": "No" },
+        "codersinflow": { "status": true, "value": "Dynamic" }
+      }
+    },
+    {
+      "name": "Cost Optimization",
+      "link": "/features#context-control",
+      "values": {
+        "cline": { "status": false, "value": "No" },
+        "continue": { "status": false, "value": "No" },
+        "cursor": { "status": false, "value": "Limited" },
+        "roo": { "status": false, "value": "No" },
+        "codersinflow": { "status": true, "value": "Automatic" }
+      }
+    },
+    {
+      "name": "Code Analysis",
+      "link": "/features#codebase-intelligence",
+      "values": {
+        "cline": { "status": false, "value": "No" },
+        "continue": { "status": false, "value": "Basic" },
+        "cursor": { "status": false, "value": "Basic" },
+        "roo": { "status": false, "value": "No" },
+        "codersinflow": { "status": true, "value": "50+ Detectors" }
+      }
+    },
+    {
+      "name": "Security Scanner",
+      "link": "/features#codebase-intelligence",
+      "values": {
+        "cline": { "status": false, "value": "No" },
+        "continue": { "status": false, "value": "No" },
+        "cursor": { "status": false, "value": "No" },
+        "roo": { "status": false, "value": "No" },
+        "codersinflow": { "status": true, "value": "30+ Patterns" }
+      }
+    },
+    {
+      "name": "Auto-Fixes",
+      "link": "/features#codebase-intelligence",
+      "values": {
+        "cline": { "status": false, "value": "No" },
+        "continue": { "status": false, "value": "Limited" },
+        "cursor": { "status": false, "value": "Limited" },
+        "roo": { "status": false, "value": "No" },
+        "codersinflow": { "status": true, "value": "200+ Types" }
+      }
+    },
+    {
+      "name": "Automatic MCP Passthrough",
+      "link": "/features#provider-system",
+      "values": {
+        "cline": { "status": false, "value": "No" },
+        "continue": { "status": false, "value": "No" },
+        "cursor": { "status": false, "value": "No" },
+        "roo": { "status": false, "value": "No" },
+        "codersinflow": { "status": true, "value": "Built-in" }
+      }
+    },
+    {
+      "name": "Message Indexing",
+      "link": "/features",
+      "values": {
+        "cline": { "status": false, "value": "No" },
+        "continue": { "status": false, "value": "No" },
+        "cursor": { "status": false, "value": "No" },
+        "roo": { "status": false, "value": "No" },
+        "codersinflow": { "status": true, "value": "Byte-offset" }
+      }
+    },
+    {
+      "name": "Lazy Loading",
+      "link": "/features",
+      "values": {
+        "cline": { "status": false, "value": "No" },
+        "continue": { "status": false, "value": "No" },
+        "cursor": { "status": false, "value": "No" },
+        "roo": { "status": false, "value": "No" },
+        "codersinflow": { "status": true, "value": "Windowed" }
+      }
+    }
+  ],
+  "stats": [
+    {
+      "value": "20×",
+      "label": "More Concurrent Tasks"
+    },
+    {
+      "value": "60%",
+      "label": "Cost Reduction"
+    },
+    {
+      "value": "50+",
+      "label": "Code Detectors"
+    },
+    {
+      "value": "200+",
+      "label": "Auto-Fix Types"
+    }
+  ]
+}

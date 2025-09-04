@@ -1,0 +1,61 @@
+---
+import DevWrapper from '../../../shared/components/Dev/DevWrapper.astro';
+
+// Simple test data
+const testData = {
+  title: "Test Component",
+  description: "This is a test component for the dev overlay",
+  items: [
+    { id: 1, name: "Item 1" },
+    { id: 2, name: "Item 2" }
+  ]
+};
+---
+
+  <main style="padding: 2rem;">
+    <h1>Dev Overlay Test Page</h1>
+    
+    <DevWrapper componentName="TestSection" dataPath="../data/test.json" data={testData}>
+      <section style="border: 2px solid #333; padding: 1rem; margin: 1rem 0;">
+        <h2>{testData.title}</h2>
+        <p>{testData.description}</p>
+        <ul>
+          {testData.items.map(item => (
+            <li key={item.id}>{item.name}</li>
+          ))}
+        </ul>
+      </section>
+    </DevWrapper>
+    
+    <DevWrapper componentName="SimpleCard" dataPath="../data/card.json" data={{ title: "Card Title", content: "Card content" }}>
+      <div style="background: #f0f0f0; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+        <h3>Simple Card Component</h3>
+        <p>This is a simple card to test the overlay.</p>
+      </div>
+    </DevWrapper>
+    
+    <DevWrapper componentName="ButtonGroup">
+      <div style="display: flex; gap: 1rem; margin: 1rem 0;">
+        <button style="padding: 0.5rem 1rem; background: #3b82f6; color: white; border: none; border-radius: 4px;">
+          Button 1
+        </button>
+        <button style="padding: 0.5rem 1rem; background: #10b981; color: white; border: none; border-radius: 4px;">
+          Button 2
+        </button>
+      </div>
+    </DevWrapper>
+  </main>
+  
+  <script>
+    // Debug: Check if dev mode is active
+    console.log('Dev mode:', import.meta.env.DEV);
+    
+    // Debug: Check for components with data attributes
+    setTimeout(() => {
+      const components = document.querySelectorAll('[data-component-name]');
+      console.log('Found components with dev tracking:', components.length);
+      components.forEach(comp => {
+        console.log('Component:', comp.getAttribute('data-component-name'), comp);
+      });
+    }, 1000);
+  </script>

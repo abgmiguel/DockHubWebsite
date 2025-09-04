@@ -1,0 +1,21 @@
+{
+  "logo": {
+    "src": "/darkflows-logo.svg",
+    "alt": "Darkflows Logo",
+    "width": 180,
+    "height": 45
+  },
+  "tagline": "Have your CAKE and eat it too... DarkFlows RouterOS",
+  "links": [
+    {
+      "href": "https://discord.gg/3QmjpqX2Y5",
+      "type": "discord",
+      "color": "#5865F2"
+    },
+    {
+      "href": "https://www.reddit.com/r/DarkFlows/",
+      "type": "reddit",
+      "color": "#FF4500"
+    }
+  ]
+}

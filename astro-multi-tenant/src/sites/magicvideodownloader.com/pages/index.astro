@@ -1,0 +1,23 @@
+---
+// Import data files
+import heroData from '../data/features-hero.json';
+
+// Import just the working component
+import FeaturesHero from '../../../shared/components/Features/FeaturesHero';
+---
+
+<main>
+  <!-- Features Hero Section -->
+  <FeaturesHero client:load data={heroData} />
+  
+  <!-- Simple Call to Action -->
+  <section class="py-16 bg-primary text-white text-center">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-4">Ready to Download Videos?</h2>
+      <p class="text-xl mb-8">Start downloading videos from any website today!</p>
+      <a href="/download" class="inline-block px-8 py-3 bg-white text-primary rounded-lg font-semibold hover:bg-gray-100 transition">
+        Get Started Free
+      </a>
+    </div>
+  </section>
+</main>

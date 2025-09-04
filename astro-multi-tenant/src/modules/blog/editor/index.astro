@@ -1,0 +1,177 @@
+---
+export const prerender = false;
+
+import { API_URL } from '../../../shared/lib/api-config';
+
+// Get database from props (passed from BlogApp)
+const { database, tenant } = Astro.props;
+
+// Check authentication
+const token = Astro.cookies.get('auth-token');
+if (!token) {
+  return Astro.redirect('/blog/editor/login');
+}
+
+// Fetch user info
+const userResponse = await fetch(`${API_URL}/api/auth/me`, {
+  headers: {
+    'Cookie': `auth-token=${token.value}`,
+    'X-Site-Database': database
+  }
+});
+
+if (!userResponse.ok) {
+  // Clear invalid cookie to prevent redirect loop
+  Astro.cookies.delete('auth-token', { path: '/' });
+  return Astro.redirect('/blog/editor/login');
+}
+
+const user = await userResponse.json();
+
+// Fetch recent posts
+const postsResponse = await fetch(`${API_URL}/api/posts`, {
+  headers: {
+    'Cookie': `auth-token=${token.value}`
+  }
+});
+const postsData = postsResponse.ok ? await postsResponse.json() : null;
+const posts = Array.isArray(postsData) ? postsData : [];
+---
+
+<!-- No Layout wrapper needed, BlogApp handles the layout -->
+  <div class="min-h-screen bg-background">
+    <!-- Editor Header -->
+    <header class="bg-surface border-b border-border">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <h1 class="text-xl font-bold text-text-primary">Content Editor</h1>
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted">Welcome, {user.name}</span>
+            <a href={`/blog/editor/users/edit/${user.id}`} class="text-link hover:text-link-hover">
+              Settings
+            </a>
+            <a href="/blog/editor/change-password" class="text-link hover:text-link-hover">
+              Change Password
+            </a>
+            <button id="logoutBtn" class="text-error hover:text-red-300">
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Editor Navigation -->
+    <nav class="bg-surface border-b border-border">
+      <div class="container mx-auto px-4">
+        <div class="flex gap-6">
+          <a href="/blog/editor" class="py-3 border-b-2 border-blue-500 text-link">Dashboard</a>
+          <a href="/blog/editor/posts" class="py-3 border-b-2 border-transparent text-text-muted hover:text-text-secondary">Posts</a>
+          <a href="/blog/editor/categories" class="py-3 border-b-2 border-transparent text-text-muted hover:text-text-secondary">Categories</a>
+          {user.role === 'admin' && (
+            <a href="/blog/editor/users" class="py-3 border-b-2 border-transparent text-text-muted hover:text-text-secondary">Users</a>
+          )}
+        </div>
+      </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+      <!-- Quick Actions -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <a href="/blog/editor/posts/new?type=blog" class="bg-surface p-6 rounded-lg hover:bg-surface-hover transition">
+          <h3 class="font-bold mb-2 text-text-primary">New Blog Post</h3>
+          <p class="text-text-muted text-sm">Create a new blog article</p>
+        </a>
+        
+        <a href="/blog/editor/posts/new?type=docs" class="bg-surface p-6 rounded-lg hover:bg-surface-hover transition">
+          <h3 class="font-bold mb-2 text-text-primary">New Documentation</h3>
+          <p class="text-text-muted text-sm">Add documentation content</p>
+        </a>
+        
+        <a href="/blog/editor/categories" class="bg-surface p-6 rounded-lg hover:bg-surface-hover transition">
+          <h3 class="font-bold mb-2 text-text-primary">Manage Categories</h3>
+          <p class="text-text-muted text-sm">Organize your content</p>
+        </a>
+        
+        <a href="/blog/editor/media" class="bg-surface p-6 rounded-lg hover:bg-surface-hover transition">
+          <h3 class="font-bold mb-2 text-text-primary">Media Library</h3>
+          <p class="text-text-muted text-sm">Manage uploaded files</p>
+        </a>
+      </div>
+
+      <!-- Recent Posts -->
+      <section>
+        <h2 class="text-2xl font-bold mb-4 text-text-primary">Recent Posts</h2>
+        <div class="bg-surface rounded-lg overflow-hidden">
+          <table class="w-full">
+            <thead class="bg-surface-hover">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Title</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Type</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Category</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Status</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Date</th>
+                <th class="px-6 py-3 text-right text-xs font-medium text-text-secondary uppercase tracking-wider">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-700">
+              {(posts || []).slice(0, 10).map((post: any) => (
+                <tr class="hover:bg-surface-hover">
+                  <td class="px-6 py-4">
+                    <a href={`/blog/editor/posts/edit/${post.id}`} class="text-link hover:text-link-hover">
+                      {post.title}
+                    </a>
+                  </td>
+                  <td class="px-6 py-4">
+                    <span class={`px-2 py-1 text-xs rounded-full ${
+                      post.type === 'blog' ? 'bg-blue-900 text-link-hover' : 'bg-green-900 text-green-300'
+                    }`}>
+                      {post.type}
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 text-text-muted">
+                    {post.category_data?.name || 'Uncategorized'}
+                  </td>
+                  <td class="px-6 py-4">
+                    <span class={`px-2 py-1 text-xs rounded-full ${
+                      post.published ? 'bg-green-900 text-green-300' : 'bg-yellow-900 text-yellow-300'
+                    }`}>
+                      {post.published ? 'Published' : 'Draft'}
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 text-text-muted">
+                    {new Date(post.createdAt).toLocaleDateString()}
+                  </td>
+                  <td class="px-6 py-4 text-right">
+                    <a href={`/${post.type}/${post.slug}`} target="_blank" class="text-text-muted hover:text-text-primary mr-3">
+                      View
+                    </a>
+                    <a href={`/blog/editor/posts/edit/${post.id}`} class="text-link hover:text-link-hover">
+                      Edit
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          
+          {(posts || []).length === 0 && (
+            <div class="text-center py-8 text-text-muted">
+              No posts yet. Create your first post!
+            </div>
+          )}
+        </div>
+      </section>
+    </main>
+  </div>
+<!-- End of component -->
+
+<script define:vars={{ API_URL }}>
+  document.getElementById('logoutBtn')?.addEventListener('click', async () => {
+    await fetch(`${API_URL}/api/auth/logout`, {
+      method: 'POST',
+      credentials: 'include'
+    });
+    window.location.href = '/blog/editor/login';
+  });
+</script>

@@ -1,0 +1,45 @@
+---
+import DevWrapper from '../../../shared/components/Dev/DevWrapper.astro';
+
+const testData = {
+  title: "Test Component",
+  items: ["Item 1", "Item 2", "Item 3"]
+};
+---
+
+  <main style="padding: 2rem;">
+    <h1>Dev Mode Test - CodersinFlow</h1>
+    <p>Environment: {import.meta.env.DEV ? 'Development' : 'Production'}</p>
+    
+    <DevWrapper componentName="TestComponent" dataPath="test.json" data={testData}>
+      <div style="border: 2px solid blue; padding: 1rem; margin: 1rem 0;">
+        <h2>Test Component with Data</h2>
+        <pre>{JSON.stringify(testData, null, 2)}</pre>
+      </div>
+    </DevWrapper>
+    
+    <DevWrapper componentName="SimpleComponent">
+      <div style="border: 2px solid green; padding: 1rem; margin: 1rem 0;">
+        <h2>Simple Component without Data</h2>
+        <p>This component has no data path.</p>
+      </div>
+    </DevWrapper>
+  </main>
+  
+  <script>
+    console.log('=== Dev Mode Test Page ===');
+    console.log('Dev mode:', import.meta.env.DEV);
+    
+    // Check for wrapped components
+    setTimeout(() => {
+      const components = document.querySelectorAll('[data-component-name]');
+      console.log(`Found ${components.length} wrapped components:`);
+      components.forEach((comp, i) => {
+        console.log(`${i + 1}. ${comp.getAttribute('data-component-name')}`, {
+          id: comp.getAttribute('data-component-id'),
+          path: comp.getAttribute('data-component-path'),
+          hasProps: !!comp.getAttribute('data-component-props')
+        });
+      });
+    }, 100);
+  </script>

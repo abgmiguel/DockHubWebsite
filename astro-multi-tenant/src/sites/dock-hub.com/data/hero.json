@@ -1,0 +1,25 @@
+{
+  "phoneMockup": {
+    "appName": "DockHub Control",
+    "downButton": {
+      "color": "#00a8e8",
+      "label": "↓"
+    },
+    "status": "Lift Status: Ready",
+    "upButton": {
+      "color": "#00ff88",
+      "label": "↑"
+    }
+  },
+  "primaryButton": {
+    "link": "#how-it-works",
+    "text": "See How It Works"
+  },
+  "secondaryButton": {
+    "link": "#compatibility",
+    "text": "Check Compatibility"
+  },
+  "subtitle": "The smart alternative to lost remotes. Start your lift before you arrive. Install in minutes, not hours.",
+  "title": "Amazing Boat Lift",
+  "titleHighlight": "From Anywhere"
+}

@@ -1,0 +1,15 @@
+---
+// Component that handles multiple DataConnectSection items
+import DataConnectSection from './DataConnectSection.astro';
+
+const { data = [] } = Astro.props;
+---
+
+<div class="space-y-2">
+  {data.map((section, index) => (
+    <DataConnectSection
+      data={section}
+      imageOnRight={index % 2 === 0}
+    />
+  ))}
+</div>

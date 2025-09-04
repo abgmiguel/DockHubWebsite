@@ -1,0 +1,22 @@
+[Unit]
+Description={{DISPLAY_NAME}} Backend API
+After=network.target docker.service
+Wants=docker.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory={{SERVER_PATH}}
+Environment="PORT={{BACKEND_PORT}}"
+Environment="MONGODB_URI=mongodb://admin:{{MONGO_PASSWORD}}@127.0.0.1:{{MONGODB_PORT}}/{{DB_NAME}}?authSource=admin"
+Environment="JWT_SECRET={{JWT_SECRET}}"
+Environment="CORS_ORIGIN={{FRONTEND_URL}}"
+Environment="UPLOAD_DIR={{SERVER_PATH}}/runtime/uploads"
+ExecStart={{SERVER_PATH}}/backend/server
+Restart=always
+RestartSec=10
+StandardOutput=append:{{SERVER_PATH}}/runtime/backend.log
+StandardError=append:{{SERVER_PATH}}/runtime/backend.log
+
+[Install]
+WantedBy=multi-user.target

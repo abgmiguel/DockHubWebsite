@@ -1,0 +1,83 @@
+{
+  "header": {
+    "title": "How We Compare",
+    "subtitle": "See why our solution stands out from the competition",
+    "badge": "✨ Leading the Industry"
+  },
+  "competitors": [
+    {
+      "name": "Competitor A",
+      "key": "competitor-a"
+    },
+    {
+      "name": "Competitor B",
+      "key": "competitor-b"
+    },
+    {
+      "name": "Our Solution",
+      "key": "our-solution",
+      "highlight": true,
+      "icon": "⚡"
+    }
+  ],
+  "features": [
+    {
+      "name": "Performance",
+      "values": {
+        "competitor-a": { "status": false, "value": "Slow" },
+        "competitor-b": { "status": true, "value": "Fast" },
+        "our-solution": { "status": true, "value": "Lightning" }
+      }
+    },
+    {
+      "name": "Scalability",
+      "values": {
+        "competitor-a": { "status": true, "value": "Limited" },
+        "competitor-b": { "status": false, "value": "No" },
+        "our-solution": { "status": true, "value": "Unlimited" }
+      }
+    },
+    {
+      "name": "24/7 Support",
+      "values": {
+        "competitor-a": { "status": false, "value": "Business Hours" },
+        "competitor-b": { "status": false, "value": "No" },
+        "our-solution": { "status": true, "value": "Always" }
+      }
+    },
+    {
+      "name": "Custom Integration",
+      "values": {
+        "competitor-a": { "status": false, "value": "No" },
+        "competitor-b": { "status": true, "value": "Basic" },
+        "our-solution": { "status": true, "value": "Advanced" }
+      }
+    },
+    {
+      "name": "Advanced Analytics",
+      "values": {
+        "competitor-a": { "status": true, "value": "Basic" },
+        "competitor-b": { "status": false, "value": "No" },
+        "our-solution": { "status": true, "value": "AI-Powered" }
+      }
+    }
+  ],
+  "stats": [
+    {
+      "value": "10×",
+      "label": "Faster Performance"
+    },
+    {
+      "value": "99.9%",
+      "label": "Uptime"
+    },
+    {
+      "value": "24/7",
+      "label": "Support"
+    },
+    {
+      "value": "100+",
+      "label": "Integrations"
+    }
+  ]
+}

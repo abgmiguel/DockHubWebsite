@@ -1,0 +1,16 @@
+---
+// Import data files
+import heroData from '../data/features-hero.json';
+
+// Import just two simple components
+import FeaturesHero from '../../../shared/components/Features/FeaturesHero.tsx';
+import CallToAction from '../../../shared/components/sections/CallToAction.tsx';
+---
+
+<main>
+  <!-- Features Hero Section -->
+  <FeaturesHero client:load data={heroData} />
+  
+  <!-- Call to Action -->
+  <CallToAction client:load />
+</main>

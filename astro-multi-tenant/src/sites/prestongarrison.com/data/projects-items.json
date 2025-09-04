@@ -1,0 +1,86 @@
+[
+  {
+    "desc": "Developed using React and Electron this full blown configurator was the first of its kind to offer full wizards to make it easy for anyone to set up the drone in less then 30 seconds.",
+    "id": "0",
+    "image_desc": "Revolt Flight Controller",
+    "image_name": "/images/configurator.jpg",
+    "title": "flight controller configurator"
+  },
+  {
+    "desc": "Our high performance flight control software is the most advanced flight control software available, for unmatched performance and practically real time performance. No software offers a better flying drone, making the drone appear to fly on rails.",
+    "id": "1",
+    "image_desc": "Flightone Frame",
+    "image_name": "/images/arcpointfive.jpg",
+    "title": "flight control software"
+  },
+  {
+    "desc": "Modern hardware to match the most advanced software on the planet. I design hardware to be virtually noise free, and shield from external and internal interference giving top level performance..",
+    "id": "2",
+    "image_desc": "Speed Controllers",
+    "image_name": "/images/escs.jpg",
+    "title": "hardware design"
+  },
+  {
+    "desc": "To match our marketing automation system I created a nationwide node system leveraging the inexpensive Raspberry Pis to deploy hundreds of nodes in various networks across the planet. This allowed our system and sales agents to come from real consumer networks in any major city in the world.",
+    "id": "3",
+    "image_desc": "Servers",
+    "image_name": "/images/servers.jpeg",
+    "title": "nationwide node network"
+  },
+  {
+    "desc": "With the launch of our marketing system and nation wide node network we needed a bullet proof VOIP and SMS system to be used automatically and by the sales agents. This software was created from the ground up to be the ultimate telecommunications network.",
+    "id": "4",
+    "image_desc": "VOIP",
+    "image_name": "/images/voips.jpeg",
+    "title": "VOIP & SMS Network"
+  },
+  {
+    "desc": "The first fully automated loan system, that allowed our company to originate hundreds of millions of dollars in loans while offering a seamless experience for the home owners. Not only did it allow everything to be tracked, and uploaded digitally, but brought the file digitally to the under writers as well.",
+    "id": "5",
+    "image_desc": "Finance Software",
+    "image_name": "/images/loan software.jpeg",
+    "title": "loan origination software"
+  },
+  {
+    "desc": "Full blown marketing system that helped aid the sales agents in the tedious job of deploying ads on various services on the internet. Emulating humans using early artificial intelligence we were able to deploy ads all across the world automatically.",
+    "id": "6",
+    "image_desc": "Graph",
+    "image_name": "/images/graph.jpeg",
+    "title": "marketing system"
+  },
+  {
+    "desc": "The ultimate price comparison app for the consumer. We tied directly into the pricing policies of all the stores, to automatically match the lowest price, with the appropriate store that would allow the price match.",
+    "id": "7",
+    "image_desc": "iphone",
+    "image_name": "/images/price compare 2.jpeg",
+    "title": "price comparison iPhone app"
+  },
+  {
+    "desc": "With my passion for racing we helped develop tuning software and hardware for corvette and other high performance cars.",
+    "id": "8",
+    "image_desc": "Corvette",
+    "image_name": "/images/corvette.jpeg",
+    "title": "automotive tuning system"
+  },
+  {
+    "desc": "Modeled after the application server for SGI Irix I created the ultimate webserver. One of the first webservers with a full GUI configuration, its own server side programming language, and full C module support with garbage collection, and safe memory management, it is the ultimate solution for web development aimed at high performance servers.",
+    "id": "9",
+    "image_desc": "webserver",
+    "image_name": "/images/web server.jpeg",
+    "title": "application web server"
+  },
+  {
+    "desc": "In order to match the performance of our application server and offer multi-network image and file caching, I created a web cache server, written fully in C that sat in front of our web servers, and automatically deployed the images from the closest web cache server.",
+    "id": "10",
+    "image_desc": "server network",
+    "image_name": "/images/cache server.jpeg",
+    "title": "web cache server"
+  },
+  {
+    "desc": "We created the first web site analytics system before Google Analytics even existed. Tracking users every step of the way, and handling over 10 million unique users per pentium 3 1ghz server.",
+    "id": "11",
+    "image_desc": "web statistics",
+    "image_name": "/images/stats.jpg",
+    "title": "web statistics service"
+  }
+]

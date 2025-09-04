@@ -1,0 +1,74 @@
+---
+// Import JSON data files
+import heroData from '../data/hero.json';
+import problemsData from '../data/problems.json';
+import comparisonData from '../data/comparison-table.json';
+import featuresData from '../data/features-dock.json';
+import howItWorksData from '../data/how-it-works.json';
+import compatibilityData from '../data/compatibility.json';
+import installerData from '../data/installer-benefits.json';
+import testimonialsData from '../data/testimonials.json';
+import ctaData from '../data/cta.json';
+import footerData from '../data/footer.json';
+
+// Import shared components
+import PhoneMockupHero from '../../../shared/components/Hero/PhoneMockupHero.tsx';
+import ProblemsCards from '../../../shared/components/sections/ProblemsCards.tsx';
+import StepByStepProcess from '../../../shared/components/sections/StepByStepProcess.tsx';
+import CompatibilityBrands from '../../../shared/components/sections/CompatibilityBrands.tsx';
+import InstallerBenefits from '../../../shared/components/sections/InstallerBenefits.tsx';
+import SimpleFeatures from '../../../shared/components/sections/SimpleFeatures.tsx';
+import TestimonialsGrid from '../../../shared/components/sections/TestimonialsGrid.tsx';
+import SimpleCTA from '../../../shared/components/sections/SimpleCTA.tsx';
+import SimpleFooter from '../../../shared/components/sections/SimpleFooter.tsx';
+import ComparisonTable from '../../../shared/components/Comparison/ComparisonTable.tsx';
+---
+
+<main class="bg-background">
+  <!-- Hero Section with Phone Mockup -->
+  <PhoneMockupHero client:load data={heroData} />
+  
+  <!-- Problems Section -->
+  <ProblemsCards client:visible data={problemsData} />
+  
+  <!-- Comparison Table -->
+  <section id="comparison" class="py-16 bg-surface">
+    <ComparisonTable client:visible data={comparisonData} />
+  </section>
+  
+  <!-- Features Grid -->
+  <section id="features">
+    <SimpleFeatures client:visible data={featuresData} />
+  </section>
+  
+  <!-- How It Works -->
+  <section id="how-it-works">
+    <StepByStepProcess client:visible data={howItWorksData} />
+  </section>
+  
+  <!-- Installer Benefits -->
+  <InstallerBenefits client:visible data={installerData} />
+  
+  <!-- Compatibility Section -->
+  <section id="compatibility">
+    <CompatibilityBrands client:visible data={compatibilityData} />
+  </section>
+  
+  <!-- Testimonials -->
+  <section class="py-16 bg-white">
+    <TestimonialsGrid client:visible data={testimonialsData} />
+  </section>
+  
+  <!-- CTA Section -->
+  <SimpleCTA client:visible data={ctaData} />
+  
+  <!-- Footer -->
+  <SimpleFooter data={footerData} />
+</main>
+
+<style>
+  /* Smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

@@ -1,0 +1,15 @@
+{
+  "title": "Ready to Modernize Your Boat Lift?",
+  "subtitle": "Join the smart boating revolution",
+  "price": "$499",
+  "priceLabel": "One-time purchase • No subscriptions • Free app forever",
+  "primaryButton": {
+    "text": "Order DockHub Uno Today",
+    "link": "/order"
+  },
+  "features": [
+    "30-Day Money Back Guarantee",
+    "Free Shipping",
+    "2-Year Warranty"
+  ]
+}

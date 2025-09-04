@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "filename": "Claude Code.mov",
+    "title": "Claude Code",
+    "url": "/videos/Claude Code.mov",
+    "thumbnail": "/videos/thumbnails/Claude Code.jpg",
+    "duration": null,
+    "size": 22269708,
+    "description": "Video 1"
+  },
+  {
+    "id": 2,
+    "filename": "ClaudeCode KanBan.mp4",
+    "title": "ClaudeCode KanBan",
+    "url": "/videos/ClaudeCode KanBan.mp4",
+    "thumbnail": "/videos/thumbnails/ClaudeCode KanBan.jpg",
+    "duration": null,
+    "size": 24712172,
+    "description": "Video 2"
+  },
+  {
+    "id": 3,
+    "filename": "ClaudeCode Modify.mp4",
+    "title": "ClaudeCode Modify",
+    "url": "/videos/ClaudeCode Modify.mp4",
+    "thumbnail": "/videos/thumbnails/ClaudeCode Modify.jpg",
+    "duration": null,
+    "size": 13722927,
+    "description": "Video 3"
+  },
+  {
+    "id": 4,
+    "filename": "Code Analysis.mov",
+    "title": "Code Analysis",
+    "url": "/videos/Code Analysis.mov",
+    "thumbnail": "/videos/thumbnails/Code Analysis.jpg",
+    "duration": null,
+    "size": 31895240,
+    "description": "Video 4"
+  }
+]

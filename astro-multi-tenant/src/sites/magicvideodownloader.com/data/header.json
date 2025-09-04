@@ -1,0 +1,17 @@
+{
+  "logo": {
+    "text": "Magic Video Downloader",
+    "href": "/"
+  },
+  "navigation": [
+    { "href": "/", "text": "Home" },
+    { "href": "/about", "text": "About" },
+    { "href": "/services", "text": "Services" },
+    { "href": "/contact", "text": "Contact" }
+  ],
+  "social": [],
+  "cta": {
+    "text": "Get Started",
+    "href": "/contact"
+  }
+}

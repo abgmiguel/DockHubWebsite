@@ -1,0 +1,15 @@
+---
+import FeatureGrid from '../Features/FeatureGrid';
+// Note: This component needs to receive data as props since it's shared
+export interface Props {
+  featureGridData?: any;
+}
+const { featureGridData } = Astro.props;
+---
+
+<div class="w-full bg-gray-950">
+  <div class="max-w-7xl mx-auto py-16 px-4">
+    <h2 class="text-4xl md:text-5xl font-bold text-center text-white mb-12">Key Features</h2>
+    <FeatureGrid client:only="react" data={featureGridData} />
+  </div>
+</div>

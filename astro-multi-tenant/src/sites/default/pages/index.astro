@@ -1,0 +1,476 @@
+---
+import { getSitesConfig } from '../../../shared/lib/tenant';
+
+const sites = getSitesConfig();
+const isDevelopment = import.meta.env.DEV;
+const DEV_FRONTEND_PORT = import.meta.env.PUBLIC_DEV_FRONTEND_PORT || '4321';
+
+// Filter and prepare sites for dropdown
+const displaySites = Object.entries(sites)
+  .filter(([domain]) => 
+    !domain.includes('localhost') && 
+    !domain.includes('127.0.0.1') && 
+    domain !== 'default' &&
+    !domain.startsWith('www.')
+  )
+  .map(([domain, config]) => ({
+    domain,
+    name: config.name || domain.split('.')[0].charAt(0).toUpperCase() + domain.split('.')[0].slice(1),
+    url: isDevelopment 
+      ? `http://${config.id}.localhost:${DEV_FRONTEND_PORT}`
+      : `https://${domain}`
+  }));
+
+// Start with the first real site (CodersInFlow) to avoid any recursion
+// Don't add welcome.localhost as it might not route properly
+---
+
+  <div id="dashboard-container">
+    <div class="dashboard-header">
+      <div class="site-selector">
+        <label for="site-select">Select Site:</label>
+        <select id="site-select">
+          {displaySites.map((site, index) => (
+            <option value={site.url} selected={index === 0}>
+              {site.name} ({site.domain})
+            </option>
+          ))}
+        </select>
+      </div>
+      <div class="selection-info">
+        <span class="selected-count">Selected: <span id="count">0</span> components</span>
+        <button id="send-to-vscode" class="action-btn primary">Send to VSCode</button>
+        <button id="clear-selection" class="action-btn">Clear Selection</button>
+      </div>
+    </div>
+    
+    <div class="selected-components" id="selected-section" style="display: none;">
+      <h3>Selected Components:</h3>
+      <ul id="component-list"></ul>
+    </div>
+    
+    <iframe id="site-frame" src={`${displaySites[0]?.url || 'http://codersinflow.localhost:4321'}?dashboardMode=true`}></iframe>
+  </div>
+
+  <style>
+    #dashboard-container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #1a1a1a;
+      color: #fff;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .dashboard-header {
+      padding: 0.75rem 1rem;
+      background: #2a2a2a;
+      border-bottom: 1px solid #444;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .site-selector {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .site-selector label {
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    #site-select {
+      padding: 0.4rem 0.8rem;
+      background: #1a1a1a;
+      color: #fff;
+      border: 1px solid #444;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .selection-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .selected-count {
+      padding: 0.4rem 0.8rem;
+      background: #333;
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+
+    .selected-count #count {
+      font-weight: bold;
+      color: #3b82f6;
+    }
+
+    .action-btn {
+      padding: 0.4rem 0.8rem;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .action-btn.primary {
+      background: #3b82f6;
+      color: white;
+    }
+
+    .action-btn.primary:hover {
+      background: #2563eb;
+    }
+
+    .action-btn:not(.primary) {
+      background: #444;
+      color: #fff;
+    }
+
+    .action-btn:not(.primary):hover {
+      background: #555;
+    }
+
+    .selected-components {
+      padding: 0.75rem 1rem;
+      background: #2a2a2a;
+      max-height: 120px;
+      overflow-y: auto;
+      border-bottom: 1px solid #444;
+    }
+
+    .selected-components h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 0.85rem;
+      color: #999;
+    }
+
+    #component-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    #component-list li {
+      padding: 0.25rem 0.75rem;
+      background: #333;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    #component-list li .site-tag {
+      color: #3b82f6;
+      font-size: 0.75rem;
+    }
+
+    #site-frame {
+      flex: 1;
+      width: 100%;
+      border: none;
+      background: #1a1a1a;
+    }
+  </style>
+
+  <script>
+    class DashboardController {
+      constructor() {
+        this.selectedComponents = new Map();
+        this.ws = null;
+        this.wsConnected = false;
+        
+        this.initElements();
+        this.restoreSavedSite();
+        this.setupEventListeners();
+      }
+
+      initElements() {
+        this.siteSelect = document.getElementById('site-select');
+        this.iframe = document.getElementById('site-frame');
+        this.countElement = document.getElementById('count');
+        this.componentList = document.getElementById('component-list');
+        this.sendButton = document.getElementById('send-to-vscode');
+        this.clearButton = document.getElementById('clear-selection');
+        this.selectedSection = document.getElementById('selected-section');
+      }
+
+      restoreSavedSite() {
+        // Try to restore the last selected site from localStorage
+        const savedSite = localStorage.getItem('devSelectedSite');
+        if (savedSite && this.siteSelect) {
+          // Check if the saved site exists in the options
+          const options = Array.from(this.siteSelect.options);
+          const matchingOption = options.find(opt => opt.value === savedSite);
+          
+          if (matchingOption) {
+            this.siteSelect.value = savedSite;
+            this.currentSite = savedSite;
+            const addDashboard = !savedSite.includes('welcome.localhost');
+            this.iframe.src = addDashboard ? `${savedSite}?dashboardMode=true` : savedSite;
+          } else {
+            this.currentSite = this.siteSelect.value || 'http://localhost:4321';
+          }
+        } else {
+          this.currentSite = this.siteSelect?.value || 'http://localhost:4321';
+        }
+      }
+
+      setupEventListeners() {
+        // Site selector change
+        this.siteSelect?.addEventListener('change', (e) => {
+          this.currentSite = e.target.value;
+          // Save the selected site to localStorage
+          localStorage.setItem('devSelectedSite', this.currentSite);
+          const addDashboard = !this.currentSite.includes('welcome.localhost');
+          this.iframe.src = addDashboard ? `${this.currentSite}?dashboardMode=true` : this.currentSite;
+        });
+
+        // Listen for messages from iframe
+        window.addEventListener('message', (e) => {
+          if (e.data.type === 'COMPONENT_SELECTED') {
+            this.addComponent(e.data.component);
+          } else if (e.data.type === 'COMPONENT_DESELECTED') {
+            this.removeComponent(e.data.component);
+          }
+        });
+
+        // Send to VSCode button
+        this.sendButton?.addEventListener('click', () => {
+          this.sendToVSCode();
+        });
+
+        // Clear selection button
+        this.clearButton?.addEventListener('click', () => {
+          this.clearSelection();
+        });
+      }
+
+      addComponent(component) {
+        const key = `${component.site}:${component.id}`;
+        this.selectedComponents.set(key, component);
+        this.updateUI();
+      }
+
+      removeComponent(component) {
+        const key = `${component.site}:${component.id}`;
+        this.selectedComponents.delete(key);
+        this.updateUI();
+      }
+
+      clearSelection() {
+        this.selectedComponents.clear();
+        this.updateUI();
+        
+        // Tell iframe to clear all selections
+        this.iframe?.contentWindow?.postMessage({
+          type: 'CLEAR_ALL_SELECTIONS'
+        }, '*');
+      }
+
+      updateUI() {
+        // Update count
+        if (this.countElement) {
+          this.countElement.textContent = this.selectedComponents.size;
+        }
+
+        // Show/hide selected section
+        if (this.selectedSection) {
+          this.selectedSection.style.display = this.selectedComponents.size > 0 ? 'block' : 'none';
+        }
+
+        // Update component list
+        if (this.componentList) {
+          this.componentList.innerHTML = '';
+          this.selectedComponents.forEach((comp) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+              ${comp.name}
+              <span class="site-tag">(${this.getSiteName(comp.site)})</span>
+            `;
+            this.componentList.appendChild(li);
+          });
+        }
+      }
+
+      getSiteName(site) {
+        // Extract domain name from URL
+        try {
+          const url = new URL(site);
+          const hostname = url.hostname;
+          // Remove .localhost or get the first part of domain
+          const domain = hostname.replace('.localhost', '').split('.')[0];
+          // Return abbreviated version (first 2-3 letters uppercase)
+          return domain.substring(0, 3).toUpperCase();
+        } catch {
+          return site;
+        }
+      }
+
+      formatMessage() {
+        if (this.selectedComponents.size === 0) {
+          return "No components selected.";
+        }
+
+        let message = "I want to use the following components on my site:\n\n";
+        this.selectedComponents.forEach((comp) => {
+          // Extract domain from URL
+          let siteName = comp.site;
+          try {
+            const url = new URL(comp.site);
+            siteName = url.hostname.replace('.localhost', '');
+          } catch {}
+          message += `• ${comp.name} (${siteName}/data/${comp.path})\n`;
+        });
+        message += "\nComponents selected from multi-tenant dashboard.";
+        return message;
+      }
+
+      connectWebSocket() {
+        if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+          return; // Already connected
+        }
+        
+        try {
+          this.ws = new WebSocket('ws://localhost:7651');
+          
+          this.ws.onopen = () => {
+            console.log('Connected to VSCode WebSocket');
+            this.wsConnected = true;
+          };
+          
+          this.ws.onmessage = (event) => {
+            try {
+              const data = JSON.parse(event.data);
+              console.log('Received from VSCode:', data);
+              
+              if (data.type === 'success') {
+                this.showFeedback('Message sent to VSCode chat successfully!');
+              } else if (data.type === 'error') {
+                this.showFeedback(`VSCode error: ${data.error}`, true);
+              }
+            } catch (err) {
+              console.log('Received non-JSON message:', event.data);
+            }
+          };
+          
+          this.ws.onerror = (error) => {
+            console.error('WebSocket error:', error);
+            this.wsConnected = false;
+          };
+          
+          this.ws.onclose = () => {
+            console.log('WebSocket closed');
+            this.wsConnected = false;
+            this.ws = null;
+          };
+        } catch (error) {
+          console.error('Failed to connect WebSocket:', error);
+          this.wsConnected = false;
+        }
+      }
+      
+      async sendToVSCode() {
+        const message = this.formatMessage();
+        
+        // Try WebSocket first
+        if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
+          // Try to connect if not connected
+          this.connectWebSocket();
+          
+          // Wait a bit for connection
+          await new Promise(resolve => setTimeout(resolve, 500));
+        }
+        
+        if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+          // Send via WebSocket
+          const payload = {
+            type: 'fillChatInput',
+            text: message
+          };
+          this.ws.send(JSON.stringify(payload));
+          console.log('Sent to VSCode via WebSocket:', payload);
+        } else {
+          // Fallback to clipboard
+          this.showFeedback('VSCode not connected. Copying to clipboard...', true);
+          try {
+            await navigator.clipboard.writeText(message);
+            this.showFeedback('Copied to clipboard! Paste in VSCode extension.');
+          } catch (err) {
+            console.error('Failed to copy:', err);
+            this.showFeedback('Failed to send to VSCode', true);
+          }
+        }
+      }
+
+      showFeedback(message, isError = false) {
+        const feedback = document.createElement('div');
+        feedback.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          padding: 1rem 1.5rem;
+          background: ${isError ? '#ef4444' : '#10b981'};
+          color: white;
+          border-radius: 8px;
+          font-size: 0.9rem;
+          z-index: 10000;
+          animation: slideIn 0.3s ease;
+        `;
+        feedback.textContent = message;
+        document.body.appendChild(feedback);
+
+        setTimeout(() => {
+          feedback.style.animation = 'slideOut 0.3s ease';
+          setTimeout(() => feedback.remove(), 300);
+        }, 3000);
+      }
+    }
+
+    // Initialize when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      const controller = new DashboardController();
+      // Auto-connect to VSCode WebSocket
+      controller.connectWebSocket();
+    });
+  </script>
+
+  <style>
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideOut {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+  </style>

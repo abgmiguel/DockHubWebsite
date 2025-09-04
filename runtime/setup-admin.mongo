@@ -1,0 +1,17 @@
+use codersblog;
+
+// Delete existing admin user if exists
+db.users.deleteOne({ email: "sales@codersinflow.com" });
+
+// Create admin user
+db.users.insertOne({
+  email: "sales@codersinflow.com",
+  password: "$2b$10$rmcx.PRO5JE7dRxYNKWoluib4G0/9K3zQwZQUHzyotZ615Qs7cetK",
+  name: "Admin",
+  role: "admin",
+  approved: true,
+  created_at: new Date(),
+  updated_at: new Date()
+});
+
+print("Admin user created successfully");

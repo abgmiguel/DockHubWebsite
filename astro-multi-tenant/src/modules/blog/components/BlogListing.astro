@@ -1,0 +1,56 @@
+---
+import { API_URL } from '../../../shared/lib/api-config';
+
+// Blog listing component
+const { database, tenant, type = 'blog' } = Astro.props;
+
+// Fetch posts
+let posts = [];
+try {
+  const response = await fetch(`${API_URL}/api/posts?type=${type}&published=true`, {
+    headers: {
+      'X-Site-Database': database
+    }
+  });
+  if (response.ok) {
+    posts = await response.json();
+  }
+} catch (error) {
+  console.error('Failed to fetch posts:', error);
+}
+
+const pageTitle = type === 'docs' ? 'Documentation' : 'Blog';
+---
+
+<div class="min-h-screen bg-background">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-text-primary mb-8">{pageTitle}</h1>
+    
+    {posts.length > 0 ? (
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post: any) => (
+          <article class="bg-surface rounded-lg shadow-sm border border-border p-6 hover:bg-surface-hover transition-colors">
+            <h2 class="text-xl font-bold text-text-primary mb-2">
+              <a href={`/blog/${post.slug}`} class="hover:underline">
+                {post.title}
+              </a>
+            </h2>
+            <p class="text-text-secondary mb-4">{post.description}</p>
+            <div class="flex justify-between items-center">
+              <time class="text-text-muted text-sm">
+                {new Date(post.createdAt).toLocaleDateString()}
+              </time>
+              <a href={`/blog/${post.slug}`} class="text-link hover:text-link-hover text-sm transition-colors">
+                Read more →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="bg-surface rounded-lg shadow-sm border border-border p-8 text-center">
+        <p class="text-text-muted">No posts published yet.</p>
+      </div>
+    )}
+  </div>
+</div>

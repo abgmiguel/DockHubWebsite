@@ -1,0 +1,210 @@
+---
+export const prerender = false;
+
+// API configuration
+import { API_URL } from '../../../../shared/lib/api-config';
+
+// Get database from props (passed from BlogApp)
+const { database, tenant } = Astro.props;
+
+// Check authentication (handled by middleware)
+const token = Astro.cookies.get('auth-token');
+
+// Fetch user info
+const userResponse = await fetch(`${API_URL}/api/auth/me`, {
+  headers: {
+    'Cookie': `auth-token=${token.value}`,
+    'X-Site-Database': database
+  }
+});
+
+if (!userResponse.ok) {
+  // This shouldn't happen as middleware handles auth
+  return Astro.redirect('/blog/editor/login');
+}
+
+const user = await userResponse.json();
+
+// Fetch recent posts
+const postsResponse = await fetch(`${API_URL}/api/posts?limit=5`, {
+  headers: {
+    'Cookie': `auth-token=${token.value}`,
+    'X-Site-Database': database
+  }
+});
+const postsData = postsResponse.ok ? await postsResponse.json() : null;
+const posts = Array.isArray(postsData) ? postsData : [];
+
+// Fetch stats
+let stats = { posts: 0, categories: 0, users: 0, drafts: 0 };
+try {
+  const statsResponse = await fetch(`${API_URL}/api/stats`, {
+    headers: {
+      'Cookie': `auth-token=${token.value}`,
+      'X-Site-Database': database
+    }
+  });
+  if (statsResponse.ok) {
+    stats = await statsResponse.json();
+  }
+} catch (error) {
+  // Use default stats
+}
+---
+
+<div class="min-h-screen bg-background">
+  <!-- Editor Header -->
+  <header class="bg-surface border-b border-border">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex justify-between items-center">
+        <h1 class="text-xl font-bold text-text-primary">Content Editor - {tenant?.name || 'Blog'}</h1>
+        <div class="flex items-center gap-4">
+          <span class="text-text-muted">Welcome, {user.name}</span>
+          <a href={`/blog/editor/users/edit/${user.id || user._id}`} class="text-link hover:text-link-hover transition-colors">
+            Settings
+          </a>
+          <a href="/blog/editor/change-password" class="text-link hover:text-link-hover transition-colors">
+            Change Password
+          </a>
+          <button id="logoutBtn" class="text-error hover:text-error/80 transition-colors">
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Editor Navigation -->
+  <nav class="bg-surface border-b border-border">
+    <div class="container mx-auto px-4">
+      <div class="flex gap-6">
+        <a href="/blog/editor" class="text-text-primary font-medium border-b-2 border-primary py-3">Dashboard</a>
+        <a href="/blog/editor/posts" class="text-text-secondary hover:text-text-primary transition-colors py-3">Posts</a>
+        <a href="/blog/editor/categories" class="text-text-secondary hover:text-text-primary transition-colors py-3">Categories</a>
+        {user.role === 'admin' && (
+          <a href="/blog/editor/users" class="text-text-secondary hover:text-text-primary transition-colors py-3">Users</a>
+        )}
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto px-4 py-8">
+    <!-- Stats Overview -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div class="bg-surface rounded-lg border border-border p-6">
+        <h3 class="text-2xl font-bold text-text-primary">{stats.posts || 0}</h3>
+        <p class="text-text-muted">Total Posts</p>
+      </div>
+      <div class="bg-surface rounded-lg border border-border p-6">
+        <h3 class="text-2xl font-bold text-text-primary">{stats.drafts || 0}</h3>
+        <p class="text-text-muted">Drafts</p>
+      </div>
+      <div class="bg-surface rounded-lg border border-border p-6">
+        <h3 class="text-2xl font-bold text-text-primary">{stats.categories || 0}</h3>
+        <p class="text-text-muted">Categories</p>
+      </div>
+      {user.role === 'admin' && (
+        <div class="bg-surface rounded-lg border border-border p-6">
+          <h3 class="text-2xl font-bold text-text-primary">{stats.users || 0}</h3>
+          <p class="text-text-muted">Users</p>
+        </div>
+      )}
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <a href="/blog/editor/posts/new?type=blog" class="bg-surface rounded-lg border border-border p-6 hover:bg-surface-hover transition-colors">
+        <h3 class="font-bold mb-2 text-text-primary">New Blog Post</h3>
+        <p class="text-text-muted text-sm">Create a new blog article</p>
+      </a>
+      
+      <a href="/blog/editor/posts/new?type=docs" class="bg-surface rounded-lg border border-border p-6 hover:bg-surface-hover transition-colors">
+        <h3 class="font-bold mb-2 text-text-primary">New Documentation</h3>
+        <p class="text-text-muted text-sm">Add documentation content</p>
+      </a>
+      
+      <a href="/blog/editor/categories" class="bg-surface rounded-lg border border-border p-6 hover:bg-surface-hover transition-colors">
+        <h3 class="font-bold mb-2 text-text-primary">Manage Categories</h3>
+        <p class="text-text-muted text-sm">Organize your content</p>
+      </a>
+      
+      <a href="/blog/editor/media" class="bg-surface rounded-lg border border-border p-6 hover:bg-surface-hover transition-colors">
+        <h3 class="font-bold mb-2 text-text-primary">Media Library</h3>
+        <p class="text-text-muted text-sm">Manage uploaded files</p>
+      </a>
+    </div>
+
+    <!-- Recent Posts -->
+    {posts.length > 0 && (
+      <div class="bg-surface rounded-lg border border-border">
+        <div class="p-6 border-b border-border">
+          <h2 class="text-lg font-bold text-text-primary">Recent Posts</h2>
+        </div>
+        <div class="p-6">
+          <div class="space-y-4">
+            {posts.slice(0, 5).map((post: any) => (
+              <div class="flex justify-between items-center py-3 border-b border-border last:border-0">
+                <div>
+                  <h3 class="font-medium text-text-primary">{post.title}</h3>
+                  <p class="text-text-muted text-sm">
+                    {new Date(post.createdAt).toLocaleDateString()} • 
+                    {post.published ? (
+                      <span class="text-success ml-2">Published</span>
+                    ) : (
+                      <span class="text-warning ml-2">Draft</span>
+                    )}
+                  </p>
+                </div>
+                <div class="flex gap-2">
+                  <a href={`/blog/editor/posts/edit/${post._id || post.id}`} class="text-link hover:text-link-hover text-sm">
+                    Edit
+                  </a>
+                  <a href={`/blog/${post.slug}`} target="_blank" class="text-link hover:text-link-hover text-sm">
+                    View
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+          {posts.length > 5 && (
+            <div class="mt-4 pt-4 border-t border-border">
+              <a href="/blog/editor/posts" class="text-link hover:text-link-hover">
+                View all posts →
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    )}
+
+    {posts.length === 0 && (
+      <div class="bg-surface rounded-lg border border-border p-8 text-center">
+        <p class="text-text-muted mb-4">No posts yet. Create your first post to get started!</p>
+        <a href="/blog/editor/posts/new" class="px-4 py-2 bg-primary hover:bg-primary/90 text-text-primary rounded-md font-medium transition-colors inline-block">
+          Create First Post
+        </a>
+      </div>
+    )}
+  </main>
+</div>
+
+<script define:vars={{ database, API_URL }}>
+  // Logout functionality
+  document.getElementById('logoutBtn')?.addEventListener('click', async () => {
+    try {
+      const response = await fetch(`${API_URL}/api/auth/logout`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'X-Site-Database': database
+        }
+      });
+      
+      if (response.ok) {
+        window.location.href = '/blog/editor/login';
+      }
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  });
+</script>

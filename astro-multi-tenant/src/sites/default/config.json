@@ -1,0 +1,9 @@
+{
+  "name": "Site Directory",
+  "description": "Choose a site to visit",
+  "theme": {
+    "type": "dark",
+    "primaryColor": "#3b82f6",
+    "accentColor": "#8b5cf6"
+  }
+}

@@ -1,0 +1,398 @@
+{
+  "skills": [
+    {
+      "color": "bg-blue-600",
+      "description": "My preferred programming languages are C and C++ due to the control and power they offer over project development. I value the ability to manage projects with precision, which is why I have developed and used many of my own libraries over the years, avoiding the challenges that can arise when relying on third-party code. For cross-platform software development, I favor JavaScript, while Python is my go-to language for Unix-based programs and automation tasks. When reverse engineering or working on smaller functions for embedded platforms, I utilize assembly languages. Additionally, I have experience using C# for developing Windows applications.",
+      "items": [
+        {
+          "id": "0",
+          "percentage": 98,
+          "title": "Embedded C/C++"
+        },
+        {
+          "id": "1",
+          "percentage": 80,
+          "title": "HTML"
+        },
+        {
+          "id": "2",
+          "percentage": 70,
+          "title": "JavaScript"
+        },
+        {
+          "id": "3",
+          "percentage": 98,
+          "title": "Pascal"
+        },
+        {
+          "id": "4",
+          "percentage": 75,
+          "title": "C#"
+        },
+        {
+          "id": "5",
+          "percentage": 90,
+          "title": "Python"
+        },
+        {
+          "id": "6",
+          "percentage": 60,
+          "title": "Assembly"
+        },
+        {
+          "id": "7",
+          "percentage": 95,
+          "title": "Delphi"
+        },
+        {
+          "id": "8",
+          "percentage": 98,
+          "title": "C/C++"
+        },
+        {
+          "id": "9",
+          "percentage": 90,
+          "title": "CSS (Cascading Style Sheets)"
+        },
+        {
+          "id": "10",
+          "percentage": 70,
+          "title": "Swift"
+        },
+        {
+          "id": "11",
+          "percentage": 60,
+          "title": "Java"
+        },
+        {
+          "id": "12",
+          "percentage": 95,
+          "title": "PHP"
+        },
+        {
+          "id": "13",
+          "percentage": 75,
+          "title": "Bash"
+        }
+      ],
+      "name": "Programming Languages"
+    },
+    {
+      "color": "bg-red-500",
+      "description": "For web development my preferred combination is HTML, TailwindCSS with Javascript.  For the backend I have utilized PHP, and python via DJango and Flask, as well as C using my own web server, that allows protected modules to run directly inside developed purely in C.  I also developed my own server side HTML that includes a language that many of my projects have used.  This allows my websites to integrate smoothly with the C modules in my own web server. \u003cbr\u003e\u003cbr\u003e Our drone configuration client uses Javascript, React and Electron to create a stand alone configurator available on Windows, MacOS and Linux.  The original version was written using Angular, but I have found React to be better suited.",
+      "items": [
+        {
+          "id": "0",
+          "percentage": 75,
+          "title": "DJango"
+        },
+        {
+          "id": "1",
+          "percentage": 75,
+          "title": "Next.JS"
+        },
+        {
+          "id": "2",
+          "percentage": 85,
+          "title": "React"
+        },
+        {
+          "id": "3",
+          "percentage": 95,
+          "title": "TailWindCSS"
+        },
+        {
+          "id": "4",
+          "percentage": 80,
+          "title": "Flask"
+        },
+        {
+          "id": "5",
+          "percentage": 85,
+          "title": "Laravel"
+        },
+        {
+          "id": "6",
+          "percentage": 75,
+          "title": "Angular"
+        },
+        {
+          "id": "7",
+          "percentage": 90,
+          "title": "Electron"
+        }
+      ],
+      "name": "Web Frameworks"
+    },
+    {
+      "color": "bg-green-500",
+      "description": "Throughout my career, I have worked extensively with a wide range of operating systems, including IBM Mainframe, VAX, Solaris, and Irix. Among these, Irix stood out as a particular favorite, inspiring the architecture of my web server, which was modeled after the Irix Application Server. \u003cbr\u003e\u003cbr\u003e In the early stages, I primarily relied on FreeBSD as the server platform of choice due to its superior thread management and stability. This robust foundation enabled my initial project to serve 10 million unique clients and handle ten times that number in requests, all from a Pentium 3 1GHz processor. Over time, as Linux evolved to match FreeBSD's stability, I transitioned to using CentOS or Ubuntu, benefiting from their broader hardware and software support. \u003cbr\u003e\u003cbr\u003e For desktop use, I prefer macOS for its stability and performance, though I also maintain regular use of Windows to ensure versatility across platforms.",
+      "items": [
+        {
+          "id": "0",
+          "percentage": 98,
+          "title": "Linux (Ubuntu, Debian, CentOS, RedHat)"
+        },
+        {
+          "id": "1",
+          "percentage": 90,
+          "title": "OpenBSD"
+        },
+        {
+          "id": "2",
+          "percentage": 95,
+          "title": "Windows/Windows Server"
+        },
+        {
+          "id": "3",
+          "percentage": 80,
+          "title": "Amazon Web Services"
+        },
+        {
+          "id": "4",
+          "percentage": 98,
+          "title": "FreeBSD"
+        },
+        {
+          "id": "5",
+          "percentage": 98,
+          "title": "MacOS"
+        },
+        {
+          "id": "6",
+          "percentage": 90,
+          "title": "ProxMox"
+        },
+        {
+          "id": "7",
+          "percentage": 75,
+          "title": "Microsoft Azure"
+        }
+      ],
+      "name": "Operating Systems"
+    },
+    {
+      "color": "bg-yellow-400",
+      "description": "Owning my own company and for a good period of time running my own data center, I was involved in the day to day operations of network and server administration.  I regularly maintain and configure our network of servers, firewalls and routers.  At one time I had a node network of hundreds of servers deployed across the world.",
+      "items": [
+        {
+          "id": "0",
+          "percentage": 85,
+          "title": "Juniper"
+        },
+        {
+          "id": "1",
+          "percentage": 85,
+          "title": "VMWare"
+        },
+        {
+          "id": "2",
+          "percentage": 85,
+          "title": "Ubiquiti"
+        },
+        {
+          "id": "3",
+          "percentage": 90,
+          "title": "OPNSense"
+        },
+        {
+          "id": "4",
+          "percentage": 75,
+          "title": "Nagios"
+        },
+        {
+          "id": "5",
+          "percentage": 90,
+          "title": "Generic Networking"
+        },
+        {
+          "id": "6",
+          "percentage": 85,
+          "title": "pfSense"
+        },
+        {
+          "id": "7",
+          "percentage": 80,
+          "title": "Cisco"
+        },
+        {
+          "id": "8",
+          "percentage": 80,
+          "title": "Extreme Networks"
+        },
+        {
+          "id": "9",
+          "percentage": 80,
+          "title": "SNMP"
+        },
+        {
+          "id": "10",
+          "percentage": 85,
+          "title": "Firewall"
+        },
+        {
+          "id": "11",
+          "percentage": 95,
+          "title": "OpenVPN"
+        }
+      ],
+      "name": "Networking"
+    },
+    {
+      "color": "bg-blue-800",
+      "description": "Majority of my designs and software have been written to utilize the STM32 family of processors.  When internet integration is needed, we rely on the ESP32 platform.  Our drone software utilizes our own real time operating system that allows us to achieve unbelievable results on modest STM32 processors, like the STM32F4, STM32F7 and STM32H7.",
+      "items": [
+        {
+          "id": "0",
+          "percentage": 95,
+          "title": "STM32"
+        },
+        {
+          "id": "1",
+          "percentage": 80,
+          "title": "Arduino"
+        },
+        {
+          "id": "2",
+          "percentage": 90,
+          "title": "RP2040"
+        },
+        {
+          "id": "3",
+          "percentage": 75,
+          "title": "NXP"
+        },
+        {
+          "id": "4",
+          "percentage": 90,
+          "title": "ESP32"
+        },
+        {
+          "id": "5",
+          "percentage": 90,
+          "title": "Raspberry Pi"
+        },
+        {
+          "id": "6",
+          "percentage": 70,
+          "title": "FreeRTOS"
+        },
+        {
+          "id": "7",
+          "percentage": 80,
+          "title": "Other Processors"
+        }
+      ],
+      "name": "Embedded Technology"
+    },
+    {
+      "color": "bg-green-400",
+      "description": "Over the years I have used a few different PCB Design software, but prefer KiCad over the majority of choices.  I have also found the Segger J-Link gives us the best results for hardware debugging, integrated with Visual Studio Code",
+      "items": [
+        {
+          "id": "0",
+          "percentage": 90,
+          "title": "OpenOCD"
+        },
+        {
+          "id": "1",
+          "percentage": 90,
+          "title": "J-Link"
+        },
+        {
+          "id": "2",
+          "percentage": 90,
+          "title": "St-Link"
+        },
+        {
+          "id": "3",
+          "percentage": 75,
+          "title": "Oscilliscope"
+        },
+        {
+          "id": "4",
+          "percentage": 70,
+          "title": "Eagle"
+        },
+        {
+          "id": "5",
+          "percentage": 60,
+          "title": "DipTrace"
+        },
+        {
+          "id": "6",
+          "percentage": 90,
+          "title": "Segger"
+        },
+        {
+          "id": "7",
+          "percentage": 70,
+          "title": "Keil"
+        },
+        {
+          "id": "8",
+          "percentage": 90,
+          "title": "Logic Analyzer"
+        },
+        {
+          "id": "9",
+          "percentage": 95,
+          "title": "KiCad"
+        },
+        {
+          "id": "10",
+          "percentage": 75,
+          "title": "Altium"
+        }
+      ],
+      "name": "Hardware Debugging \u0026 Development"
+    },
+    {
+      "color": "bg-cyan-300",
+      "description": "My drone company required a lot of social media, mostly YouTube, Facebook and Instagram.  Most videos and photos were shot using the sony A7 camera lines, edited in photoshop and Final Cut Pro.  Social media really helped our company grow quickly.",
+      "items": [
+        {
+          "id": "0",
+          "percentage": 98,
+          "title": "Final Cut Pro"
+        },
+        {
+          "id": "1",
+          "percentage": 90,
+          "title": "Photoshop"
+        },
+        {
+          "id": "2",
+          "percentage": 90,
+          "title": "Lightroom"
+        },
+        {
+          "id": "3",
+          "percentage": 75,
+          "title": "Lighting Design"
+        },
+        {
+          "id": "4",
+          "percentage": 90,
+          "title": "General Photography \u0026 Videography"
+        },
+        {
+          "id": "5",
+          "percentage": 80,
+          "title": "Premiere"
+        },
+        {
+          "id": "6",
+          "percentage": 90,
+          "title": "Social Media Interfacing"
+        },
+        {
+          "id": "7",
+          "percentage": 80,
+          "title": "Sound Editing"
+        }
+      ],
+      "name": "Videography and Photography"
+    }
+  ]
+}

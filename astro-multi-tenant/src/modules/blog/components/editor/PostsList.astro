@@ -1,0 +1,139 @@
+---
+export const prerender = false;
+import { API_URL } from '../../../../shared/lib/api-config';
+
+const { database, tenant } = Astro.props;
+const token = Astro.cookies.get('auth-token');
+
+// Fetch posts
+let posts = [];
+try {
+  const response = await fetch(`${API_URL}/api/posts`, {
+    headers: {
+      'Cookie': `auth-token=${token.value}`,
+      'X-Site-Database': database
+    }
+  });
+  if (response.ok) {
+    posts = await response.json();
+  }
+} catch (error) {
+  console.error('Failed to fetch posts:', error);
+}
+---
+
+<div class="blog-page">
+  <!-- Editor Header -->
+  <header class="blog-header">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex justify-between items-center">
+        <h1 class="text-xl font-bold blog-title">Manage Posts</h1>
+        <div class="flex gap-4">
+          <a href="/blog/editor/posts/new?type=blog" class="blog-btn-primary">
+            New Blog Post
+          </a>
+          <a href="/blog/editor/posts/new?type=docs" class="blog-btn-secondary">
+            New Documentation
+          </a>
+          <a href="/blog/editor" class="blog-link">
+            ← Back to Dashboard
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 py-8">
+    {posts.length > 0 ? (
+      <div class="blog-card overflow-hidden">
+        <table class="blog-table w-full">
+          <thead class="blog-table-header">
+            <tr>
+              <th class="px-6 py-3 text-left">Title</th>
+              <th class="px-6 py-3 text-left">Type</th>
+              <th class="px-6 py-3 text-left">Status</th>
+              <th class="px-6 py-3 text-left">Created</th>
+              <th class="px-6 py-3 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {posts.map((post: any) => (
+              <tr class="blog-table-row">
+                <td class="blog-table-cell font-medium">
+                  {post.title}
+                </td>
+                <td class="blog-table-cell">
+                  <span class={post.type === 'docs' ? 'blog-badge-info' : 'blog-badge-success'}>
+                    {post.type || 'blog'}
+                  </span>
+                </td>
+                <td class="blog-table-cell">
+                  {post.published ? (
+                    <span class="blog-badge-success">Published</span>
+                  ) : (
+                    <span class="blog-badge-warning">Draft</span>
+                  )}
+                </td>
+                <td class="blog-table-cell">
+                  {new Date(post.createdAt).toLocaleDateString()}
+                </td>
+                <td class="blog-table-cell text-right">
+                  <div class="flex gap-2 justify-end">
+                    <a href={`/blog/editor/posts/edit/${post._id || post.id}`} class="blog-link text-sm">
+                      Edit
+                    </a>
+                    <a href={`/blog/${post.slug}`} target="_blank" class="blog-link text-sm">
+                      View
+                    </a>
+                    <button 
+                      data-post-id={post._id || post.id}
+                      class="delete-btn blog-link-danger text-sm"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ) : (
+      <div class="blog-card p-8 text-center">
+        <p class="blog-text-muted mb-4">No posts yet.</p>
+        <a href="/blog/editor/posts/new" class="blog-btn-primary">
+          Create Your First Post
+        </a>
+      </div>
+    )}
+  </main>
+</div>
+
+<script define:vars={{ API_URL, database }}>
+  // Delete functionality
+  document.querySelectorAll('.delete-btn').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      if (!confirm('Are you sure you want to delete this post?')) return;
+      
+      const postId = e.target.dataset.postId;
+      
+      try {
+        const response = await fetch(`${API_URL}/api/posts/${postId}`, {
+          method: 'DELETE',
+          headers: {
+            'X-Site-Database': database
+          },
+          credentials: 'include'
+        });
+        
+        if (response.ok) {
+          window.location.reload();
+        } else {
+          alert('Failed to delete post');
+        }
+      } catch (error) {
+        alert('Error deleting post');
+      }
+    });
+  });
+</script>
