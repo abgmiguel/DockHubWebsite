@@ -1,5 +1,6 @@
 # Multi-Tenant Astro SSR Platform
 
+
 A production-ready multi-tenant web platform built with Astro SSR, supporting unlimited sites with dynamic SSL, unified backend, and Docker deployment.
 
 ## 🚀 Features
